@@ -164,7 +164,7 @@
 
       .hero {
         align-items: center;
-        background-color: #000000;
+        background-color: #FF0069;
         color: #FFFFFF;
         display: flex;
         flex-direction: column;
@@ -180,8 +180,18 @@
         }
         .hero--logo {
           font-family: HybridBold, sans-serif;
-          font-size: 3em;
+          position: relative;
+          top: -1em;
         }
+        .hero--logoLine {
+          line-height: 0.666;
+        }
+          .hero--logoLine-1 {
+            font-size: 6em;
+          }
+          .hero--logoLine-2 {
+            font-size: 2em;
+          }
 
       .scrollable {
         max-width: 100%;
@@ -207,7 +217,10 @@
     <header class="hero">
       <h1>
         <div class="hero--lockup">
-          <div class="hero--logo">Lacus Opportunitas</div>
+          <div class="hero--logo">
+            <div class="hero--logoLine hero--logoLine-1">Lacus</div>
+            <div class="hero--logoLine hero--logoLine-2">Opportunitas</div>
+          </div>
           <div class="hero--author">by shiftBacktick</div>
         </div>
       </h1>

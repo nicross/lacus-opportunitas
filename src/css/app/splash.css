@@ -1,5 +1,7 @@
 .a-splash {
   align-items: center;
+  background-color: #FF0069;
+  max-width: unset;
   text-align: center;
 }
   .a-splash--details {
@@ -24,8 +26,18 @@
   }
   .a-splash--logo {
     font-family: HybridBold, sans-serif;
-    font-size: 4em;
+    position: relative;
+    top: -2em;
   }
+  .a-splash--logoLine {
+    line-height: 0.666;
+  }
+    .a-splash--logoLine-1 {
+      font-size: 12em;
+    }
+    .a-splash--logoLine-2 {
+      font-size: 4em;
+    }
 
 @keyframes a-splash--instruction {
   0% {
