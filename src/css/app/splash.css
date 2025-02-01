@@ -4,7 +4,7 @@
 }
   .a-splash--details {
     bottom: 2rem;
-    font-family: monospace;
+    font-family: FiraCodeLight, monospace;
     font-size: 0.75em;
     font-weight: 300;
     left: 2rem;
@@ -23,6 +23,7 @@
     text-transform: uppercase;
   }
   .a-splash--logo {
+    font-family: HybridBold, sans-serif;
     font-size: 4em;
   }
 
