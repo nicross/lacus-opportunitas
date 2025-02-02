@@ -1,8 +1,8 @@
 :root {
-  background-color: #000000;
+  background-color: #FF0069;
   color: #FFFFFF;
-  font-family: RobotoRegular, sans-serif;
-  font-size: 16px;
+  font-family: FiraCodeRegular, sans-serif;
+  font-size: 18px;
   line-height: 1.5;
   user-select: none;
 }
@@ -13,7 +13,8 @@ html, body {
 }
 
 :focus {
-  outline: 2px solid #FFFFFF;
+  animation: focus 0.5s linear 0s infinite alternate both;
+  outline: 0.375em solid #000000;
 }
 
 [hidden] {
@@ -38,5 +39,14 @@ button[disabled] {
 @media (min-width: 20rem) {
   body {
     font-size: calc(0.5rem + ((1vw - 0.4rem) * 1));
+  }
+}
+
+@keyframes focus {
+  0% {
+    outline-width: 0.375rem;
+  }
+  100% {
+    outline-width: 0.125rem;
   }
 }

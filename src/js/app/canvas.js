@@ -8,8 +8,11 @@ app.canvas = (() => {
     window.addEventListener('resize', onResize)
 
     onResize()
+
+    engine.loop.on('pause', () => root.classList.add('a-app--canvas-blur'))
+    engine.loop.on('resume', () => root.classList.remove('a-app--canvas-blur'))
   })
-  
+
   function onResize() {
     root.height = root.clientHeight
     root.width = root.clientWidth

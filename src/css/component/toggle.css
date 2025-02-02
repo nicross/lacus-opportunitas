@@ -1,0 +1,35 @@
+.c-toggle {}
+  .c-toggle--button {
+    background-color: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    color: #FFFFFF;
+    display: flex;
+    font-size: inherit;
+    transition: all 0.125s ease;
+    transition-property: background-color;
+  }
+  .c-toggle--button[aria-disabled] {
+    opacity: 0.25;
+  }
+  .c-toggle--button:active,
+  .c-toggle--button:focus,
+  .c-toggle--button:hover {
+    border-color: rgba(255, 255, 255, 1);
+  }
+  .c-toggle--off,
+  .c-toggle--on {
+    font-size: calc(1em - 2px);
+    line-height: 1;
+    text-align: center;
+    text-transform: uppercase;
+    transition: all 0.125s ease;
+    transition-property: background-color, opacity;
+    width: 3em;
+  }
+  .c-toggle--button[aria-checked="true"] .c-toggle--off,
+  .c-toggle--button[aria-checked="false"] .c-toggle--on {
+    background-color: #FFFFFF;
+    font-family: RobotoBold, sans-serif;
+    font-weight: 700;
+    opacity: 1;
+  }

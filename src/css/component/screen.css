@@ -12,3 +12,32 @@
   .c-screen > * + * {
     margin-top: 1rem;
   }
+  .c-screen > * + *,
+  .c-screen--actions > * + *,
+  .c-screen--fields > * + *,
+  .c-screen--items > * + * {
+    margin-top: 1rem;
+  }
+  .c-screen--actions,
+  .c-screen--description,
+  .c-screen--fields {
+    margin-top: 2rem;
+  }
+  .c-screen--actions {
+    list-style-type: none;
+  }
+  .c-screen--field {
+    line-height: 1;
+  }
+  .c-screen--fields {
+    max-width: 75%;
+  }
+  .c-screen--label {
+    display: block;
+    margin-bottom: 0.5em;
+  }
+  .c-screen--title {
+    font-family: HybridBold;
+    font-size: 4em;
+    line-height: 0.666;
+  }

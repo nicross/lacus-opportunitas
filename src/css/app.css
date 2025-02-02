@@ -9,15 +9,22 @@
   width: 100%;
 }
   .a-app--canvas {
-    background-color: #000000;
+    background-color: #FF0069;
     height: 100%;
     left: 0;
+    oapcity: 1;
     pointer-events: none;
     position: absolute;
     top: 0;
+    transition: all 0.5s ease;
+    transition-property: filter opacity;
     width: 100%;
     z-index: 0;
   }
+    .a-app--canvas-blur {
+      filter: blur(1em);
+      opacity: 0;
+    }
   .a-app--overlaySupport {
     height: 100%;
     left: 0;
@@ -29,7 +36,7 @@
   }
   .a-app--screen {
     align-items: center;
-    background-color: #000000;
+    background-color: #FF0069;
     display: flex;
     height: 100%;
     justify-content: center;
@@ -37,7 +44,7 @@
     position: absolute;
     opacity: 0;
     top: 0;
-    transition: all 0.5s ease;
+    transition: all 0.25s ease;
     transition-property: opacity;
     width: 100%;
     z-index: 1;

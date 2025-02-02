@@ -46,6 +46,8 @@ content.video = (() => {
       this.sun.unload()
       this.surface.unload()
 
+      isLoaded = false
+
       return this
     },
   }

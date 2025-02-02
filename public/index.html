@@ -23,13 +23,13 @@
               <button class="c-menuButton a-gameMenu--settings" type="button">Settings</button>
             </li>
             <li class="c-screen--action">
+              <button class="c-menuButton a-gameMenu--back" type="button">Resume game</button>
+            </li>
+            <li class="c-screen--action">
               <button class="c-menuButton a-gameMenu--mainMenu" type="button">Exit to main menu</button>
             </li>
             <li class="c-screen--action a-gameMenu--action-quit">
               <button class="c-menuButton a-gameMenu--quit" type="button">Quit to desktop</button>
-            </li>
-            <li class="c-screen--action">
-              <button class="c-menuButton a-gameMenu--back" type="button">Resume game</button>
             </li>
           </ul>
         </section>
@@ -56,8 +56,11 @@
       </div>
 
       <div class="a-app--screen a-app--screen-os a-app--newGame">
-        <section class="c-screen a-newGame" aria-label="Confirm new game">
-          <h1 class="c-screen--title">Confirm save deletion</h1>
+        <section class="c-screen a-newGame" aria-labelledby="a-newGame--title">
+          <div id="a-newGame--title">
+            <h1 class="c-screen--title">Warning</h1>
+            <p class="a-newGame--warning">Starting a new game will delete your save.</p>
+          </div>
           <ul class="c-screen--actions">
             <li class="c-screen--action">
               <button class="c-menuButton a-newGame--back" type="button">Keep existing save</button>
