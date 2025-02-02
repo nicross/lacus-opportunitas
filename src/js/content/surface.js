@@ -3,7 +3,13 @@ content.surface = (() => {
 
   const noise1 = engine.fn.createNoise({
     octaves: 1,
-    seed: ['surface', 'noise'],
+    seed: ['surface', 'noise1'],
+    type: 'simplex3d',
+  })
+
+  const noise2 = engine.fn.createNoise({
+    octaves: 1,
+    seed: ['surface', 'noise2'],
     type: 'simplex3d',
   })
 
@@ -29,11 +35,22 @@ content.surface = (() => {
         engine.fn.distance({x, y}) / radius
       )
 
-      return noise1.value(
-        x / 20 * engine.tool.simplex3d.prototype.skewFactor,
-        y / 20 * engine.tool.simplex3d.prototype.skewFactor,
-        time / 10 * engine.tool.simplex3d.prototype.skewFactor
-      ) * 10 * centerRatio
+      const v1 = noise1.value(
+        x / 25 * engine.tool.simplex3d.prototype.skewFactor,
+        y / 25 * engine.tool.simplex3d.prototype.skewFactor,
+        time / 15 * engine.tool.simplex3d.prototype.skewFactor
+      ) * 10
+
+      const v2 = (noise2.value(
+        ((x + (time * -10)) / 100) * engine.tool.simplex3d.prototype.skewFactor,
+        y / 500 * engine.tool.simplex3d.prototype.skewFactor,
+        time / 60 * engine.tool.simplex3d.prototype.skewFactor
+      ) ** 4) * 40
+
+      return centerRatio * (
+          v1
+        + v2
+      )
     },
   }
 })()
