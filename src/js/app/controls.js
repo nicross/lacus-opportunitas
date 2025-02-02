@@ -11,6 +11,15 @@ app.controls = (() => {
 
   function check(mappings) {
     return Math.max(
+      // Gamepad analog buttons
+      mappings.gamepadAnalog.reduce((value, mapping) => {
+        const reading = engine.input.gamepad.getAnalog(mapping)
+
+        return Math.max(
+          value,
+          Math.abs(reading),
+        )
+      }, 0),
       // Gamepad axes
       mappings.gamepadAxis.reduce((value, mapping) => {
         const reading = engine.input.gamepad.getAxis(mapping[0])
@@ -20,12 +29,12 @@ app.controls = (() => {
           mapping[1] * reading > 0 ? Math.abs(reading) : 0,
         )
       }, 0),
-      // Gamepad buttons
+      // Gamepad digital buttons
       mappings.gamepadDigital.reduce((value, key) => value || engine.input.gamepad.isDigital(key) ? 1 : 0, 0),
       // Keyboard buttons
       mappings.keyboard.reduce((value, key) => value || engine.input.keyboard.is(key) > 0 ? 1 : 0, 0),
       // Mouse axes
-      document.pointerLockElement
+      app.pointerLock.is()
         ? mappings.mouseAxis.reduce((value, mapping) => {
             const reading = mapping[1] * Math.sign(
               mapping[0] == 'x'
@@ -40,7 +49,7 @@ app.controls = (() => {
           }, 0)
         : 0,
       // Mouse buttons
-      document.pointerLockElement
+      app.pointerLock.is()
         ? mappings.mouseButton.reduce((value, key) => value || engine.input.mouse.isButton(key) ? 1 : 0, 0)
         : 0,
       0

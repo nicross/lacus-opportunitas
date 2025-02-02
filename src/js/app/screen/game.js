@@ -29,12 +29,10 @@ app.screen.game = app.screenManager.invent({
     const game = app.controls.game(),
       ui = app.controls.ui()
 
-    // Move forward, glued to surface for demo purposes
-    // TODO: Movement controller
-    const position = engine.position.getVector()
-    position.x += engine.loop.delta() * 25
-    position.z = content.surface.value(position)
-    engine.position.setVector(position)
+    content.movement.update({
+      move: game.move,
+      turn: game.turn,
+    })
 
     content.camera.applyLook(game.look)
   },
