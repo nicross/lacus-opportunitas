@@ -66,6 +66,7 @@ content.camera = (() => {
 
       return this
     },
+    height: () => height,
     projectionMatrix: () => projectionMatrix,
     quaternion: () => quaternion.clone(),
     reset: function () {

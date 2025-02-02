@@ -8,6 +8,35 @@ content.movement = (() => {
     turningSpeed = 1,
     velocity = engine.tool.vector2d.create()
 
+  function calculateSpeedLimit() {
+    const majorRadius = content.lake.radius(),
+      minorRadius = majorRadius - content.lake.portRadius()
+
+    const position = engine.position.getVector()
+    const distance = position.distance()
+
+    if (distance < minorRadius) {
+      return maxVelocity
+    }
+
+    // When facing away from center, scale max velocity by dot product with position (facing away from center is slower)
+    const distanceRatio = engine.fn.clamp(engine.fn.scale(
+      distance,
+      minorRadius, majorRadius,
+      1, 0
+    ))
+
+    const dot = engine.tool.vector2d.create(position)
+      .normalize()
+      .dotProduct(velocity.normalize())
+
+    return maxVelocity * engine.fn.scale(
+      dot,
+      -1, 1,
+      1, distanceRatio,
+    )
+  }
+
   return {
     export: () => velocity.clone(),
     import: function (value) {
@@ -73,11 +102,12 @@ content.movement = (() => {
       }
 
       // Enforce the speed limit
+      const speedLimit = calculateSpeedLimit()
       let magnitude = velocity.distance()
 
-      if (magnitude > maxVelocity) {
-        velocity = velocity.scale(maxVelocity / magnitude)
-        magnitude = maxVelocity
+      if (magnitude > speedLimit) {
+        velocity = velocity.scale(speedLimit / magnitude)
+        magnitude = speedLimit
       }
 
       // Apply extra turning force (proportional to dot product with target vector)
@@ -99,11 +129,22 @@ content.movement = (() => {
         )
       }
 
-      // Apply next velocity, gluing to surface
+      // Calculate next velocity
       const next = position.add(
         velocity.scale(delta)
       )
 
+      // Enforce boundary
+      const lakeRadius = content.lake.radius()
+      const centerDistance = engine.fn.distance({x: next.x, y: next.y})
+
+      if (centerDistance > lakeRadius) {
+        const scalar = lakeRadius / centerDistance
+        next.x *= scalar
+        next.y *= scalar
+      }
+
+      // Glue to surface
       next.z = content.surface.value(position)
 
       engine.position.setVector(next)

@@ -1,6 +1,4 @@
 content.surface = (() => {
-  const radius = 2500
-
   const noise1 = engine.fn.createNoise({
     octaves: 1,
     seed: ['surface', 'noise1'],
@@ -31,9 +29,18 @@ content.surface = (() => {
       x = 0,
       y = 0,
     } = {}) {
-      const centerRatio = 1 - engine.fn.clamp(
-        engine.fn.distance({x, y}) / radius
-      )
+      const lakeRadius = content.lake.radius()
+      const centerRatio = 1 - (engine.fn.distance({x, y}) / lakeRadius)
+
+      if (centerRatio <= 0) {
+        return engine.fn.clamp(
+          engine.fn.scale(
+            centerRatio,
+            0, -(5 / lakeRadius),
+            0, 1
+          )
+        ) * (content.camera.height() * 0.75)
+      }
 
       const v1 = noise1.value(
         x / 25 * engine.tool.simplex3d.prototype.skewFactor,

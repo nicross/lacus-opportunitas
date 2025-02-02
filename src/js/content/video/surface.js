@@ -52,6 +52,14 @@ void main(void) {
     perlin3d(vec3(offset.xy * 0.25, u_time), 666.0),
     1.0
   )), 1.0);
+
+  if (length(offset.xy + camera.xy) > 2500.0) {
+    color_out = vec4(hsv2rgb(vec3(
+      335.0 / 360.0,
+      0.5,
+      0.5
+    )), 1.0);
+  }
 }
 `
 
