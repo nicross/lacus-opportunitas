@@ -5,7 +5,7 @@ app.screen.splash = app.screenManager.invent({
   rootSelector: '.a-splash',
   transitions: {
     interact: function () {
-      this.change('game')
+      this.change('mainMenu')
     },
   },
   // State

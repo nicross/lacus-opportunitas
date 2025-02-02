@@ -1,12 +1,11 @@
 app.autosave = (() => {
-  const autosaveInterval = 30,
-    storageKey = 'state'
+  const autosaveInterval = 30
 
   let active = false,
     timeout
 
   function save() {
-    app.storage.set(storageKey, engine.state.export())
+    app.storage.game.save()
   }
 
   function saveLoop() {

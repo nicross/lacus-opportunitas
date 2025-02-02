@@ -3,6 +3,12 @@ content.video = (() => {
 
   return {
     draw: function () {
+      if (!isLoaded || !content.gl.isActive()) {
+        return this
+      }
+
+      content.gl.clear()
+
       this.sky.draw()
       this.stars.draw()
       this.sun.draw()
@@ -13,7 +19,7 @@ content.video = (() => {
       return this
     },
     load: function () {
-      if (isLoaded) {
+      if (isLoaded || !content.gl.isActive()) {
         return this
       }
 
@@ -23,6 +29,8 @@ content.video = (() => {
       this.stars.load()
       this.sun.load()
       this.surface.load()
+
+      isLoaded = true
 
       return this
     },

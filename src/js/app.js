@@ -20,9 +20,10 @@ const app = (() => {
 
       return this
     },
+    component: {},
     isActive: () => isActive,
     isElectron: () => typeof ElectronApi != 'undefined',
-    name: () => 'syngen-template',
+    name: () => 'shiftbacktick/lacus-opportunitas',
     quit: function () {
       if (this.isElectron()) {
         ElectronApi.quit()

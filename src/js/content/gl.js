@@ -48,6 +48,10 @@ content.gl = (() => {
     setActive: function (value) {
       isActive = Boolean(value)
 
+      if (!isActive) {
+        clear()
+      }
+
       return this
     },
     setCanvas: function (element) {

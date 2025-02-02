@@ -68,8 +68,8 @@ app.controls = (() => {
 
   function updateMouseAccelerated() {
     // TODO: Apply mouse sensitivity setting
-    const acceleration = 8,
-      sensitivity = 25
+    const acceleration = 16,
+      sensitivity = app.settings.computed.mouseSensitivity
 
     mouseAccelerated.x = engine.fn.accelerateValue(
       mouseAccelerated.x || 0,

@@ -193,7 +193,12 @@ app.controls.mappings = {
       gamepadDigital: [
         1,
       ],
-      keyboard: [],
+      keyboard: [
+        'Backspace',
+        'Delete',
+        'Escape',
+        'NumpadDecimal',
+      ],
       mouseAxis: [],
       mouseButton: [
         3,
@@ -208,7 +213,9 @@ app.controls.mappings = {
       ],
       keyboard: [
         'Backspace',
+        'Delete',
         'Escape',
+        'Pause',
         'NumpadDecimal',
       ],
       mouseAxis: [],

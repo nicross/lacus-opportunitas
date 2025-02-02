@@ -78,4 +78,34 @@ app.screen.base = {
 
     return this
   },
+  handleBasicInput: function () {
+    const root = this.rootElement,
+      ui = app.controls.ui()
+
+    if (ui.back) {
+      app.screenManager.dispatch('back')
+      return true
+    }
+
+    if (ui.confirm) {
+      const focused = app.utility.focus.get(root)
+
+      if (focused) {
+        focused.click()
+        return true
+      }
+    }
+
+    if (ui.up) {
+      app.utility.focus.setPreviousFocusable(root)
+      return true
+    }
+
+    if (ui.down) {
+      app.utility.focus.setNextFocusable(root)
+      return true
+    }
+
+    return false
+  },
 }

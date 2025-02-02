@@ -15,9 +15,121 @@
         <section class="c-screen a-game" tabindex="-1" aria-label="Game"></section>
       </div>
 
+      <div class="a-app--screen a-app--screen-os a-app--gameMenu">
+        <section class="c-screen a-gameMenu" aria-label="Game paused">
+          <h1 class="c-screen--title">Game paused</h1>
+          <ul class="c-screen--actions">
+            <li class="c-screen--action">
+              <button class="c-menuButton a-gameMenu--settings" type="button">Settings</button>
+            </li>
+            <li class="c-screen--action">
+              <button class="c-menuButton a-gameMenu--mainMenu" type="button">Exit to main menu</button>
+            </li>
+            <li class="c-screen--action a-gameMenu--action-quit">
+              <button class="c-menuButton a-gameMenu--quit" type="button">Quit to desktop</button>
+            </li>
+            <li class="c-screen--action">
+              <button class="c-menuButton a-gameMenu--back" type="button">Resume game</button>
+            </li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="a-app--screen a-app--screen-os a-app--mainMenu">
+        <section class="c-screen a-mainMenu" aria-label="Main menu">
+          <h1 class="c-screen--title">Main menu</h1>
+          <ul class="c-screen--actions">
+            <li class="c-screen--action a-mainMenu--action-continue">
+              <button class="c-menuButton a-mainMenu--continue" type="button">Continue</button>
+            </li>
+            <li class="c-screen--action">
+              <button class="c-menuButton a-mainMenu--newGame" type="button">Start new game</button>
+            </li>
+            <li class="c-screen--action">
+              <button class="c-menuButton a-mainMenu--settings" type="button">Settings</button>
+            </li>
+            <li class="c-screen--action a-mainMenu--action-quit">
+              <button class="c-menuButton a-mainMenu--quit" type="button">Quit to desktop</button>
+            </li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="a-app--screen a-app--screen-os a-app--newGame">
+        <section class="c-screen a-newGame" aria-label="Confirm new game">
+          <h1 class="c-screen--title">Confirm save deletion</h1>
+          <ul class="c-screen--actions">
+            <li class="c-screen--action">
+              <button class="c-menuButton a-newGame--back" type="button">Keep existing save</button>
+            </li>
+            <li class="c-screen--action">
+              <button class="c-menuButton a-newGame--confirm" type="button">Start new game</button>
+            </li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="a-app--screen a-app--screen-os a-app--settings">
+        <section class="c-screen a-settings" aria-label="Settings">
+          <h1 class="c-screen--title">Settings</h1>
+          <div class="c-screen--fields">
+            <div class="c-screen--field">
+              <label class="c-screen--label" for="a-settings--mainVolumeInput">Main volume</label>
+              <div class="c-slider a-settings--mainVolume">
+                <div class="c-slider--input">
+                  <input id="a-settings--mainVolumeInput" max="10" min="0" step="1" type="range" />
+                </div>
+                <div class="c-slider--value"></div>
+              </div>
+            </div>
+            <div class="c-screen--field">
+              <label class="c-screen--label" for="a-settings--turningSpeedInput">Turning speed</label>
+              <div class="c-slider a-settings--turningSpeed">
+                <div class="c-slider--input">
+                  <input id="a-settings--turningSpeedInput" max="10" min="0" step="1" type="range" />
+                </div>
+                <div class="c-slider--value"></div>
+              </div>
+            </div>
+            <div class="c-screen--field">
+              <label class="c-screen--label" for="a-settings--mouseSensitivityInput">Mouse sensitivity</label>
+              <div class="c-slider a-settings--mouseSensitivity">
+                <div class="c-slider--input">
+                  <input id="a-settings--mouseSensitivityInput" max="10" min="0" step="1" type="range" />
+                </div>
+                <div class="c-slider--value"></div>
+              </div>
+            </div>
+            <div class="c-screen--field">
+              <label class="c-screen--label" for="a-settings--gamepadVibrationInput">Vibration strength</label>
+              <div class="c-slider a-settings--gamepadVibration">
+                <div class="c-slider--input">
+                  <input id="a-settings--gamepadVibrationInput" max="10" min="0" step="1" type="range" />
+                </div>
+                <div class="c-slider--value"></div>
+              </div>
+            </div>
+            <div class="c-screen--field">
+              <div class="c-screen--label" id="a-settings--graphicsOnLabel">Enable graphics</div>
+              <div class="c-toggle a-settings--graphicsOn">
+                <button class="c-toggle--button" role="switch" aria-checked="false" aria-labeledby="a-settings--graphicsOnLabel">
+                  <span class="c-toggle--off">Off</span>
+                  <span class="c-toggle--on">On</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <ul class="c-screen--actions">
+            <li class="c-screen--action">
+              <button class="c-menuButton a-settings--back" type="button">Back</button>
+            </li>
+          </ul>
+        </section>
+      </div>
+
       <div class="a-app--screen a-app--splash">
         <section class="c-screen a-splash" tabindex="-1">
-          <h1 class="a-splash--logo">
+          <h1 class="a-splash--logo" lang="la">
             <div class="a-splash--logoLine a-splash--logoLine-1">Lacus</div>
             <div class="a-splash--logoLine a-splash--logoLine-2">Opportunitas</div>
           </h1>
@@ -25,7 +137,7 @@
             <div class="a-splash--version"></div>
             <div class="a-splash--author">by shiftBacktick</div>
           </div>
-          <div class="a-splash--instruction">Interact to Begin</div>
+          <div class="a-splash--instruction">Interact to begin</div>
         </section>
       </div>
 
