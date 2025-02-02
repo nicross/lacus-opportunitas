@@ -46,6 +46,9 @@ content.gl.sl.bindUniforms = (gl, program) => {
   // Bind u_drawDistance
   gl.uniform1f(program.uniforms.u_drawDistance, drawDistance)
 
+  // Bind u_lakeRadius
+  gl.uniform1f(program.uniforms.u_lakeRadius, content.lake.radius())
+
   // Bind u_planet
   const planet = content.time.planet().scale(drawDistance * 1.5)
   gl.uniform3fv(program.uniforms.u_planet, [planet.x, planet.y, planet.z])
@@ -67,6 +70,7 @@ content.gl.sl.bindUniforms = (gl, program) => {
 content.gl.sl.defineIns = () => `
 in vec3 camera;
 in float drawDistance;
+in float lakeRadius;
 in vec4 planet;
 in mat4 projection;
 in mat4 projection_inverse;
@@ -79,6 +83,7 @@ in highp float time;
 content.gl.sl.defineOuts = () => `
 out vec3 camera;
 out float drawDistance;
+out float lakeRadius;
 out vec4 planet;
 out mat4 projection;
 out mat4 projection_inverse;
@@ -92,6 +97,7 @@ content.gl.sl.defineUniforms = () => `
 in vec2 quadCoordinates_in;
 uniform vec3 u_camera;
 uniform float u_drawDistance;
+uniform float u_lakeRadius;
 uniform vec3 u_planet;
 uniform mat4 u_projection;
 uniform vec2 u_resolution;
@@ -102,6 +108,7 @@ uniform highp float u_time;
 content.gl.sl.passUniforms = () => `
 camera = u_camera;
 drawDistance = u_drawDistance;
+lakeRadius = u_lakeRadius;
 planet = u_projection * vec4(u_planet, 1.0);
 projection = u_projection;
 projection_inverse = inverse(u_projection);
@@ -114,6 +121,7 @@ time = u_time;
 content.gl.sl.uniformNames = () => [
   'u_camera',
   'u_drawDistance',
+  'u_lakeRadius',
   'u_planet',
   'u_projection',
   'u_resolution',

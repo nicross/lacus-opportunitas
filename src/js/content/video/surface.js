@@ -53,11 +53,11 @@ void main(void) {
     1.0
   )), 1.0);
 
-  if (length(offset.xy + camera.xy) > 2500.0) {
+  if (length(offset.xy + camera.xy) > lakeRadius) {
     color_out = vec4(hsv2rgb(vec3(
       335.0 / 360.0,
-      0.5,
-      0.5
+      0.25,
+      0.25
     )), 1.0);
   }
 }

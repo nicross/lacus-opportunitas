@@ -135,7 +135,7 @@ content.movement = (() => {
       )
 
       // Enforce boundary
-      const lakeRadius = content.lake.radius()
+      const lakeRadius = content.lake.radius() - 1
       const centerDistance = engine.fn.distance({x: next.x, y: next.y})
 
       if (centerDistance > lakeRadius) {
@@ -145,7 +145,7 @@ content.movement = (() => {
       }
 
       // Glue to surface
-      next.z = content.surface.value(position)
+      next.z = content.surface.value(next)
 
       engine.position.setVector(next)
 
