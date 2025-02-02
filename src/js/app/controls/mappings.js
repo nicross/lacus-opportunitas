@@ -43,7 +43,9 @@ app.controls.mappings = {
         'Numpad5',
       ],
       mouseAxis: [],
-      mouseButton: [],
+      mouseButton: [
+        2,
+      ],
     },
     moveForward: {
       gamepadAnalog: [
@@ -59,7 +61,7 @@ app.controls.mappings = {
       ],
       mouseAxis: [],
       mouseButton: [
-        2,
+        0,
       ],
     },
     turnLeft: {
