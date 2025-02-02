@@ -1,6 +1,6 @@
 content.camera = (() => {
   const height = 2.5,
-    lookMaxVelocity = engine.const.tau / 4,
+    lookMaxVelocity = engine.const.tau / 2,
     lookRange = engine.const.tau * 63/256
 
   let look = engine.const.zero,

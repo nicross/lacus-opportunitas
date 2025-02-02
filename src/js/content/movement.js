@@ -1,6 +1,6 @@
 content.movement = (() => {
   const acceleration = 5,
-    angularVelocity = engine.const.tau / 4,
+    angularVelocity = engine.const.tau / 2,
     deceleration = 5,
     maxVelocity = 25
 

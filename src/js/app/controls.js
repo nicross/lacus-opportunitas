@@ -6,6 +6,7 @@ app.controls = (() => {
   }
 
   let gameCache = {...gameDefaults},
+    mouseAccelerated = {},
     uiCache = {},
     uiDelta = {}
 
@@ -36,11 +37,7 @@ app.controls = (() => {
       // Mouse axes
       app.pointerLock.is()
         ? mappings.mouseAxis.reduce((value, mapping) => {
-            const reading = mapping[1] * Math.sign(
-              mapping[0] == 'x'
-                ? engine.input.mouse.getMoveX()
-                : engine.input.mouse.getMoveY()
-            )
+            const reading = mapping[1] * mouseAccelerated[mapping[0]]
 
             return Math.max(
               value,
@@ -69,6 +66,24 @@ app.controls = (() => {
     gameCache.turn = gameCache.turnLeft - gameCache.turnRight
   }
 
+  function updateMouseAccelerated() {
+    // TODO: Apply mouse sensitivity setting
+    const acceleration = 8,
+      sensitivity = 25
+
+    mouseAccelerated.x = engine.fn.accelerateValue(
+      mouseAccelerated.x || 0,
+      engine.fn.clamp(engine.fn.scale(engine.input.mouse.getMoveX(), -sensitivity, sensitivity, -1, 1), -1, 1),
+      acceleration
+    )
+
+    mouseAccelerated.y = engine.fn.accelerateValue(
+      mouseAccelerated.y || 0,
+      engine.fn.clamp(engine.fn.scale(engine.input.mouse.getMoveY(), -sensitivity, sensitivity, -1, 1), -1, 1),
+      acceleration
+    )
+  }
+
   function updateUi() {
     const values = {}
 
@@ -94,12 +109,15 @@ app.controls = (() => {
     ui: () => ({...uiDelta}),
     reset: function () {
       gameCache = {}
+      mouseAccelerated = {}
       uiCache = {}
       uiDelta = {}
 
       return this
     },
     update: function () {
+      updateMouseAccelerated()
+
       updateGame()
       updateUi()
 

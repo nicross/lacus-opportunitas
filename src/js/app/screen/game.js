@@ -29,6 +29,7 @@ app.screen.game = app.screenManager.invent({
     const game = app.controls.game(),
       ui = app.controls.ui()
 
+    // TODO: Apply turn/look speed to these values
     content.movement.update({
       move: game.move,
       turn: game.turn,
