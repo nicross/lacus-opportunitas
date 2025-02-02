@@ -229,59 +229,203 @@
     <main>
       <section>
         <h2>Introduction</h2>
+        <p>This section is forthcoming.</p>
       </section>
 
       <section>
         <h2>System Requirements</h2>
-        <p>Lacus Opportunitas is best experienced with headphones and a gamepad.</p>
+        <p>Lacus Opportunitas is best experienced with a gamepad and headphones.</p>
         <p>Real-time synthesis is an <em>extremely</em> CPU-intensive process. It will attempt to run on any machine that meets its minimum requirements; however, you may experience stuttering or drop-outs when running below the recommended requirements.</p>
 
-        <h3>Minimum System Requirements</h3>
+        <h3>Minimum system requirements</h3>
         <table>
           <tr>
-            <th>CPU</th>
+            <th scope="row">CPU</th>
             <td>SSE2 capable (64-bit)</td>
           </tr>
           <tr>
-            <th>RAM</th>
+            <th scope="row">RAM</th>
             <td>2 GB</td>
           </tr>
         </table>
 
-        <h3>Recommended System Requirements</h3>
+        <h3>Recommended system requirements</h3>
         <table>
           <tr>
-            <th>CPU</th>
+            <th scope="row">CPU</th>
             <td>3.5 GHz Quad-Core (64-bit)</td>
           </tr>
           <tr>
-            <th>RAM</th>
-            <td>4 GB</td>
+            <th scope="row">RAM</th>
+            <td>8 GB</td>
+          </tr>
+          <tr>
+            <th scope="row">GPU</th>
+            <td>WebGL2 compatible</td>
           </tr>
         </table>
 
-        <h3>Browser Support</h3>
-        <p>The HTML5 build of Lacus Opportunitas is intended to be played in a recent version of a Chromium-based browser, such as Google Chrome, Microsoft Edge, or Opera. Browser extensions that alter page behavior are not recommended. Other browsers must support modern JavaScript features and the current Web Audio API specification.</p>
+        <h3>Browser support</h3>
+        <p>The HTML5 build of Lacus Opportunitas is intended to be played in an up-to-date Chromium-based browser such as Google Chrome. Browser extensions that alter page behavior are not recommended. Other browsers must support modern JavaScript features such as Web Audio, WebGL2, and IndexedDB.</p>
       </section>
 
       <section>
         <h2>How to Play</h2>
+        <p>This section is forthcoming.</p>
       </section>
 
       <section>
         <h2>Controls</h2>
+        <p>Lacus Opportunitas supports a variety of input devices. Although remapping of controls is currently not available, alternate control schemes have been provided where appropriate.</p>
+
+        <h3>Gamepad controls</h3>
+        <p>Lacus Opportunitas is best experienced with a gamepad. For best results, please use an Xbox controller. Other controllers can be configured with Steam Input or a utility like <a href="https://github.com/x360ce/x360ce" rel="nofollow noopener" target="_blank">x360ce</a>:</p>
+
         <div class="scrollable">
           <table>
             <thead>
               <tr>
-                <th>Action</th>
-                <th>Button</th>
+                <th scope="col">Action</th>
+                <th scope="col" colspan="2">Gamepad controls</th>
               </tr>
             </thead>
             <tbody>
+              <tr>
+                <th scope="row">Accelerate</th>
+                <td>Left Stick</td>
+                <td>Right Trigger</td>
+              </tr>
+              <tr>
+                <th scope="row">Brake</th>
+                <td>Left Stick</td>
+                <td>Left Trigger</td>
+              </tr>
+              <tr>
+                <th scope="row">Turning</th>
+                <td colspan="2">Right Stick</td>
+              </tr>
+              <tr>
+                <th scope="row">Vertical Look</th>
+                <td colspan="2">Right Stick</td>
+              </tr>
+              <tr>
+                <th scope="row">Game Menu</th>
+                <td>Start</td>
+                <td>Select</td>
+              </tr>
+              <tr>
+                <th scope="row">UI Confirm</th>
+                <td colspan="2">A</td>
+              </tr>
+              <tr>
+                <th scope="row">UI Back</th>
+                <td colspan="2">B</td>
+              </tr>
             </tbody>
           </table>
         </div>
+
+        <h3>Keyboard controls</h3>
+        <p>The keyboard controls support play with one or both hands:</p>
+
+        <div class="scrollable">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Action</th>
+                <th colspan="3" scope="col">Keys</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Accelerate</th>
+                <td colspan="3">W</td>
+                <td>Numpad 8</td>
+              </tr>
+              <tr>
+                <th scope="row">Brake</th>
+                <td colspan="3">S</td>
+                <td>Numpad 5</td>
+              </tr>
+              <tr>
+                <th scope="row">Turn Left</th>
+                <td>Q</td>
+                <td>A</td>
+                <td>Left Arrow</td>
+                <td>Numpad 7</td>
+              </tr>
+              <tr>
+                <th scope="row">Turn Right</th>
+                <td>E</td>
+                <td>D</td>
+                <td>Right Arrow</td>
+                <td>Numpad 9</td>
+              </tr>
+              <tr>
+                <th scope="row">Look Up</th>
+                <td colspan="3">Up Arrow</td>
+                <td>Page Up</td>
+              </tr>
+              <tr>
+                <th scope="row">Look Down</th>
+                <td colspan="3">Down Arrow</td>
+                <td>Page Down</td>
+              </tr>
+              <tr>
+                <th scope="row">UI Confirm</th>
+                <td>F</td>
+                <td>Enter</td>
+                <td>Space</td>
+                <td>Numpad Enter</td>
+              </tr>
+              <tr>
+                <th scope="row">Game Menu / UI Back</th>
+                <td colspan="2">Escape</td>
+                <td>Backspace</td>
+                <td>Numpad Decimal</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Mouse controls</h3>
+        <p>The mouse may be used for an immersive first-person experience:</p>
+
+        <div class="scrollable">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Action</th>
+                <th scope="col">Mouse control</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Accelerate</th>
+                <td>Mouse 0 (Primary)</td>
+              </tr>
+              <tr>
+                <th scope="row">Brake</th>
+                <td>Mouse 2 (Secondary)</td>
+              </tr>
+              <tr>
+                <th scope="row">Turning</th>
+                <td>Mouse X-Axis</td>
+              </tr>
+              <tr>
+                <th scope="row">Vertical Look</th>
+                <td>Mouse Y-Axis</td>
+              </tr>
+              <tr>
+                <th scope="row">Game Menu / UI Back</th>
+                <td>Mouse 3 (Back)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Touch controls</h3>
+        <p>Lacus Opportunitas does not support touch input beyond its menus. A gamepad is strongly recommended for best results on mobile devices.</p>
       </section>
 
       <section>
