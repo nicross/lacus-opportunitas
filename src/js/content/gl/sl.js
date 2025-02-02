@@ -134,43 +134,28 @@ vec4 calculateSkyColor() {
   pitch -= ditherRange * 0.5;
   pitch = clamp(pitch, -1.0, 1.0);
 
-  return vec4(hsv2rgb(vec3(
+  // Gradient
+  vec4 color = vec4(hsv2rgb(vec3(
     mix(275.0, 335.0, pow(scale(pitch, -1.0, 1.0, 0.0, 1.0), 0.5)) / 360.0,
     1.0,
-    clamp(scale(pitch, 0.0, 1.0, 1.0, 0.5), 0.0, 1.0)
+    clamp(scale(pitch, 0.0, 1.0, 1.0, 0.25), 0.0, 1.0)
   )), 1.0);
 
-  // Colors
-  vec4 lowColor = vec4(hsv2rgb(vec3(
-    215.0 / 360.0,
-    1.0,
-    1.0
-  )), 1.0);
+  // Sun glow
+  float sunRatio = 1.0 - distance(normalize(vec3(1.0, 0, 20.0 / 90.0)), vertex);
+  sunRatio += rand(gl_FragCoord.yx * time) * ditherRange;
+  sunRatio -= ditherRange * 0.5;
+  sunRatio *= 0.333;
 
-  vec4 midColor = vec4(hsv2rgb(vec3(
-    335.0 / 360.0,
-    1.0,
-    1.0
-  )), 1.0);
-
-  vec4 highColor = vec4(hsv2rgb(vec3(
-    335.0 / 360.0,
-    1.0,
-    0.25
-  )), 1.0);
-
-  // Gradient
-  return pitch > 0.0
-    ? mix(
-        midColor,
-        highColor,
-        pitch
-      )
-    : mix(
-        midColor,
-        lowColor,
-        -pitch
-      );
+  return mix(
+    color,
+    vec4(hsv2rgb(vec3(
+      80.0 / 360.0,
+      1.0,
+      1.0
+    )), 1.0),
+    sunRatio
+  );
 }
 `
 

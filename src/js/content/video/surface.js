@@ -46,7 +46,7 @@ void main(void) {
   gl_Position = u_projection * vec4(vertex + offset, 1.0);
 
   ${content.gl.sl.passUniforms()}
-  alpha = sin(life * PI);
+  alpha = pow(sin(life * PI), 0.5);
   color_out = vec4(hsv2rgb(vec3(
     80.0 / 360.0,
     perlin3d(vec3(offset.xy * 0.25, u_time), 666.0),
@@ -77,7 +77,7 @@ void main(void) {
 
       particles.push({
         life: 1,
-        rate: 1 / engine.fn.randomFloat(1, 3),
+        rate: 1 / engine.fn.randomFloat(2, 4),
         x: vector.x,
         y: vector.y,
         z: content.surface.value({
