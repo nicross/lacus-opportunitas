@@ -1,18 +1,180 @@
 content.gl.sl = {}
 
+// Common stuff
 content.gl.sl.common = () => `
 ${content.gl.sl.definePi()}
 ${content.gl.sl.circle()}
 ${content.gl.sl.hash()}
 ${content.gl.sl.hsv2rgb()}
 ${content.gl.sl.rand()}
+${content.gl.sl.rotate()}
 ${content.gl.sl.scale()}
 ${content.gl.sl.perlin2d()}
 ${content.gl.sl.perlin3d()}
 ${content.gl.sl.perlin4d()}
 `
 
-content.gl.sl.circle = (prefix = '') => `
+content.gl.sl.commonFragment = () => `
+${content.gl.sl.common()}
+${content.gl.sl.getRelativeFromFragCoord()}
+${content.gl.sl.calculateSkyColor()}
+`
+
+content.gl.sl.commonVertex = () => `
+${content.gl.sl.common()}
+`
+
+content.gl.sl.attributeNames = () => [
+  'quadCoordinates_in',
+]
+
+content.gl.sl.bindUniforms = (gl, program) => {
+  const drawDistance = content.gl.drawDistance()
+
+  // Bind quadCoordinates_in
+  gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer())
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(
+    content.gl.quadTextureCoordinates()
+  ), gl.STATIC_DRAW)
+  gl.enableVertexAttribArray(program.attributes.quadCoordinates_in)
+  gl.vertexAttribPointer(program.attributes.quadCoordinates_in, 2, gl.FLOAT, false, 0, 0)
+
+  // Bind u_camera
+  const camera = content.camera.vector()
+  gl.uniform3fv(program.uniforms.u_camera, [camera.x, camera.y, camera.z])
+
+  // Bind u_drawDistance
+  gl.uniform1f(program.uniforms.u_drawDistance, drawDistance)
+
+  // Bind u_planet
+  const planet = content.time.planet().scale(drawDistance * 1.5)
+  gl.uniform3fv(program.uniforms.u_planet, [planet.x, planet.y, planet.z])
+
+  // Bind u_projection
+  gl.uniformMatrix4fv(program.uniforms.u_projection, false, content.camera.projectionMatrix().elements)
+
+  // Bind u_resolution
+  gl.uniform2fv(program.uniforms.u_resolution, [gl.canvas.width, gl.canvas.height])
+
+  // Bind u_sun
+  const sun = content.time.sun().scale(drawDistance * 1.75)
+  gl.uniform3fv(program.uniforms.u_sun, [sun.x, sun.y, sun.z])
+
+  // Bind u_time
+  gl.uniform1f(program.uniforms.u_time, content.time.value())
+}
+
+content.gl.sl.defineIns = () => `
+in vec3 camera;
+in float drawDistance;
+in vec4 planet;
+in mat4 projection;
+in mat4 projection_inverse;
+in vec2 quadCoordinates;
+in vec2 resolution;
+in vec4 sun;
+in highp float time;
+`
+
+content.gl.sl.defineOuts = () => `
+out vec3 camera;
+out float drawDistance;
+out vec4 planet;
+out mat4 projection;
+out mat4 projection_inverse;
+out vec2 quadCoordinates;
+out vec2 resolution;
+out vec4 sun;
+out float time;
+`
+
+content.gl.sl.defineUniforms = () => `
+in vec2 quadCoordinates_in;
+uniform vec3 u_camera;
+uniform float u_drawDistance;
+uniform vec3 u_planet;
+uniform mat4 u_projection;
+uniform vec2 u_resolution;
+uniform vec3 u_sun;
+uniform highp float u_time;
+`
+
+content.gl.sl.passUniforms = () => `
+camera = u_camera;
+drawDistance = u_drawDistance;
+planet = u_projection * vec4(u_planet, 1.0);
+projection = u_projection;
+projection_inverse = inverse(u_projection);
+quadCoordinates = quadCoordinates_in;
+resolution = u_resolution;
+sun = u_projection * vec4(u_sun, 1.0);
+time = u_time;
+`
+
+content.gl.sl.uniformNames = () => [
+  'u_camera',
+  'u_drawDistance',
+  'u_planet',
+  'u_projection',
+  'u_resolution',
+  'u_sun',
+  'u_time',
+]
+
+// Invididual functions
+content.gl.sl.calculateSkyColor = () => `
+vec4 calculateSkyColor() {
+  vec3 vertex = getRelativeFromFragCoord();
+  float pitch = vertex.z;
+
+  // Dithering
+  float ditherRange = 1.0 / 30.0;
+
+  pitch += rand(gl_FragCoord.xy * time) * ditherRange;
+  pitch -= ditherRange * 0.5;
+  pitch = clamp(pitch, -1.0, 1.0);
+
+  return vec4(hsv2rgb(vec3(
+    mix(275.0, 335.0, pow(scale(pitch, -1.0, 1.0, 0.0, 1.0), 0.5)) / 360.0,
+    1.0,
+    clamp(scale(pitch, 0.0, 1.0, 1.0, 0.5), 0.0, 1.0)
+  )), 1.0);
+
+  // Colors
+  vec4 lowColor = vec4(hsv2rgb(vec3(
+    215.0 / 360.0,
+    1.0,
+    1.0
+  )), 1.0);
+
+  vec4 midColor = vec4(hsv2rgb(vec3(
+    335.0 / 360.0,
+    1.0,
+    1.0
+  )), 1.0);
+
+  vec4 highColor = vec4(hsv2rgb(vec3(
+    335.0 / 360.0,
+    1.0,
+    0.25
+  )), 1.0);
+
+  // Gradient
+  return pitch > 0.0
+    ? mix(
+        midColor,
+        highColor,
+        pitch
+      )
+    : mix(
+        midColor,
+        lowColor,
+        -pitch
+      );
+}
+`
+
+content.gl.sl.circle = () => `
 // https://webgl2fundamentals.org/webgl/webgl-qna-the-fastest-way-to-draw-many-circles-example-5.html
 float circle(vec2 st, float radius) {
   vec2 dist = st - vec2(0.5);
@@ -27,6 +189,25 @@ float circle(vec2 st, float radius) {
 
 content.gl.sl.definePi = () => `
 #define PI 3.1415926535897932384626433832795
+`
+
+content.gl.sl.getRelativeFromFragCoord = () => `
+vec3 getRelativeFromFragCoord() {
+  // Convert screen space to world space coordinates
+  // https://stackoverflow.com/a/38960050
+  vec4 ndc = vec4(
+    ((gl_FragCoord.x / resolution.x) - 0.5) * 2.0,
+    ((gl_FragCoord.y / resolution.y) - 0.5) * 2.0,
+    (gl_FragCoord.z  - 0.5) * 2.0,
+    1.0
+  );
+
+  // Convert world space to clip space
+  vec4 clip = projection_inverse * ndc;
+
+  // Normalize it
+  return normalize((clip / clip.w).xyz);
+}
 `
 
 content.gl.sl.hash = () => `
@@ -231,6 +412,18 @@ float rand(vec2 co) {
   float dt= dot(co.xy ,vec2(a,b));
   float sn= mod(dt,3.14);
   return fract(sin(sn) * c);
+}
+`
+
+content.gl.sl.rotate = () => `
+vec2 rotate(vec2 point, float angle) {
+  float c = cos(angle);
+  float s = sin(angle);
+
+  return vec2(
+    (point.x * c) - (point.y * s),
+    (point.x * s) + (point.y * c)
+  );
 }
 `
 

@@ -3,7 +3,7 @@ content.camera = (() => {
     lookMaxVelocity = engine.const.tau / 4,
     lookRange = engine.const.tau * 63/256
 
-  let look = 0,
+  let look = engine.const.zero,
     projectionMatrix = engine.tool.matrix4d.identity(),
     quaternion = engine.tool.quaternion.identity(),
     vector = engine.tool.vector3d.create()
@@ -69,7 +69,8 @@ content.camera = (() => {
     projectionMatrix: () => projectionMatrix,
     quaternion: () => quaternion.clone(),
     reset: function () {
-      look = 0
+      // FIXME: When look is EXACTLY zero it causes issues with rotations?
+      look = engine.const.zero
       projectionMatrix = engine.tool.matrix4d.identity()
       quaternion = engine.tool.quaternion.identity()
       vector = engine.tool.vector3d.create()

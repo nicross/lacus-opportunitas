@@ -131,7 +131,7 @@ content.gl.createQuad = ({
   translate = engine.tool.vector3d.create(),
   width = 1,
 } = {}) => {
-  const quaternion = content.camera.computedQuaternion()
+  const quaternion = content.camera.quaternion()
 
   const corners = [
     engine.tool.vector3d.create({y: -width, z: -height}) // right bottom
