@@ -7,14 +7,24 @@ app.storage.game = {
   new: function () {
     this.clear()
 
+    const seed = app.fn.generateSeed()
+    engine.seed.set(seed)
+
+    const ports = content.ports.generate(),
+      start = ports.find((port) => port.economy == 'agricultural')
+
+    const startVector = engine.tool.vector3d.unitX()
+      .rotateEuler({yaw: start.angle})
+      .scale(content.lake.radius())
+
     engine.state.import({
+      ports,
       position: {
-        quaternion: engine.tool.vector3d.unitX().quaternion(),
-        x: 0,
-        y: 0,
-        z: 0,
+        quaternion: startVector.normalize().inverse().quaternion(),
+        x: startVector.x,
+        y: startVector.y,
       },
-      seed: Math.random(),
+      seed,
       time: 0,
     })
 

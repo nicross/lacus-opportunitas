@@ -94,7 +94,7 @@ A list of all economy types, and the goods they buy and sell:
     - Refinement Equipment
     - Consumer Goods
     - Waste
-- Cosmopolitan
+- Luxury
   - Buy
     - Consumer Goods
     - Essentials
