@@ -9,9 +9,7 @@ app.screen.newGame = app.screenManager.invent({
     },
     confirm: function () {
       app.storage.game.new()
-
-      // TODO: Docking screen?
-      this.change('game')
+      this.change(content.dock.is() ? 'dock' : 'game')
     },
   },
   // State

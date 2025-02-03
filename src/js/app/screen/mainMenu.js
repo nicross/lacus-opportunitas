@@ -9,9 +9,7 @@ app.screen.mainMenu = app.screenManager.invent({
     },
     continue: function () {
       app.storage.game.load()
-
-      // TODO: Docking screen?
-      this.change('game')
+      this.change(content.dock.is() ? 'dock' : 'game')
     },
     newGame: function () {
       if (app.storage.game.has()) {
@@ -19,9 +17,7 @@ app.screen.mainMenu = app.screenManager.invent({
       }
 
       app.storage.game.new()
-
-      // TODO: Docking screen?
-      this.change('game')
+      this.change(content.dock.is() ? 'dock' : 'game')
     },
     quit: function () {
       app.quit()

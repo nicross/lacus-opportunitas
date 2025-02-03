@@ -4,6 +4,9 @@ app.screen.game = app.screenManager.invent({
   parentSelector: '.a-app--game',
   rootSelector: '.a-game',
   transitions: {
+    dock: function () {
+      this.change('dock')
+    },
     pause: function () {
       this.change('gameMenu')
     },
@@ -11,6 +14,11 @@ app.screen.game = app.screenManager.invent({
   // State
   state: {},
   // Hooks
+  onReady: function () {
+    content.dock.on('dock', () => {
+      app.screenManager.dispatch('dock')
+    })
+  },
   onEnter: function () {
     app.autosave.enable()
     app.autosave.trigger()

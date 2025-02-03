@@ -10,7 +10,7 @@ content.movement = (() => {
 
   function calculateSpeedLimit() {
     const majorRadius = content.lake.radius(),
-      minorRadius = majorRadius - content.lake.portRadius()
+      minorRadius = majorRadius - content.dock.radius()
 
     const position = engine.position.getVector()
     const distance = position.distance()
@@ -44,6 +44,7 @@ content.movement = (() => {
 
       return this
     },
+    maxVelocity: () => maxVelocity,
     rawInput: () => ({...rawInput}),
     reset: function () {
       velocity = engine.tool.vector2d.create()
@@ -160,3 +161,7 @@ content.movement = (() => {
 engine.state.on('export', (data) => data.movement = content.movement.export())
 engine.state.on('import', ({movement}) => content.movement.import(movement))
 engine.state.on('reset', () => content.movement.reset())
+
+engine.ready(() => {
+  content.dock.on('dock', () => content.movement.reset())
+})

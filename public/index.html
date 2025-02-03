@@ -15,7 +15,26 @@
         <section class="c-screen a-game" tabindex="-1" aria-label="Game"></section>
       </div>
 
-      <div class="a-app--screen a-app--screen-os a-app--gameMenu">
+      <div class="a-app--screen a-app--dock">
+        <section class="c-screen a-dock" aria-labelledby="a-dock--title">
+          <h1 id="a-dock--title" class="a-dock--title">
+            <div class="a-dock--welcome">Welcome to</div>
+            <div class="c-screen--title a-dock--portName">Port name</div>
+            <span class="u-screenReader">.</span>
+            <div class="a-dock--economy">Economy type</div>
+          </h1>
+          <ul class="c-screen--actions">
+            <li class="c-screen--action">
+              <button class="c-menuButton a-dock--back" type="button">Undock</button>
+            </li>
+            <li class="c-screen--action">
+              <button class="c-menuButton a-dock--gameMenu" type="button">Miscellaneous</button>
+            </li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="a-app--screen a-app--gameMenu">
         <section class="c-screen a-gameMenu" aria-label="Game paused">
           <h1 class="c-screen--title">Game paused</h1>
           <ul class="c-screen--actions">
@@ -35,7 +54,7 @@
         </section>
       </div>
 
-      <div class="a-app--screen a-app--screen-os a-app--mainMenu">
+      <div class="a-app--screen a-app--mainMenu">
         <section class="c-screen a-mainMenu" aria-label="Main menu">
           <h1 class="c-screen--title">Main menu</h1>
           <ul class="c-screen--actions">
@@ -55,7 +74,7 @@
         </section>
       </div>
 
-      <div class="a-app--screen a-app--screen-os a-app--newGame">
+      <div class="a-app--screen a-app--newGame">
         <section class="c-screen a-newGame" aria-labelledby="a-newGame--title">
           <div id="a-newGame--title">
             <h1 class="c-screen--title">Warning</h1>
@@ -72,7 +91,7 @@
         </section>
       </div>
 
-      <div class="a-app--screen a-app--screen-os a-app--settings">
+      <div class="a-app--screen a-app--settings">
         <section class="c-screen a-settings" aria-label="Settings">
           <h1 class="c-screen--title">Settings</h1>
           <div class="c-screen--fields">

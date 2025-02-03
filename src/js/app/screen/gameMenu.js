@@ -5,7 +5,7 @@ app.screen.gameMenu = app.screenManager.invent({
   rootSelector: '.a-gameMenu',
   transitions: {
     back: function () {
-      this.change('game')
+      this.change(content.dock.is() ? 'dock' : 'game')
     },
     mainMenu: function () {
       this.change('mainMenu')

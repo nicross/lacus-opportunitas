@@ -1,0 +1,8 @@
+.a-dock {}
+  .a-dock .c-screen--title {
+    margin: -0.25rem 0 1rem 0;
+  }
+  .a-dock--economy {
+    font-size: 1.333em;
+  }
+  .a-dock--welcome {}
