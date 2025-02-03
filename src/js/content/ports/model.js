@@ -10,12 +10,14 @@ content.ports.model.prototype = {
     behavior = 0,
     economy = '',
     index = 0,
+    luxuryGood = undefined,
     name = '',
   } = {}) {
     this.angle = angle
     this.behavior = behavior
     this.economy = content.economies.get(economy)
     this.index = index
+    this.luxuryGood = luxuryGood
     this.name = name
     this.x = Math.cos(angle) * content.lake.radius()
     this.y = Math.sin(angle) * content.lake.radius()
@@ -27,7 +29,23 @@ content.ports.model.prototype = {
       angle: this.angle,
       economy: this.economy.id,
       index: this.index,
+      luxuryGood: this.luxuryGood,
       name: this.name,
     }
+  },
+  getSelling: function () {
+    const goods = this.economy.sells.map(
+      (id) => content.goods.get(id)
+    )
+
+    if (this.luxuryGood) {
+      goods.push(
+        content.goods.getLuxuryForPort(this.index)
+      )
+    }
+
+    goods.sort((a, b) => a.name.localeCompare(b.name))
+
+    return goods
   },
 }

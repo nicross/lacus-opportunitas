@@ -1,29 +1,42 @@
 content.ports.generate = (() => {
+  const defaultLuxuries = [
+    'Dust',
+    'Elixir',
+    'Sauce',
+    'Spice',
+    'Zest',
+  ]
+
   const defaultNamePrefixes = [
+    'Astro',
     'Augur',
     'Blink',
     'Bluff',
-    'Brine',
-    'Chert',
+    'Braille',
     'Exa',
+    'Gaines',
     'Giga',
     'Grand',
     'Hexa',
     'Hill',
     'Holo',
     'Kilo',
+    'Launch',
     'Lumen',
     'Luna',
+    'Maria',
+    'Maya',
     'Mega',
-    'Mid',
+    'Midi',
     'Milli',
     'Mono',
     'Neo',
     'Octo',
+    'Omni',
     'Quant',
     'Penta',
     'Rich',
-    'Rock',
+    'Rocks',
     'Sol',
     'Spring',
     'Sprocket',
@@ -31,7 +44,7 @@ content.ports.generate = (() => {
     'River',
     'Water',
     'Widget',
-    'Yotta',
+    'Worthing',
     'Zeta',
   ]
 
@@ -41,31 +54,45 @@ content.ports.generate = (() => {
     'burough',
     'bury',
     'castle',
+    'center',
     'chester',
     'dale',
     'field',
     'ford',
+    'forge',
     'gon',
     'gram',
     'ham',
     'haven',
+    'house',
     'land',
     'mouth',
+    'pad',
     'plex',
     'point',
     'polis',
     'port',
     'shade',
     'shire',
+    'smith',
     'station',
     'stead',
     'ton',
+    'tower',
+    'town',
+    'turf',
     'view',
     'ville',
     'wood',
     'worth',
     'valley',
   ]
+
+  function generateLuxury(portName, luxuries, srand) {
+    const luxury = engine.fn.chooseSplice(luxuries, srand)
+
+    return `${portName} ${luxury}`
+  }
 
   function generateName(prefixes, suffixes, srand) {
     const prefix = engine.fn.chooseSplice(prefixes, srand)
@@ -87,7 +114,8 @@ content.ports.generate = (() => {
       economies.length * srand(1, 2)
     )
 
-    const namePrefixes = engine.fn.shuffle(defaultNamePrefixes, srand),
+    const luxuries = engine.fn.shuffle(defaultLuxuries, srand),
+      namePrefixes = engine.fn.shuffle(defaultNamePrefixes, srand),
       nameSuffixes = engine.fn.shuffle(defaultNameSuffixes, srand)
 
     let angle = srand(0, engine.const.tau),
@@ -100,13 +128,19 @@ content.ports.generate = (() => {
         economyRolls = engine.fn.shuffle(economies, srand)
       }
 
-      ports.push({
+      const port = {
         angle,
         behavior: srand(),
         economy: engine.fn.chooseSplice(economyRolls, srand()).id,
         index: i,
         name: generateName(namePrefixes, nameSuffixes, srand),
-      })
+      }
+
+      if (port.economy == 'luxury') {
+        port.luxuryGood = generateLuxury(port.name, luxuries, srand)
+      }
+
+      ports.push(port)
 
       const angleRoll = defecit
         ? 0.5 + srand(0, defecit)

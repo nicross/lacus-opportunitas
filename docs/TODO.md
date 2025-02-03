@@ -4,7 +4,6 @@
   - Port discovery tracker
   - Aria live region when facing a port
 - Phase 2
-  - Define goods
   - Inventory system
   - Gold system
   - Buying screen
