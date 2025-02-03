@@ -1,1 +1,23 @@
 # TODO
+- Phase 1
+  - Particle effects for ports
+  - Port discovery tracker
+  - Aria live region when facing a port
+- Phase 2
+  - Define goods
+  - Inventory system
+  - Gold system
+  - Buying screen
+  - Selling screen
+  - Dynamic supply and demand?
+- Phase 3
+  - Ambient audio
+  - Movement sounds
+  - Navigational audio
+  - Focus changes, clicks, and screen transitions
+  - Dock and menu music?
+- Phase 4?
+  - Upgrades?
+  - Tutorial?
+  - Trick system?
+  - Dolphins?
