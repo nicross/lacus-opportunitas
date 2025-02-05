@@ -40,7 +40,7 @@ content.surface = (() => {
       y = 0,
     } = {}) {
       const lakeRadius = content.lake.radius()
-      const centerRatio = 1 - (engine.fn.distance({x, y}) / lakeRadius)
+      let centerRatio = 1 - (engine.fn.distance({x, y}) / lakeRadius)
 
       if (centerRatio <= 0) {
         return engine.fn.clamp(
@@ -52,6 +52,8 @@ content.surface = (() => {
         ) * (content.camera.height() * 0.75)
       }
 
+      centerRatio **= 0.666
+
       const v1 = noise1.value(
         x / 10 * engine.tool.simplex3d.prototype.skewFactor,
         y / 10 * engine.tool.simplex3d.prototype.skewFactor,
@@ -59,7 +61,7 @@ content.surface = (() => {
       ) * 0.5
 
       const v2 = noise2.value(
-        x / 25 * engine.tool.simplex3d.prototype.skewFactor,
+        ((x + (time * -5)) / 25) * engine.tool.simplex3d.prototype.skewFactor,
         y / 25 * engine.tool.simplex3d.prototype.skewFactor,
         time / 15 * engine.tool.simplex3d.prototype.skewFactor
       ) * 10

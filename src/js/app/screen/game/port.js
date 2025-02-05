@@ -9,13 +9,11 @@ app.screen.game.port = {
     this.visualElement = this.rootElement.querySelector('.a-game--portVisual')
   },
   onEnter: function () {
-    this.onFrame()
-
     this.liveElement.setAttribute('aria-live', 'assertive')
   },
   onExit: function () {
-    this.currentDistance = undefined
-    this.currentPort = undefined
+    delete this.currentDistance
+    delete this.currentPort
 
     this.liveElement.removeAttribute('aria-live')
     this.liveElement.innerHTML = ''
@@ -26,8 +24,17 @@ app.screen.game.port = {
       minimumFractionDigits: 2,
     })
 
-    const facing = content.ports.facing(),
+    const facing = content.ports.facing(1/32),
       position = engine.position.getVector()
+
+    if (!facing) {
+      delete this.currentDistance
+      delete this.currentPort
+      this.liveElement.innerHTML = ''
+      this.visualElement.innerHTML = '[No target]<br /><br /><br />'
+
+      return
+    }
 
     const distance = position.distance(facing) / 1000,
       distanceRounded1 = numberFormat.format(distance),
@@ -35,8 +42,8 @@ app.screen.game.port = {
       name = facing.isDiscovered ? facing.name : 'Unknown'
 
     this.visualElement.innerHTML = facing.isDiscovered
-      ? `${facing.name}<br />${facing.economy.name} port<br />${distanceRounded1} km`
-      : `Unknown<br />Dock to discover<br />${distanceRounded1} km`
+      ? `[${facing.name}]<br />${facing.economy.name} port<br />${distanceRounded1} km`
+      : `[Unknown]<br />Dock to discover<br />${distanceRounded1} km`
 
     if (this.currentPort !== facing || this.currentDistance != distanceRounded2) {
       this.liveElement.innerHTML = this.currentPort === facing
@@ -47,6 +54,8 @@ app.screen.game.port = {
             : `Unknown, Dock to discover, ${distanceRounded2} kilometer${distanceRounded2 == 1 ? '' : 's'}`
         )
     }
+
+    engine.loop.once('frame', () => this.visualElement.style.minWidth = `${this.visualElement.clientWidth}px`)
 
     this.currentDistance = distanceRounded2
     this.currentPort = facing

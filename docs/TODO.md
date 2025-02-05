@@ -1,6 +1,4 @@
 # TODO
-- Phase 1
-  - Aria live region when facing a port
 - Phase 2
   - Inventory system
   - Gold system

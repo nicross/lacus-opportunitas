@@ -84,7 +84,7 @@ void main(void) {
       }
 
       const fps = engine.performance.fps()
-      const chance = engine.fn.scale(dot, 0.85, 1, 0, 1) ** 8
+      const chance = engine.fn.scale(dot, 0.85, 1, 0, 1) ** 12
 
       if (Math.random() > chance) {
         continue
@@ -103,12 +103,12 @@ void main(void) {
   function updateParticles() {
     const camera = content.camera.vector(),
       delta = engine.loop.delta(),
-      lifeRate = 4 * delta,
+      lifeRate = 2 * delta,
       lifes = [],
       offsets = [],
       position = engine.position.getVector(),
       quaternion = engine.position.getQuaternion(),
-      velocity = 10 * delta
+      velocity = 5 * delta
 
     const origins = new Map()
 
@@ -120,7 +120,7 @@ void main(void) {
       origins.set(port,
         relative.subtractRadius(
           Math.max(0, relative.distance() - content.dock.radius())
-        ).add({z: 22.5})
+        ).add({z: 24})
       )
     }
 
