@@ -18,18 +18,24 @@ app.screen.game = app.screenManager.invent({
     content.dock.on('dock', () => {
       app.screenManager.dispatch('dock')
     })
+
+    this.port.onReady()
   },
   onEnter: function () {
     app.autosave.enable()
     app.autosave.trigger()
 
     engine.loop.resume()
+
+    this.port.onEnter()
   },
   onExit: function () {
     app.autosave.disable()
     app.autosave.trigger()
 
     engine.loop.pause()
+
+    this.port.onExit()
   },
   onFrame: function () {
     const game = app.controls.game(),
@@ -45,5 +51,7 @@ app.screen.game = app.screenManager.invent({
     })
 
     content.camera.applyLook(game.look)
+
+    this.port.onFrame()
   },
 })
