@@ -14,6 +14,7 @@ content.video = (() => {
       this.sun.draw()
       this.planet.draw()
       this.surface.draw()
+      this.portParticles.draw()
       this.grain.draw()
 
       return this
@@ -25,6 +26,7 @@ content.video = (() => {
 
       this.grain.load()
       this.planet.load()
+      this.portParticles.load()
       this.sky.load()
       this.stars.load()
       this.sun.load()
@@ -41,6 +43,7 @@ content.video = (() => {
 
       this.grain.unload()
       this.planet.unload()
+      this.portParticles.unload()
       this.sky.unload()
       this.stars.unload()
       this.sun.unload()

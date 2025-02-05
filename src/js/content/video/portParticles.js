@@ -1,5 +1,5 @@
-content.video.surface = (() => {
-  const maxParticles = 10000
+content.video.portParticles = (() => {
+  const maxParticles = 1000
 
   const fragmentShader = `#version 300 es
 
@@ -9,7 +9,6 @@ ${content.gl.sl.defineIns()}
 ${content.gl.sl.commonFragment()}
 
 in float alpha;
-in vec4 color_out;
 
 out vec4 color;
 
@@ -21,7 +20,7 @@ void main() {
   }
 
   color = vec4(
-    color_out.rgb,
+    1.0, 1.0, 1.0,
     alpha * pow(d, 0.0625)
   );
 }
@@ -40,96 +39,110 @@ in vec3 offset;
 in vec3 vertex;
 
 out float alpha;
-out vec4 color_out;
 
 void main(void) {
-  gl_Position = u_projection * vec4(vertex + offset, 1.0);
+  vec3 v = vertex + offset;
+  gl_Position = u_projection * vec4(v.xyz, 1.0);
 
   ${content.gl.sl.passUniforms()}
-  alpha = pow(sin(life * PI), 0.5);
-  color_out = vec4(hsv2rgb(vec3(
-    80.0 / 360.0,
-    perlin3d(vec3(offset.xy * 0.25, u_time), 666.0),
-    1.0
-  )), 1.0);
-
-  if (length(offset.xy + camera.xy) > lakeRadius) {
-    color_out = vec4(hsv2rgb(vec3(
-      335.0 / 360.0,
-      0.25,
-      0.25
-    )), 1.0);
-  }
+  alpha = sqrt(sin(PI * life));
 }
 `
 
   let particles = [],
     program
 
+  function generateParticle(port) {
+    const velocity = engine.tool.vector3d.create({
+      x: engine.fn.randomFloat(-1, 1),
+      y: engine.fn.randomFloat(-1, 1),
+      z: engine.fn.randomFloat(-1, 1),
+    }).normalize()
+
+    return {
+      life: 1,
+      port,
+      vector: velocity.clone(),
+      velocity,
+    }
+  }
+
   function generateParticles() {
-    const count = Math.min(
-      maxParticles / engine.performance.fps(),
-      Math.max(0, maxParticles - particles.length)
-    )
+    if (particles.length > maxParticles) {
+      return
+    }
 
     const drawDistance = content.gl.drawDistance(),
       position = engine.position.getVector(),
       time = content.time.value()
 
-    for (let i = 0; i < count; i += 1) {
-      const vector = position.add(
-        engine.tool.vector2d.unitX()
-          .scale(Math.random() * drawDistance)
-          .rotate(Math.random() * 2 * engine.const.tau)
+    for (const port of content.ports.all()) {
+      const dot = port.getDot()
+
+      if (dot < 0.85) {
+        continue
+      }
+
+      const fps = engine.performance.fps()
+      const chance = engine.fn.scale(dot, 0.85, 1, 0, 1) ** 8
+
+      if (Math.random() > chance) {
+        continue
+      }
+
+      particles.push(
+        generateParticle(port)
       )
 
-      particles.push({
-        life: 1,
-        rate: 1 / engine.fn.randomFloat(2, 4),
-        x: vector.x,
-        y: vector.y,
-        z: content.surface.value({
-          time,
-          x: vector.x,
-          y: vector.y
-        }),
-      })
+      if (particles.length > maxParticles) {
+        break
+      }
     }
   }
 
   function updateParticles() {
     const camera = content.camera.vector(),
       delta = engine.loop.delta(),
-      drawDistance = content.gl.drawDistance(),
+      lifeRate = 4 * delta,
       lifes = [],
       offsets = [],
-      time = content.time.value(),
-      xMax = camera.x + drawDistance,
-      xMin = camera.x - drawDistance,
-      yMax = camera.y + drawDistance,
-      yMin = camera.y - drawDistance
+      position = engine.position.getVector(),
+      quaternion = engine.position.getQuaternion(),
+      velocity = 10 * delta
+
+    const origins = new Map()
+
+    for (const port of content.ports.all()) {
+      const relative = engine.tool.vector3d.create(port)
+        .subtract(camera)
+        .zeroZ()
+
+      origins.set(port,
+        relative.subtractRadius(
+          Math.max(0, relative.distance() - content.dock.radius())
+        ).add({z: 25})
+      )
+    }
 
     particles = particles.reduce((particles, particle) => {
-      particle.life -= delta * particle.rate
+      const origin = origins.get(particle.port)
 
-      if (particle.life < 0) {
+      particle.life -= lifeRate
+
+      if (particle.life <= 0) {
         return particles
       }
 
-      particle.x = wrap(particle.x, xMin, xMax)
-      particle.y = wrap(particle.y, yMin, yMax)
-      particle.z = content.surface.value({
-        time,
-        x: particle.x,
-        y: particle.y
-      })
+      particle.vector.x += particle.velocity.x * velocity
+      particle.vector.y += particle.velocity.y * velocity
+      particle.vector.z += particle.velocity.z * velocity
 
       lifes.push(particle.life)
 
       offsets.push(
-        particle.x - camera.x,
-        particle.y - camera.y,
-        particle.z - camera.z,
+        origin.x + particle.vector.x,
+        origin.y + particle.vector.y,
+        origin.z + particle.vector.z,
       )
 
       particles.push(particle)
@@ -141,18 +154,6 @@ void main(void) {
       lifes,
       offsets,
     }
-  }
-
-  function wrap(value, min, max) {
-    if (value >= max) {
-      return min + engine.const.zero
-    }
-
-    if (value <= min) {
-      return max - engine.const.zero
-    }
-
-    return value
   }
 
   return {
@@ -187,9 +188,9 @@ void main(void) {
 
       // Bind mesh
       const mesh = content.gl.createQuad({
-        height: 1/16,
+        height: 1/32,
         quaternion: content.camera.quaternion(),
-        width: 1/16,
+        width: 1/32,
       })
 
       gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer())

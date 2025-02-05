@@ -1,6 +1,5 @@
 # TODO
 - Phase 1
-  - Particle effects for ports
   - Port discovery tracker
   - Aria live region when facing a port
 - Phase 2
