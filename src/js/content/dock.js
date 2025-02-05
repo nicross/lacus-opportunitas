@@ -30,6 +30,7 @@ content.dock = (() => {
 
       if (closest && distance < radius) {
         index = closest.index
+        closest.isDiscovered = true
         pubsub.emit('dock')
       }
 

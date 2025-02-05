@@ -17,6 +17,8 @@ app.storage.game = {
       .rotateEuler({yaw: start.angle})
       .scale(content.lake.radius())
 
+    start.isDiscovered = true
+
     engine.state.import({
       ports,
       position: {

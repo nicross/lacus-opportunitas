@@ -10,6 +10,7 @@ content.ports.model.prototype = {
     behavior = 0,
     economy = '',
     index = 0,
+    isDiscovered = false,
     luxuryGood = undefined,
     name = '',
   } = {}) {
@@ -17,6 +18,7 @@ content.ports.model.prototype = {
     this.behavior = behavior
     this.economy = content.economies.get(economy)
     this.index = index
+    this.isDiscovered = isDiscovered
     this.luxuryGood = luxuryGood
     this.name = name
     this.x = Math.cos(angle) * content.lake.radius()
@@ -29,6 +31,7 @@ content.ports.model.prototype = {
       angle: this.angle,
       economy: this.economy.id,
       index: this.index,
+      isDiscovered: this.isDiscovered,
       luxuryGood: this.luxuryGood,
       name: this.name,
     }

@@ -120,7 +120,7 @@ void main(void) {
       origins.set(port,
         relative.subtractRadius(
           Math.max(0, relative.distance() - content.dock.radius())
-        ).add({z: 25})
+        ).add({z: 22.5})
       )
     }
 

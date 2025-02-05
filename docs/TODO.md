@@ -1,6 +1,5 @@
 # TODO
 - Phase 1
-  - Port discovery tracker
   - Aria live region when facing a port
 - Phase 2
   - Inventory system

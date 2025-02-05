@@ -16,10 +16,12 @@ content.ports.generate = (() => {
     'Exa',
     'Gaines',
     'Giga',
+    'Gizmo',
     'Grand',
     'Hexa',
     'Hill',
     'Holo',
+    'Inner',
     'Kilo',
     'Launch',
     'Lumen',
@@ -33,6 +35,7 @@ content.ports.generate = (() => {
     'Neo',
     'Octo',
     'Omni',
+    'Outer',
     'Quant',
     'Penta',
     'Rich',
@@ -44,6 +47,7 @@ content.ports.generate = (() => {
     'River',
     'Water',
     'Widget',
+    'Wild',
     'Worthing',
     'Zeta',
   ]
@@ -68,6 +72,7 @@ content.ports.generate = (() => {
     'land',
     'mouth',
     'pad',
+    'pass',
     'plex',
     'point',
     'polis',
@@ -75,6 +80,7 @@ content.ports.generate = (() => {
     'shade',
     'shire',
     'smith',
+    'star',
     'station',
     'stead',
     'ton',
@@ -111,7 +117,7 @@ content.ports.generate = (() => {
       srand = engine.fn.srand('ports')
 
     const count = Math.round(
-      economies.length * srand(1, 2)
+      economies.length * srand(1.5, 2.5)
     )
 
     const luxuries = engine.fn.shuffle(defaultLuxuries, srand),
@@ -143,8 +149,8 @@ content.ports.generate = (() => {
       ports.push(port)
 
       const angleRoll = defecit
-        ? 0.5 + srand(0, defecit)
-        : srand(0.5, 1)
+        ? 0.666 + srand(0, defecit)
+        : srand(0.666, 1)
 
       angle += angleRoll * engine.const.tau / count
 
