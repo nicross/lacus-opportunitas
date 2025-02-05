@@ -33,6 +33,23 @@ content.ports.model.prototype = {
       name: this.name,
     }
   },
+  getDistance: function () {
+    const value = engine.tool.vector3d.create(this)
+      .subtract(engine.position.getVector())
+      .zeroZ()
+      .distance()
+
+    return engine.fn.scale(value, 0, content.lake.radius() * 2, 0, 1)
+  },
+  getDot: function() {
+    const value = engine.tool.vector3d.create(this)
+      .subtract(engine.position.getVector())
+      .zeroZ()
+      .normalize()
+      .dotProduct(engine.position.getQuaternion().forward())
+
+    return engine.fn.scale(value, -1, 1, 0, 1)
+  },
   getSelling: function () {
     const goods = this.economy.sells.map(
       (id) => content.goods.get(id)

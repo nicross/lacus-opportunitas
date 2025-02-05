@@ -6,6 +6,14 @@ content.ports = (() => {
     all: () => [...ports],
     closest: () => tree.find(engine.position.getVector(), Infinity),
     export: () => ports.map((port) => port.export()),
+    facing: (threshold = 1) => {
+      const sorted = ports.map((port) => [port, port.getDot()])
+      sorted.sort((a, b) => b[1] - a[1])
+
+      return sorted.length && sorted[0][1] > (1 - threshold)
+        ? sorted[0][0]
+        : undefined
+    },
     get: (index) => ports[index],
     import: function (exports) {
       for (const exported of exports) {
