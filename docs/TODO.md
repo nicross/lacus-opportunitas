@@ -1,7 +1,6 @@
 # TODO
 - Phase 2
   - Inventory system
-  - Gold system
   - Buying screen
   - Selling screen
   - Dynamic supply and demand?

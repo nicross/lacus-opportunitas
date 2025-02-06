@@ -20,6 +20,7 @@ app.storage.game = {
     start.isDiscovered = true
 
     engine.state.import({
+      credits: 10,
       ports,
       position: {
         quaternion: startVector.normalize().inverse().quaternion(),
