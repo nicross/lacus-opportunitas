@@ -8,7 +8,7 @@ content.goods.base = {
       type: '1d',
     })
 
-    const exponent = srand(0.75, 1.25),
+    const exponent = srand(1, 2),
       multiplier = content.goods.priceMultiplier(),
       rate = 1 / (60 * srand(15, 45)),
       time = content.time.value()
@@ -28,7 +28,7 @@ content.goods.base = {
       type: '1d',
     })
 
-    const exponent = srand(0.75, 1.25),
+    const exponent = srand(1, 2),
       multiplier = content.goods.priceMultiplier(),
       rate = 1 / (60 * srand(15, 45)),
       time = content.time.value()
