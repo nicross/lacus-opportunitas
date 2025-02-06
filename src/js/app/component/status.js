@@ -37,7 +37,7 @@ app.component.status.prototype = {
     this.liveElement.innerHTML = ''
 
     if (value) {
-      this.liveElement.setAttribute('aria-live', 'polite')
+      this.liveElement.setAttribute('aria-live', 'assertive')
     } else {
       this.liveElement.removeAttribute('aria-live')
     }
@@ -48,7 +48,7 @@ app.component.status.prototype = {
     this.creditsElement.innerHTML = this.describeCredits()
     this.inventoryElement.innerHTML = this.describeInventory()
 
-    this.liveElement.inenrHTML = `${this.describeCredits()}, ${this.describeInventory(true)}`
+    this.liveElement.innerHTML = `${this.describeCredits()}, ${this.describeInventory(true)}`
 
     return this
   },

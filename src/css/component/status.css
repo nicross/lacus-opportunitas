@@ -3,11 +3,11 @@
   display: flex;
   justify-content: space-between;
 }
-  .c-status > *::after {
+  .c-status--credits::after,
+  .c-status--inventory::after {
     content: ']' / '';
   }
-  .c-status > *::before {
+  .c-status--credits::before,
+  .c-status--inventory::before {
     content: '[' / '';
   }
-  .c-status--credits {}
-  .c-status--inventory {}
