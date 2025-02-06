@@ -22,8 +22,14 @@ app.screen.dock = app.screenManager.invent({
 
       this.change('game')
     },
+    buy: function () {
+      this.change('buy')
+    },
     gameMenu: function () {
       this.change('gameMenu')
+    },
+    sell: function () {
+      this.change('sell')
     },
   },
   // State
@@ -34,7 +40,9 @@ app.screen.dock = app.screenManager.invent({
 
     Object.entries({
       back: root.querySelector('.a-dock--back'),
+      buy: root.querySelector('.a-dock--buy'),
       gameMenu: root.querySelector('.a-dock--gameMenu'),
+      sell: root.querySelector('.a-dock--sell'),
     }).forEach(([event, element]) => {
       element.addEventListener('click', () => app.screenManager.dispatch(event))
     })

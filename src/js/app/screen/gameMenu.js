@@ -7,6 +7,9 @@ app.screen.gameMenu = app.screenManager.invent({
     back: function () {
       this.change(content.dock.is() ? 'dock' : 'game')
     },
+    inventory: function () {
+      this.change('inventory')
+    },
     mainMenu: function () {
       this.change('mainMenu')
     },
@@ -25,6 +28,7 @@ app.screen.gameMenu = app.screenManager.invent({
 
     Object.entries({
       back: root.querySelector('.a-gameMenu--back'),
+      inventory: root.querySelector('.a-gameMenu--inventory'),
       mainMenu: root.querySelector('.a-gameMenu--mainMenu'),
       quit: root.querySelector('.a-gameMenu--quit'),
       settings: root.querySelector('.a-gameMenu--settings'),

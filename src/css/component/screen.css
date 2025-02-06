@@ -9,6 +9,9 @@
   .c-screen:focus {
     outline: 0;
   }
+  .c-screen > * {
+    max-width: 75%;
+  }
   .c-screen > * + * {
     margin-top: 1rem;
   }
@@ -20,7 +23,8 @@
   }
   .c-screen--actions,
   .c-screen--description,
-  .c-screen--fields {
+  .c-screen--fields,
+  .c-screen--status {
     margin-top: 2rem;
   }
   .c-screen--actions {
@@ -28,9 +32,6 @@
   }
   .c-screen--field {
     line-height: 1;
-  }
-  .c-screen--fields {
-    max-width: 75%;
   }
   .c-screen--label {
     display: block;

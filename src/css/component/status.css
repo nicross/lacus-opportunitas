@@ -1,0 +1,13 @@
+.c-status {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+  .c-status > *::after {
+    content: ']' / '';
+  }
+  .c-status > *::before {
+    content: '[' / '';
+  }
+  .c-status--credits {}
+  .c-status--inventory {}

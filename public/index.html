@@ -11,20 +11,45 @@
       <canvas class="a-app--canvas"></canvas>
       <canvas class="a-app--overlaySupport"></canvas>
 
+      <div class="a-app--screen a-app--buy">
+        <section class="c-screen a-buy" aria-labelledby="a-buy--title">
+          <div id="a-buy--title">
+            <h1 class="c-screen--title">Buy goods</h1>
+            <div class="c-screen--status c-status">
+              <div class="c-status--credits"></div>
+              <div class="c-status--inventory"></div>
+              <div class="c-status--live u-screenReader"></div>
+            </div>
+          </h1>
+          <table class="c-screen--table a-buy--table"></table>
+          <ul class="c-screen--actions">
+            <li class="c-screen--action">
+              <button class="c-menuButton a-buy--back" type="button">Back</button>
+            </li>
+          </ul>
+        </section>
+      </div>
+
       <div class="a-app--screen a-app--dock">
         <section class="c-screen a-dock" aria-labelledby="a-dock--title">
-          <h1 id="a-dock--title" class="a-dock--title">
+          <h1 id="a-dock--title">
             <div class="a-dock--welcome">Welcome to</div>
             <div class="c-screen--title a-dock--portName">Port name</div>
-            <span class="u-screenReader">.</span>
+            <span class="u-screenReader">,</span>
             <div class="a-dock--economy">Economy type</div>
           </h1>
           <ul class="c-screen--actions">
             <li class="c-screen--action">
-              <button class="c-menuButton a-dock--back" type="button">Undock</button>
+              <button class="c-menuButton a-dock--buy" type="button">Buy goods</button>
+            </li>
+            <li class="c-screen--action">
+              <button class="c-menuButton a-dock--sell" type="button">Sell goods</button>
             </li>
             <li class="c-screen--action">
               <button class="c-menuButton a-dock--gameMenu" type="button">Miscellaneous</button>
+            </li>
+            <li class="c-screen--action">
+              <button class="c-menuButton a-dock--back" type="button">Undock</button>
             </li>
           </ul>
         </section>
@@ -44,6 +69,9 @@
           <h1 class="c-screen--title">Game paused</h1>
           <ul class="c-screen--actions">
             <li class="c-screen--action">
+              <button class="c-menuButton a-gameMenu--inventory" type="button">Inventory</button>
+            </li>
+            <li class="c-screen--action">
               <button class="c-menuButton a-gameMenu--settings" type="button">Settings</button>
             </li>
             <li class="c-screen--action">
@@ -54,6 +82,25 @@
             </li>
             <li class="c-screen--action a-gameMenu--action-quit">
               <button class="c-menuButton a-gameMenu--quit" type="button">Quit to desktop</button>
+            </li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="a-app--screen a-app--inventory">
+        <section class="c-screen a-inventory" aria-labelledby="a-inventory--title">
+          <div id="a-inventory--title">
+            <h1 class="c-screen--title">Inventory</h1>
+            <div class="c-screen--status c-status">
+              <div class="c-status--credits"></div>
+              <div class="c-status--inventory"></div>
+              <div class="c-status--live u-screenReader"></div>
+            </div>
+          </h1>
+          <table class="c-screen--table a-inventory--table"></table>
+          <ul class="c-screen--actions">
+            <li class="c-screen--action">
+              <button class="c-menuButton a-inventory--back" type="button">Back</button>
             </li>
           </ul>
         </section>
@@ -91,6 +138,25 @@
             </li>
             <li class="c-screen--action">
               <button class="c-menuButton a-newGame--confirm" type="button">Start new game</button>
+            </li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="a-app--screen a-app--sell">
+        <section class="c-screen a-sell" aria-labelledby="a-sell--title">
+          <div id="a-sell--title">
+            <h1 class="c-screen--title">Sell goods</h1>
+            <div class="c-screen--status c-status">
+              <div class="c-status--credits"></div>
+              <div class="c-status--inventory"></div>
+              <div class="c-status--live u-screenReader"></div>
+            </div>
+          </h1>
+          <table class="c-screen--table a-sell--table"></table>
+          <ul class="c-screen--actions">
+            <li class="c-screen--action">
+              <button class="c-menuButton a-sell--back" type="button">Back</button>
             </li>
           </ul>
         </section>
