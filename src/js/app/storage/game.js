@@ -21,6 +21,7 @@ app.storage.game = {
 
     engine.state.import({
       credits: 10,
+      inventory: {},
       ports,
       position: {
         quaternion: startVector.normalize().inverse().quaternion(),

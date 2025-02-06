@@ -3,13 +3,13 @@ content.credits = (() => {
 
   return {
     adjust: function (value) {
-      credits += Math.max(Number(value) || 0, -credits)
+      credits += Math.max(value, -credits)
 
       return this
     },
     has: (value) => value <= credits,
     import: function (value) {
-      credits = Number(value) || 0
+      credits = value || 0
 
       return this
     },

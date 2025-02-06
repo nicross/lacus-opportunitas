@@ -1,6 +1,5 @@
 # TODO
 - Phase 2
-  - Inventory system
   - Buying screen
   - Selling screen
   - Dynamic supply and demand?

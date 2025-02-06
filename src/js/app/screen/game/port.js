@@ -43,7 +43,7 @@ app.screen.game.port = {
 
     this.visualElement.innerHTML = facing.isDiscovered
       ? `[${facing.name}]<br />${facing.economy.name} port<br />${distanceRounded1} km`
-      : `[Unknown]<br />Dock to discover<br />${distanceRounded1} km`
+      : `[Unknown port]<br />Dock to discover<br />${distanceRounded1} km`
 
     if (this.currentPort !== facing || this.currentDistance != distanceRounded2) {
       this.liveElement.innerHTML = this.currentPort === facing
@@ -51,7 +51,7 @@ app.screen.game.port = {
         : (
           facing.isDiscovered
             ? `${facing.name}, ${facing.economy.name} port, ${distanceRounded2} kilometer${distanceRounded2 == 1 ? '' : 's'}`
-            : `Unknown, Dock to discover, ${distanceRounded2} kilometer${distanceRounded2 == 1 ? '' : 's'}`
+            : `Unknown port, Dock to discover, ${distanceRounded2} kilometer${distanceRounded2 == 1 ? '' : 's'}`
         )
     }
 
