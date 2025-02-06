@@ -21,11 +21,20 @@ html, body {
   display: none !important;
 }
 
-button {
+[role="button"],
+[role="button"] *,
+button,
+button * {
   cursor: pointer;
 }
-button[aria-disabled="true"],
-button[disabled] {
+[role="button"][aria-disabled="true"],
+[role="button"][aria-disabled="true"] *,
+button[disabled][aria-disabled="true"],
+button[disabled][aria-disabled="true"] *,
+[role="button"][disabled],
+[role="button"][disabled] *,
+button[disabled],
+button[disabled] * {
   cursor: not-allowed;
 }
 

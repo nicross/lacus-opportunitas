@@ -7,7 +7,6 @@ content.ports.model.instantiate = function (...args) {
 content.ports.model.prototype = {
   construct: function ({
     angle = 0,
-    behavior = 0,
     economy = '',
     index = 0,
     isDiscovered = false,
@@ -15,7 +14,6 @@ content.ports.model.prototype = {
     name = '',
   } = {}) {
     this.angle = angle
-    this.behavior = behavior
     this.economy = content.economies.get(economy)
     this.index = index
     this.isDiscovered = isDiscovered
@@ -53,10 +51,22 @@ content.ports.model.prototype = {
 
     return engine.fn.scale(value, -1, 1, 0, 1)
   },
+  getBuying: function () {
+    const goods = this.economy.getBuying(),
+      inventory = content.inventory.goods()
+
+    for (const good of inventory) {
+      if (good.id != this.luxuryGood && content.goods.luxury.isPrototypeOf(good)) {
+        goods.push(good)
+      }
+    }
+
+    goods.sort((a, b) => a.name.localeCompare(b.name))
+
+    return goods
+  },
   getSelling: function () {
-    const goods = this.economy.sells.map(
-      (id) => content.goods.get(id)
-    )
+    const goods = this.economy.getSelling()
 
     if (this.luxuryGood) {
       goods.push(

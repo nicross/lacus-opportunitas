@@ -1,1 +1,0 @@
-content.goods.base = {}

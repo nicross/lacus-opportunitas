@@ -170,7 +170,9 @@ function getContentJs() {
   const srcs = [
     'src/js/content.js',
     'src/js/content/*.js',
+    'src/js/content/economies/base.js',
     'src/js/content/gl/sl.js',
+    'src/js/content/goods/base.js',
     'src/js/content/**/*.js',
   ]
 

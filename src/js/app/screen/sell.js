@@ -9,10 +9,14 @@ app.screen.sell = app.screenManager.invent({
     },
   },
   // State
-  state: {},
+  state: {
+    components: [],
+  },
   // Hooks
   onReady: function () {
     const root = this.rootElement
+
+    this.tableElement = this.rootElement.querySelector('.a-sell--table')
 
     Object.entries({
       back: root.querySelector('.a-sell--back'),
@@ -26,13 +30,32 @@ app.screen.sell = app.screenManager.invent({
   },
   onEnter: function () {
     this.statusComponent.update().setLive(true)
+
+    this.state.components = []
+    this.tableElement.innerHTML = ''
+
+    this.state.components = content.dock.getPort().getBuying().map((good) => {
+      const component = app.component.sellable.create(good)
+        .attach(this.tableElement)
+
+      component.on('click', () => {
+        content.credits.adjust(component.cost)
+        content.inventory.adjust(good.id, -1)
+
+        this.statusComponent.update()
+
+        for (const component of this.state.components) {
+          component.update()
+        }
+      })
+
+      return component
+    })
   },
   onExit: function () {
     this.statusComponent.setLive(false)
   },
   onFrame: function () {
     this.handleBasicInput()
-
-    // this.statusComponent.update()
   },
 })

@@ -1,0 +1,7 @@
+.c-sellable {}
+  .c-sellable :first-child::before {
+    content: '[' / '';
+  }
+  .c-sellable :last-child::after {
+    content: ']' / '';
+  }

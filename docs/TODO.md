@@ -1,8 +1,9 @@
 # TODO
 - Phase 2
-  - Buying screen
-  - Selling screen
-  - Dynamic supply and demand?
+  - Style buy and sell screens
+  - Implement and style inventory screen
+  - Tutorial screen when starting new game
+  - How to play in manual
 - Phase 3
   - Ambient audio
   - Movement sounds
@@ -11,6 +12,5 @@
   - Dock and menu music?
 - Phase 4?
   - Upgrades?
-  - Tutorial?
   - Trick system?
   - Dolphins?

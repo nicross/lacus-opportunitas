@@ -31,7 +31,7 @@ app.component.status.prototype = {
 
     return isLive
       ? `${count}<i aria-hidden="true">/</i><span class="u-screenReader"> of </span>${capacity} cargo`
-      : `${count} of ${capacity} cargo`
+      : `${count}/${capacity} cargo`
   },
   setLive: function (value) {
     this.liveElement.innerHTML = ''

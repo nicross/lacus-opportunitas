@@ -37,6 +37,24 @@
     display: block;
     margin-bottom: 0.5em;
   }
+  .c-screen--table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+  }
+    .c-screen--table td,
+    .c-screen--table th {
+      border-top: 1px solid rgba(255, 255, 255, 0.5);
+    }
+    .c-screen--table td {
+      text-align: right;
+      white-space: nowrap;
+      width: 1px;
+    }
+    .c-screen--table th {
+      text-align: left;
+      width: 100%;
+    }
   .c-screen--title {
     font-family: HybridBold;
     font-size: 4em;

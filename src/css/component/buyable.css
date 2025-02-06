@@ -1,0 +1,7 @@
+.c-buyable {}
+  .c-buyable :first-child::before {
+    content: '[' / '';
+  }
+  .c-buyable :last-child::after {
+    content: ']' / '';
+  }

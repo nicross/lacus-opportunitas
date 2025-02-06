@@ -1,5 +1,6 @@
 content.goods = (() => {
   const luxuries = new Map(),
+    priceMultiplier = 5,
     registry = new Map()
 
   return {
@@ -32,6 +33,7 @@ content.goods = (() => {
       registry.set(instance.id, instance)
       return instance
     },
+    priceMultiplier: () => priceMultiplier,
     reset: function () {
       luxuries.clear()
 

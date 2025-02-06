@@ -136,7 +136,6 @@ content.ports.generate = (() => {
 
       const port = {
         angle,
-        behavior: srand(),
         economy: engine.fn.chooseSplice(economyRolls, srand()).id,
         index: i,
         name: generateName(namePrefixes, nameSuffixes, srand),
