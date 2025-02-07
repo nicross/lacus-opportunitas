@@ -1,5 +1,5 @@
 content.lake = (() => {
-  const radius = 2500
+  const radius = 1250
 
   return {
     radius: () => radius,
