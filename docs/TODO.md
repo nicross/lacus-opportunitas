@@ -1,6 +1,5 @@
 # TODO
 - Phase 2
-  - Port discovery screen from game menu
   - Tutorial screen when starting new game?
 - Phase 3
   - Ambient audio

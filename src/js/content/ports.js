@@ -5,6 +5,11 @@ content.ports = (() => {
   return {
     all: () => [...ports],
     closest: () => tree.find(engine.position.getVector(), Infinity),
+    discovered: () => {
+      const discovered = ports.filter((port) => port.isDiscovered)
+      discovered.sort((a, b) => a.name.localeCompare(b.name))
+      return discovered
+    },
     export: () => ports.map((port) => port.export()),
     facing: (threshold = 1) => {
       const sorted = ports.map((port) => [port, port.getDot()])
