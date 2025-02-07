@@ -25,13 +25,11 @@ app.component.status.prototype = {
 
     return `${credits} credits`
   },
-  describeInventory: function (isLive) {
+  describeInventory: function () {
     const capacity = content.inventory.capacity(),
       count = content.inventory.count()
 
-    return isLive
-      ? `${count}<i aria-hidden="true">/</i><span class="u-screenReader"> of </span>${capacity} cargo`
-      : `${count}/${capacity} cargo`
+    return `${count} of ${capacity} cargo`
   },
   setLive: function (value) {
     this.liveElement.innerHTML = ''
@@ -48,7 +46,9 @@ app.component.status.prototype = {
     this.creditsElement.innerHTML = this.describeCredits()
     this.inventoryElement.innerHTML = this.describeInventory()
 
-    this.liveElement.innerHTML = `${this.describeCredits()}, ${this.describeInventory(true)}`
+    if (this.liveElement) {
+      this.liveElement.innerHTML = `${this.describeCredits()}, ${this.describeInventory()}`
+    }
 
     return this
   },

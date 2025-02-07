@@ -33,7 +33,7 @@ content.inventory = (() => {
       }
 
       return goods
-    }, []),
+    }, []).sort((a, b) => a.name.localeCompare(b.name)),
     has: (id) => inventory[id] > 0,
     import: function (data) {
       inventory = {...data}

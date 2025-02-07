@@ -9,10 +9,14 @@ app.screen.inventory = app.screenManager.invent({
     },
   },
   // State
-  state: {},
+  state: {
+    components: [],
+  },
   // Hooks
   onReady: function () {
     const root = this.rootElement
+
+    this.tableElement = this.rootElement.querySelector('.a-inventory--table')
 
     Object.entries({
       back: root.querySelector('.a-inventory--back'),
@@ -26,6 +30,24 @@ app.screen.inventory = app.screenManager.invent({
   },
   onEnter: function () {
     this.statusComponent.update()
+
+    this.state.components = []
+    this.tableElement.innerHTML = ''
+
+    this.state.components = content.inventory.goods().map((good) => {
+      const component = app.component.item.create(good)
+        .attach(this.tableElement)
+
+      return component
+    })
+
+    if (!this.state.components.length) {
+      this.tableElement.innerHTML = `
+        <tr tabindex="0">
+          <td>Empty</td>
+        </tr>
+      `
+    }
   },
   onExit: function () {},
   onFrame: function () {

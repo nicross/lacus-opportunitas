@@ -11,9 +11,11 @@ app.screen.gameMenu = app.screenManager.invent({
       this.change('inventory')
     },
     mainMenu: function () {
+      app.autosave.trigger()
       this.change('mainMenu')
     },
     quit: function () {
+      app.autosave.trigger()
       app.quit()
     },
     settings: function () {

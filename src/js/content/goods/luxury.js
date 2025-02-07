@@ -1,21 +1,17 @@
 content.goods.luxury = engine.fn.extend(content.goods.base, {
-  getBasePrice: function () {
-    return engine.fn.srand('luxury', this.port, 'basePrice')(256, 768)
+  getBaseCost: function () {
+    return engine.fn.srand('luxury', this.port, 'basePrice')(256, 768) * content.goods.priceMultiplier()
   },
   getBuyCost: function () {
-    const basePrice = this.getBasePrice(),
-      multiplier = content.goods.priceMultiplier()
-
-    return Math.round(basePrice * multiplier)
+    return Math.round(this.getBaseCost())
   },
   getPort: function () {
     return content.ports.get(this.port)
   },
   getSellCost: function (port) {
-    const basePrice = this.getBasePrice(),
-      distance = engine.fn.distance(port, this.getPort()),
-      multiplier = content.goods.priceMultiplier()
+    const base = this.getBaseCost(),
+      distance = engine.fn.distance(port, this.getPort())
 
-    return Math.round(basePrice * multiplier * (1 + (distance / 1000)))
+    return Math.round(base * (1 + (distance / 1000)))
   },
 })

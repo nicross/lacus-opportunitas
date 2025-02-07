@@ -1,7 +1,5 @@
 # TODO
 - Phase 2
-  - Style buy and sell screens
-  - Implement and style inventory screen
   - Tutorial screen when starting new game
   - How to play in manual
 - Phase 3
