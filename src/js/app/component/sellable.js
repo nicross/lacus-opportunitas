@@ -19,6 +19,7 @@ app.component.sellable.prototype = {
     this.rootElement.className = 'c-sellable'
     this.rootElement.tabIndex = 0
     this.rootElement.role = 'button'
+    this.rootElement.title = 'Click to sell'
     this.rootElement.addEventListener('click', (e) => this.onClick(e))
     this.rootElement.addEventListener('keydown', (e) => this.onKeydown(e))
 

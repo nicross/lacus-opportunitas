@@ -19,6 +19,7 @@ app.component.buyable.prototype = {
     this.rootElement.className = 'c-buyable'
     this.rootElement.tabIndex = 0
     this.rootElement.role = 'button'
+    this.rootElement.title = 'Click to buy'
     this.rootElement.addEventListener('click', (e) => this.onClick(e))
     this.rootElement.addEventListener('keydown', (e) => this.onKeydown(e))
 
