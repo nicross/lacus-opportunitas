@@ -7,9 +7,9 @@ content.goods = (() => {
     all: () => [...registry.values(), ...luxuries.values()],
     get: (id) => registry.get(id) || luxuries.get(id),
     getLuxuryForPort: function (port) {
-      for (const good of luxury.values()) {
-        if (luxury.port == port.index) {
-          return luxury
+      for (const good of luxuries.values()) {
+        if (good.port == port) {
+          return good
         }
       }
     },

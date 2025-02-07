@@ -72,6 +72,8 @@ content.ports.model.prototype = {
       goods.push(
         content.goods.getLuxuryForPort(this.index)
       )
+
+      console.log(content.goods.getLuxuryForPort(this.index))
     }
 
     goods.sort((a, b) => a.name.localeCompare(b.name))
