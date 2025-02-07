@@ -56,12 +56,12 @@
       color: rgba(255, 255, 255, 1.0);
       transition: color 0.125s ease;
     }
-    .c-screen--table tr :first-child::before,
-    .c-screen--table tr :only-child::before {
+    .c-screen--table tr > :first-child::before,
+    .c-screen--table tr > :only-child::before {
       content: '[' / '';
     }
-    .c-screen--table tr :last-child::after,
-    .c-screen--table tr :only-child::after {
+    .c-screen--table tr > :last-child::after,
+    .c-screen--table tr > :only-child::after {
       content: ']' / '';
     }
     .c-screen--table tr td,

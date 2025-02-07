@@ -7,7 +7,22 @@ content.ports = (() => {
     closest: () => tree.find(engine.position.getVector(), Infinity),
     discovered: () => {
       const discovered = ports.filter((port) => port.isDiscovered)
-      discovered.sort((a, b) => a.name.localeCompare(b.name))
+
+      const distances = new Map(),
+        position = engine.position.getVector()
+
+      discovered.sort((a, b) => {
+        if (!distances.has(a)) {
+          distances.set(a, position.distance(a))
+        }
+
+        if (!distances.has(b)) {
+          distances.set(b, position.distance(b))
+        }
+
+        return distances.get(a) - distances.get(b)
+      })
+
       return discovered
     },
     export: () => ports.map((port) => port.export()),

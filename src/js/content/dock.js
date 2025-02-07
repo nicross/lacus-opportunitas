@@ -19,6 +19,11 @@ content.dock = (() => {
 
       return this
     },
+    set: function (value) {
+      index = value
+
+      return this
+    },
     update: function () {
       // Require application UI to undock
       if (index) {

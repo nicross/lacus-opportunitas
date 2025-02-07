@@ -7,6 +7,9 @@ app.screen.ports = app.screenManager.invent({
     back: function () {
       this.change('gameMenu')
     },
+    travel: function () {
+      this.change('dock')
+    },
   },
   // State
   state: {
@@ -28,9 +31,23 @@ app.screen.ports = app.screenManager.invent({
     this.state.components = []
     this.tableElement.innerHTML = ''
 
-    this.state.components = content.ports.discovered().map((port) => {
+    this.state.components = content.ports.discovered().filter(
+      (port) => port !== content.dock.getPort()
+    ).map((port) => {
       const component = app.component.port.create(port)
         .attach(this.tableElement)
+
+      component.on('click', () => {
+        content.time.add(
+          component.distance / content.movement.maxVelocity()
+        )
+
+        engine.position.setVector(port)
+        content.dock.set(port.index)
+        app.autosave.trigger()
+
+        app.screenManager.dispatch('travel')
+      })
 
       return component
     })
