@@ -43,7 +43,7 @@ app.screen.ports = app.screenManager.invent({
 
       component.on('click', () => {
         content.time.add(
-          component.distance / content.movement.maxVelocity()
+          component.distance / content.movement.maxVelocity() * 3
         )
 
         engine.position.setVector(port)

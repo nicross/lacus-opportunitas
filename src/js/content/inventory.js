@@ -1,5 +1,5 @@
 content.inventory = (() => {
-  const capacity = 8
+  const capacity = 4
 
   let inventory = {}
 
