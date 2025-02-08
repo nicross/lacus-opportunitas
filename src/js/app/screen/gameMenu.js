@@ -45,10 +45,12 @@ app.screen.gameMenu = app.screenManager.invent({
     root.querySelector('.a-gameMenu--action-quit').hidden = !app.isElectron()
   },
   onEnter: function () {
-    this.rootElement.ariaLabel = content.dock.is() ? 'Miscellaneous' : 'Game paused'
-    this.rootElement.querySelector('.c-screen--title').innerHTML = content.dock.is() ? 'Miscellaneous' : 'Game paused'
-    this.rootElement.querySelector('.a-gameMenu--back').innerHTML = content.dock.is() ? 'Return to dock' : 'Resume game'
-    this.rootElement.querySelector('.a-gameMenu--action-quit').hidden = !app.isElectron()
+    const title = content.dock.is() ? 'Miscellaneous' : 'Excursion paused'
+
+    this.rootElement.ariaLabel = title
+    this.rootElement.title = title
+    this.rootElement.querySelector('.c-screen--title').innerHTML = title
+    this.rootElement.querySelector('.a-gameMenu--back').innerHTML = content.dock.is() ? 'Return to dock' : 'Resume excursion'
   },
   onExit: function () {},
   onFrame: function () {

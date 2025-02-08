@@ -12,6 +12,12 @@ app.screen.buy = app.screenManager.invent({
   state: {
     components: [],
   },
+  // Tutorials
+  tutorials: [
+    {
+      text: `Each port sells goods based on their economy. Agricultural ports tend to sell <strong>essentials</strong>. Click on them to purchase them with your credits.`,
+    },
+  ],
   // Hooks
   onReady: function () {
     const root = this.rootElement

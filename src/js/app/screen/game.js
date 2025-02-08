@@ -13,6 +13,12 @@ app.screen.game = app.screenManager.invent({
   },
   // State
   state: {},
+  // Tutorials
+  tutorials: [
+    {
+      text: `<p><em>I insist, please take control of the ship!</em></p><p>Hold <kbd>Turn</kbd> to face any direction, <kbd>Accelerate</kbd> to apply thrust in that direction, and <kbd>Brake</kbd> to stop. Tap <kbd>Target</kbd> to track a port, and approach any port to dock.</p>`,
+    },
+  ],
   // Hooks
   onReady: function () {
     content.dock.on('dock', () => {
@@ -47,7 +53,7 @@ app.screen.game = app.screenManager.invent({
     }
 
     if (ui.target) {
-      const target = content.ports.facing(1/32)
+      const target = content.ports.facing()
 
       content.ports.setTarget(
         target == content.ports.getTarget()

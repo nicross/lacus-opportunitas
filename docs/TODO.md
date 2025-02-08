@@ -1,6 +1,4 @@
 # TODO
-- Phase 2
-  - Tutorial screen when starting new game?
 - Phase 3
   - Ambient audio
   - Movement sounds

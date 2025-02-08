@@ -9,6 +9,8 @@ app.screen.newGame = app.screenManager.invent({
     },
     confirm: function () {
       app.storage.game.new()
+      app.storage.tutorial.clear()
+
       this.change(content.dock.is() ? 'dock' : 'game')
     },
   },

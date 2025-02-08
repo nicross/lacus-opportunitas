@@ -1,0 +1,25 @@
+.a-tutorial {}
+  .a-tutorial .c-screen--items,
+  .a-tutorial .c-screen--items * {
+    cursor: inherit;
+  }
+  .a-tutorial .c-screen--items:focus {
+    outline: none;
+  }
+  .a-tutorial--text {}
+  .a-tutorial--text em {
+    font-style: italic;
+  }
+  .a-tutorial--text kbd {
+    background-color: #FFFFFF;
+    color: #FF0069;
+    border-radius: 0.25em;
+    padding: 0 0.25em;
+  }
+  .a-tutorial--text p + p {
+    margin-top: 1em;
+  }
+  .a-tutorial--text strong {
+    font-family: FiraCodeMedium, monospace;
+    font-weight: 600;
+  }

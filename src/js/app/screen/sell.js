@@ -12,6 +12,12 @@ app.screen.sell = app.screenManager.invent({
   state: {
     components: [],
   },
+  // Tutorials
+  tutorials: [
+    {
+      text: `Each port buys goods based on their economy. Click on a good to sell it from your available cargo for credits. Don't forget to <em>buy low, and sell high!</em>`,
+    },
+  ],
   // Hooks
   onReady: function () {
     const root = this.rootElement

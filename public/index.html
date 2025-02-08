@@ -14,7 +14,7 @@
       <div class="a-app--screen a-app--buy">
         <section class="c-screen a-buy" aria-labelledby="a-buy--title">
           <div id="a-buy--title">
-            <h1 class="c-screen--title">Buy goods</h1>
+            <h1 class="c-screen--title" title="Buy goods">Buy goods</h1>
             <div class="c-screen--status c-status">
               <div class="c-status--inventory"></div>
               <div class="c-status--credits"></div>
@@ -34,7 +34,7 @@
         <section class="c-screen a-dock" aria-labelledby="a-dock--title">
           <h1 id="a-dock--title">
             <div class="a-dock--welcome">Welcome to</div>
-            <div class="c-screen--title a-dock--portName">Port name</div>
+            <div class="c-screen--title a-dock--portName" title="">Port name</div>
             <span class="u-screenReader">,</span>
             <div class="a-dock--economy">Economy type</div>
           </h1>
@@ -65,20 +65,20 @@
       </div>
 
       <div class="a-app--screen a-app--gameMenu">
-        <section class="c-screen a-gameMenu" aria-label="Game paused">
-          <h1 class="c-screen--title">Game paused</h1>
+        <section class="c-screen a-gameMenu" aria-label="Paused">
+          <h1 class="c-screen--title" title="Game paused">Paused</h1>
           <ul class="c-screen--actions">
             <li class="c-screen--action">
               <button class="c-menuButton a-gameMenu--inventory" type="button">Cargo manifest</button>
             </li>
             <li class="c-screen--action">
-              <button class="c-menuButton a-gameMenu--ports" type="button">Discovered ports</button>
+              <button class="c-menuButton a-gameMenu--ports" type="button">Lunarspatial memory</button>
             </li>
             <li class="c-screen--action">
               <button class="c-menuButton a-gameMenu--settings" type="button">Settings</button>
             </li>
             <li class="c-screen--action">
-              <button class="c-menuButton a-gameMenu--back" type="button">Resume game</button>
+              <button class="c-menuButton a-gameMenu--back" type="button">Back</button>
             </li>
             <li class="c-screen--action">
               <button class="c-menuButton a-gameMenu--mainMenu" type="button">Exit to main menu</button>
@@ -93,7 +93,7 @@
       <div class="a-app--screen a-app--inventory">
         <section class="c-screen a-inventory" aria-labelledby="a-inventory--title">
           <div id="a-inventory--title">
-            <h1 class="c-screen--title">Cargo manifest</h1>
+            <h1 class="c-screen--title" title="Cargo manifest">Cargo manifest</h1>
             <div class="c-screen--status c-status">
               <div class="c-status--inventory"></div>
               <div class="c-status--credits"></div>
@@ -110,7 +110,7 @@
 
       <div class="a-app--screen a-app--mainMenu">
         <section class="c-screen a-mainMenu" aria-label="Main menu">
-          <h1 class="c-screen--title">Main menu</h1>
+          <h1 class="c-screen--title" title="Main menu">Main menu</h1>
           <ul class="c-screen--actions">
             <li class="c-screen--action a-mainMenu--action-continue">
               <button class="c-menuButton a-mainMenu--continue" type="button">Continue</button>
@@ -131,7 +131,7 @@
       <div class="a-app--screen a-app--newGame">
         <section class="c-screen a-newGame" aria-labelledby="a-newGame--title">
           <div id="a-newGame--title">
-            <h1 class="c-screen--title">Warning</h1>
+            <h1 class="c-screen--title" title="Warning">Warning</h1>
             <p class="a-newGame--warning">Starting a new game will delete your save.</p>
           </div>
           <ul class="c-screen--actions">
@@ -146,8 +146,8 @@
       </div>
 
       <div class="a-app--screen a-app--ports">
-        <section class="c-screen a-ports" aria-label="Discovered ports">
-          <h1 class="c-screen--title">Discovered ports</h1>
+        <section class="c-screen a-ports" aria-label="Lunarspatial memory">
+          <h1 class="c-screen--title" title="Lunarspatial memory">Lunarspatial memory</h1>
           <div class="c-screen--scrollable">
             <table class="c-screen--table a-ports--table"></table>
           </div>
@@ -162,7 +162,7 @@
       <div class="a-app--screen a-app--sell">
         <section class="c-screen a-sell" aria-labelledby="a-sell--title">
           <div id="a-sell--title">
-            <h1 class="c-screen--title">Sell goods</h1>
+            <h1 class="c-screen--title" title="Sell goods">Sell goods</h1>
             <div class="c-screen--status c-status">
               <div class="c-status--inventory"></div>
               <div class="c-status--credits"></div>
@@ -180,7 +180,7 @@
 
       <div class="a-app--screen a-app--settings">
         <section class="c-screen a-settings" aria-label="Settings">
-          <h1 class="c-screen--title">Settings</h1>
+          <h1 class="c-screen--title" title="Settings">Settings</h1>
           <div class="c-screen--fields">
             <div class="c-screen--field">
               <label class="c-screen--label" for="a-settings--mainVolumeInput">Main volume</label>
@@ -236,9 +236,23 @@
         </section>
       </div>
 
+      <div class="a-app--screen a-app--tutorial">
+        <section class="c-screen a-tutorial" aria-label="Tutorial">
+          <div class="c-screen--items" aria-description="Continue" role="button" tabindex="0">
+            <h1 class="c-screen--title" title="Ahoy!">Ahoy!</h1>
+            <p class="c-screen--description a-tutorial--text"></p>
+          </div>
+          <ul class="c-screen--actions">
+            <li class="c-screen--action">
+              <button class="c-menuButton a-tutorial--continue" type="button">Continue</button>
+            </li>
+          </ul>
+        </section>
+      </div>
+
       <div class="a-app--screen a-app--splash">
         <section class="c-screen a-splash" tabindex="-1">
-          <h1 class="a-splash--logo" lang="la">
+          <h1 class="a-splash--logo" lang="la" title="Lacus Opportunitas">
             <div class="a-splash--logoLine a-splash--logoLine-1">Lacus</div>
             <div class="a-splash--logoLine a-splash--logoLine-2">Opportunitas</div>
           </h1>

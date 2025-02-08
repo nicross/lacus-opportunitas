@@ -12,6 +12,12 @@ app.screen.inventory = app.screenManager.invent({
   state: {
     components: [],
   },
+  // Tutorials
+  tutorials: [
+    {
+      text: `From the <strong>Cargo manifest</strong> you may browse your current cargo. The prices here reflect the current market rate. Cargo space is limited, so manage it attentively!`
+    },
+  ],
   // Hooks
   onReady: function () {
     const root = this.rootElement

@@ -21,6 +21,7 @@ app.storage.game = {
 
     engine.state.import({
       credits: 10,
+      dock: start.index,
       inventory: {},
       ports,
       position: {

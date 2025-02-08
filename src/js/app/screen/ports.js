@@ -15,6 +15,12 @@ app.screen.ports = app.screenManager.invent({
   state: {
     components: [],
   },
+  // Tutorials
+  tutorials: [
+    {
+      text: `From the <strong>Lunarspatial memory</strong> you may browse your discoveries. Click on any port to travel to it. Discover more ports to add them to memory.`,
+    },
+  ],
   // Hooks
   onReady: function () {
     const root = this.rootElement

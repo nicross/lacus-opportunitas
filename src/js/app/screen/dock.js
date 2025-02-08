@@ -34,6 +34,16 @@ app.screen.dock = app.screenManager.invent({
   },
   // State
   state: {},
+  // Tutorials
+  tutorials: [
+    {
+      text: `Welcome to <em>Lacus Opportunatis: Lunar lake trading simulator!</em> We have arrived at an agricultural port with just ten meager credits. First, let's <strong>Buy goods</strong>.`,
+    },
+    {
+      criteria: () => content.inventory.has('essentials'),
+      text: `Now, let's turn those essentials into profit! Feel free to look around before you leave. We will <strong>Undock</strong> at your command.`,
+    },
+  ],
   // Hooks
   onReady: function () {
     const root = this.rootElement
@@ -44,7 +54,13 @@ app.screen.dock = app.screenManager.invent({
       gameMenu: root.querySelector('.a-dock--gameMenu'),
       sell: root.querySelector('.a-dock--sell'),
     }).forEach(([event, element]) => {
-      element.addEventListener('click', () => app.screenManager.dispatch(event))
+      element.addEventListener('click', () => {
+        if (element.ariaDisabled == 'true') {
+          return
+        }
+
+        app.screenManager.dispatch(event)
+      })
     })
   },
   onEnter: function () {
@@ -53,6 +69,8 @@ app.screen.dock = app.screenManager.invent({
     this.rootElement.querySelector('.a-dock--economy').innerHTML = `${port.economy.name} port`
     this.rootElement.querySelector('.a-dock--portName').innerHTML = port.name
     this.rootElement.querySelector('.a-dock--portName').title = port.name
+
+    this.rootElement.querySelector('.a-dock--back').ariaDisabled = app.storage.tutorial.has(this.id, 1) ? 'false' : 'true'
   },
   onExit: function () {},
   onFrame: function () {

@@ -6,6 +6,8 @@ app.screen.base = {
   transitions: {},
   // State
   state: {},
+  // Tutorials
+  tutorials: [],
   // Hooks
   onReady: function () {},
   onEnter: function () {},
@@ -107,5 +109,24 @@ app.screen.base = {
     }
 
     return false
+  },
+  nextTutorial: function () {
+    for (const i in this.tutorials) {
+      if (app.storage.tutorial.has(this.id, i)) {
+        continue
+      }
+
+      const tutorial = this.tutorials[i]
+
+      if (tutorial.criteria && !tutorial.criteria()) {
+        continue
+      }
+
+      return {
+        index: i,
+        screen: this.id,
+        tutorial,
+      }
+    }
   },
 }

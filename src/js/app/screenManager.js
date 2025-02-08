@@ -17,9 +17,20 @@ app.screenManager = (() => {
   machine.on('enter', (e, ...args) => {
     current = screens.get(e.currentState)
 
-    if (current) {
-      current.enter(e, ...args)
+    if (!current) {
+      return
     }
+
+    // Interject with a tutorial if one is available
+    const tutorial = current.nextTutorial()
+
+    if (tutorial) {
+      current = screens.get('tutorial')
+      e.tutorial = tutorial
+      machine.state = 'tutorial'
+    }
+
+    current.enter(e, ...args)
   })
 
   machine.on('exit', (e, ...args) => {
@@ -82,6 +93,7 @@ app.screenManager = (() => {
 
       return this
     },
+    state: () => machine.state,
     update: function (e) {
       if (current) {
         current.onFrame(e)
