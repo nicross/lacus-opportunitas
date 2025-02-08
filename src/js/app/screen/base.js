@@ -6,6 +6,7 @@ app.screen.base = {
   transitions: {},
   // State
   state: {},
+  useBasicFocusMemory: true,
   // Tutorials
   tutorials: [],
   // Hooks
@@ -46,6 +47,15 @@ app.screen.base = {
 
     this.onExit(...args)
 
+    if (this.useBasicFocusMemory) {
+      // XXX: Needs engine.tool.fsm.prototype.dispatch override
+      if (['back','dock','mainMenu','quit','resume'].includes(args[0].event)) {
+        this.clearFocusMemory()
+      } else {
+        this.rememberBasicFocus()
+      }
+    }
+
     return this
   },
   import: function (...args) {
@@ -71,14 +81,24 @@ app.screen.base = {
     return this
   },
   // Custom methods
+  clearFocusMemory: function () {
+    this.state.focusMemory = undefined
+
+    return this
+  },
   focusWithin: function () {
-    if (this.rootElement.getAttribute('tabindex') == -1) {
-      app.utility.focus.set(this.rootElement)
+    const target = this.getFocusWithinTarget()
+
+    if (app.utility.focus.isFocusable(target) || target.getAttribute('tabindex') == -1) {
+      app.utility.focus.set(target)
     } else {
-      app.utility.focus.setWithin(this.rootElement)
+      app.utility.focus.setWithin(target)
     }
 
     return this
+  },
+  getFocusWithinTarget: function () {
+    return (this.useBasicFocusMemory ? this.state.focusMemory : undefined) || this.rootElement
   },
   handleBasicInput: function () {
     const root = this.rootElement,
@@ -128,5 +148,10 @@ app.screen.base = {
         tutorial,
       }
     }
+  },
+  rememberBasicFocus: function () {
+    this.state.focusMemory = this.rootElement.querySelector('button:focus, [role="button"]:focus')
+
+    return this
   },
 }

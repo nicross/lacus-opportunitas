@@ -8,6 +8,7 @@ app.screen.mainMenu = app.screenManager.invent({
       this.change('splash')
     },
     continue: function () {
+      app.screen.mainMenu.clearFocusMemory()
       app.storage.game.load()
       this.change(content.dock.is() ? 'dock' : 'game')
     },
@@ -16,6 +17,7 @@ app.screen.mainMenu = app.screenManager.invent({
         return this.change('newGame')
       }
 
+      app.screen.mainMenu.clearFocusMemory()
       app.storage.game.new()
       this.change(content.dock.is() ? 'dock' : 'game')
     },

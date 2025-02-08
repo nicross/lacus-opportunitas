@@ -15,6 +15,7 @@ app.screen.tutorial = app.screenManager.invent({
   state: {
     tutorial: undefined,
   },
+  useBasicFocusMemory: false,
   // Hooks
   onReady: function () {
     const root = this.rootElement

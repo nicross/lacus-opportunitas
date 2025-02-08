@@ -10,6 +10,7 @@ app.screen.splash = app.screenManager.invent({
   },
   // State
   state: {},
+  useBasicFocusMemory: false,
   // Hooks
   onReady: function () {
     const root = this.rootElement

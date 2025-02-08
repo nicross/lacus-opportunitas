@@ -8,6 +8,7 @@ app.screen.newGame = app.screenManager.invent({
       this.change('mainMenu')
     },
     confirm: function () {
+      app.screen.mainMenu.clearFocusMemory()
       app.storage.game.new()
       app.storage.tutorial.clear()
 
@@ -16,6 +17,7 @@ app.screen.newGame = app.screenManager.invent({
   },
   // State
   state: {},
+  useBasicFocusMemory: false,
   // Hooks
   onReady: function () {
     const root = this.rootElement

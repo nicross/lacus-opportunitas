@@ -13,6 +13,7 @@ app.screen.settings = app.screenManager.invent({
     // Handles whether accessed by mainMenu or gameMenu
     previousState: undefined,
   },
+  useBasicFocusMemory: false,
   // Hooks
   onReady: function () {
     const root = this.rootElement

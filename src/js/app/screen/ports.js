@@ -15,6 +15,7 @@ app.screen.ports = app.screenManager.invent({
   state: {
     components: [],
   },
+  useBasicFocusMemory: false,
   // Tutorials
   tutorials: [
     {

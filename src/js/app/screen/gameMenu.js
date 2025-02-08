@@ -48,7 +48,7 @@ app.screen.gameMenu = app.screenManager.invent({
     const title = content.dock.is() ? 'Miscellaneous' : 'Excursion paused'
 
     this.rootElement.ariaLabel = title
-    this.rootElement.title = title
+    this.rootElement.querySelector('.c-screen--title').title = title
     this.rootElement.querySelector('.c-screen--title').innerHTML = title
     this.rootElement.querySelector('.a-gameMenu--back').innerHTML = content.dock.is() ? 'Return to dock' : 'Resume excursion'
   },

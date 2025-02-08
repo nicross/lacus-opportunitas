@@ -12,6 +12,7 @@ app.screen.sell = app.screenManager.invent({
   state: {
     components: [],
   },
+  useBasicFocusMemory: false,
   // Tutorials
   tutorials: [
     {
