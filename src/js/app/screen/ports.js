@@ -51,6 +51,8 @@ app.screen.ports = app.screenManager.invent({
         content.dock.set(port.index)
         app.autosave.trigger()
 
+        app.screen.dock.clearFocusMemory()
+        app.screen.gameMenu.clearFocusMemory()
         app.screenManager.dispatch('travel')
       })
 
