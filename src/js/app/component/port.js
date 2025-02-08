@@ -21,20 +21,27 @@ app.component.port.prototype = {
 
     // Root element
     this.rootElement = document.createElement('tr')
-    this.rootElement.ariaDescription = 'Click to travel'
     this.rootElement.className = 'c-port'
     this.rootElement.tabIndex = 0
     this.rootElement.role = 'button'
-    this.rootElement.title = 'Click to travel'
     this.rootElement.addEventListener('click', (e) => this.onClick(e))
     this.rootElement.addEventListener('keydown', (e) => this.onKeydown(e))
 
-    this.distance= engine.position.getVector().zeroZ().distance(port)
+    const isDocked = port === content.dock.getPort()
+
+    if (isDocked) {
+      this.rootElement.ariaDisabled = 'true'
+    } else {
+      this.rootElement.ariaDescription = 'Click to travel'
+      this.rootElement.title = 'Click to travel'
+    }
+
+    this.distance = engine.position.getVector().zeroZ().distance(port)
 
     this.rootElement.innerHTML = `
       <th class="c-port--name" scope="row">${this.port.name}</th>
       <td class="c-port--type">${port.economy.name} port</td>
-      <td class="c-port--distance">&nbsp;at ${numberFormat.format(this.distance / 1000)} <abbr aria-label="kilometers">km</abbr></td>
+      <td class="c-port--distance">&nbsp;at ${isDocked ? '0.00' : numberFormat.format(this.distance / 1000)} <abbr aria-label="kilometers">km</abbr></td>
     `
 
     return this

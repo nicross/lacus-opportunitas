@@ -31,9 +31,7 @@ app.screen.ports = app.screenManager.invent({
     this.state.components = []
     this.tableElement.innerHTML = ''
 
-    this.state.components = content.ports.discovered().filter(
-      (port) => port !== content.dock.getPort()
-    ).map((port) => {
+    this.state.components = content.ports.discovered().map((port) => {
       const component = app.component.port.create(port)
         .attach(this.tableElement)
 
