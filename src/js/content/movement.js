@@ -9,7 +9,7 @@ content.movement = (() => {
     velocity = engine.tool.vector2d.create()
 
   function calculateSpeedLimit() {
-    const majorRadius = content.lake.radius(),
+    const majorRadius = content.lake.radius() - 1,
       minorRadius = majorRadius - content.dock.radius()
 
     const position = engine.position.getVector()
