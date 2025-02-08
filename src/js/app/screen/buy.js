@@ -15,7 +15,7 @@ app.screen.buy = app.screenManager.invent({
   // Tutorials
   tutorials: [
     {
-      text: `Each port sells goods based on their economy. Agricultural ports tend to sell <strong>essentials</strong>. Click on them to purchase them with your credits.`,
+      text: `Each port sells goods based on their economy. Agricultural ports tend to sell <strong>essentials</strong>. Click on them to purchase one with your credits.`,
     },
   ],
   // Hooks

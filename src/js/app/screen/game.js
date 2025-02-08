@@ -16,7 +16,7 @@ app.screen.game = app.screenManager.invent({
   // Tutorials
   tutorials: [
     {
-      text: `<p><em>I insist, please take control of the ship!</em></p><p>Hold <kbd>Turn</kbd> to face any direction, <kbd>Accelerate</kbd> to apply thrust in that direction, and <kbd>Brake</kbd> to stop. Tap <kbd>Target</kbd> to track a port, and approach any port to dock.</p>`,
+      text: `<em>I insist, please take control of the watercraft!</em><br /><br />Hold <kbd>Turn</kbd> to face any direction, <kbd>Accelerate</kbd> to apply thrust in that direction, and <kbd>Brake</kbd> to stop. Tap <kbd>Target</kbd> to track a port, and approach any port to dock.`,
     },
   ],
   // Hooks
