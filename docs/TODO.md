@@ -1,9 +1,9 @@
 # TODO
 - Phase 3
-  - Ambient audio
   - Movement sounds
   - Navigational audio
   - Focus changes, clicks, and screen transitions
+  - Port stereo width and left/right balance sliders from PSEP
   - Dock and menu music?
 - Phase 4?
   - Upgrades?

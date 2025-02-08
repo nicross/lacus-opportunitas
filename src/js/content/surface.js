@@ -38,11 +38,15 @@ content.surface = (() => {
       time = content.time.value(),
       x = 0,
       y = 0,
-    } = {}) {
+    } = {}, noEdge = false) {
       const lakeRadius = content.lake.radius()
       let centerRatio = 1 - (engine.fn.distance({x, y}) / lakeRadius)
 
       if (centerRatio <= 0) {
+        if (noEdge) {
+          return 0
+        }
+
         return engine.fn.clamp(
           engine.fn.scale(
             centerRatio,
