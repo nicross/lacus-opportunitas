@@ -2,7 +2,7 @@
   max-width: unset;
   position: relative;
 }
-  .a-game--port {
+  .a-game--target {
     background-color: rgba(0, 0, 0, 1);
     bottom: 2em;
     font-size: 0.75em;

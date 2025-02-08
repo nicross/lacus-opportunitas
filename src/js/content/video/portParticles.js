@@ -74,25 +74,32 @@ void main(void) {
 
     const drawDistance = content.gl.drawDistance(),
       position = engine.position.getVector(),
+      target = content.ports.getTarget(),
       time = content.time.value()
 
     for (const port of content.ports.all()) {
-      const dot = port.getDot()
+      const dot = port.getDot(),
+        isTarget = port === target
 
-      if (dot < 0.85) {
+      if (!isTarget && dot < 0.85) {
         continue
       }
 
-      const fps = engine.performance.fps()
-      const chance = engine.fn.scale(dot, 0.85, 1, 0, 1) ** 12
+      const chance = isTarget
+        ? 1
+        : engine.fn.scale(dot, 0.85, 1, 0, 1) ** 12
 
       if (Math.random() > chance) {
         continue
       }
 
-      particles.push(
-        generateParticle(port)
-      )
+      const count = isTarget ? 2 : 1
+
+      for (let i = 0; i < count; i+= 1) {
+        particles.push(
+          generateParticle(port)
+        )
+      }
 
       if (particles.length > maxParticles) {
         break
@@ -108,6 +115,7 @@ void main(void) {
       offsets = [],
       position = engine.position.getVector(),
       quaternion = engine.position.getQuaternion(),
+      target = content.ports.getTarget(),
       velocity = 5 * delta
 
     const origins = new Map()
@@ -125,17 +133,18 @@ void main(void) {
     }
 
     particles = particles.reduce((particles, particle) => {
-      const origin = origins.get(particle.port)
+      const isTarget = particle.port === target,
+        origin = origins.get(particle.port)
 
-      particle.life -= lifeRate
+      particle.life -= lifeRate * (isTarget ? 0.5 : 1)
 
       if (particle.life <= 0) {
         return particles
       }
 
-      particle.vector.x += particle.velocity.x * velocity
-      particle.vector.y += particle.velocity.y * velocity
-      particle.vector.z += particle.velocity.z * velocity
+      particle.vector.x += particle.velocity.x * velocity * (isTarget ? 2 : 1)
+      particle.vector.y += particle.velocity.y * velocity * (isTarget ? 2 : 1)
+      particle.vector.z += particle.velocity.z * velocity * (isTarget ? 2 : 1)
 
       lifes.push(particle.life)
 
