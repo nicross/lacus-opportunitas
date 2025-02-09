@@ -56,27 +56,33 @@ content.surface = (() => {
         ) * (content.camera.height() * 0.75)
       }
 
-      centerRatio **= 0.666
+      centerRatio = (centerRatio ** 0.5) * engine.fn.clamp(engine.fn.scale(
+        centerRatio,
+        0, (100 / lakeRadius),
+        0, 1
+      ))
+
+      const skewFactor = engine.tool.simplex3d.prototype.skewFactor
 
       const v1 = noise1.value(
-        x / 10 * engine.tool.simplex3d.prototype.skewFactor,
-        y / 10 * engine.tool.simplex3d.prototype.skewFactor,
-        time / 5 * engine.tool.simplex3d.prototype.skewFactor
+        x / 10 * skewFactor,
+        y / 10 * skewFactor,
+        time / 5 * skewFactor
       ) * 0.5
 
       const v2 = noise2.value(
-        ((x + (time * -5)) / 25) * engine.tool.simplex3d.prototype.skewFactor,
-        y / 25 * engine.tool.simplex3d.prototype.skewFactor,
-        time / 15 * engine.tool.simplex3d.prototype.skewFactor
+        ((x + (time * -5)) / 25) * skewFactor,
+        y / 25 * skewFactor,
+        time / 15 * skewFactor
       ) * 10
 
       const v3 = (noise3.value(
-        ((x + (time * -10)) / 100) * engine.tool.simplex3d.prototype.skewFactor,
-        y / 500 * engine.tool.simplex3d.prototype.skewFactor,
-        time / 60 * engine.tool.simplex3d.prototype.skewFactor
+        ((x + (time * -10)) / 100) * skewFactor,
+        y / 500 * skewFactor,
+        time / 60 * skewFactor
       ) ** 4) * 40
 
-      return (v1 * (centerRatio ** 0.0625)) + (centerRatio * (v2 + v3))
+      return v1 + (centerRatio * (v2 + v3))
     },
   }
 })()
