@@ -35,6 +35,9 @@
   app.screenManager.dispatch('activate')
   app.activate()
 
+  // Prevent double-clicks with enter and space by mapping them to ui.confirm.
+  window.addEventListener('keydown', (e) => e.preventDefault())
+
   // Prevent closing HTML5 builds
   if (!app.isElectron()) {
     window.addEventListener('beforeunload', (e) => {
