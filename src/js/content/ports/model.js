@@ -22,6 +22,8 @@ content.ports.model.prototype = {
     this.x = Math.cos(angle) * content.lake.radius()
     this.y = Math.sin(angle) * content.lake.radius()
 
+    this.generate()
+
     return this
   },
   export: function () {
@@ -33,6 +35,80 @@ content.ports.model.prototype = {
       luxuryGood: this.luxuryGood,
       name: this.name,
     }
+  },
+  generate: function () {
+    const srand = engine.fn.srand('port', this.index, 'generate')
+
+    // Generate unique note for seed
+    const rootNote = 60
+
+    const rootNotes = engine.fn.shuffle([
+      -12,-10,-8,-5,-3,
+      0,2,4,7,9,
+      12,14,16,19,21,
+    ], engine.fn.srand('port', 'notes'))
+
+    const rootBase = rootNotes[this.index]
+
+    this.rootFrequency = engine.fn.fromMidi(rootNote + rootBase)
+
+    // Build triad around root note
+    const scale = [
+      -24,-22,-20,-19,-17,-15,-13,
+      -12,-10,-8,-7,-5,-3,-1,
+      0,2,4,5,7,9,11,
+      12,14,16,17,19,21,23,
+      24,26,28,29,31,33,35,
+    ]
+
+    const rootIndex = scale.indexOf(rootBase)
+
+    const triadIndexes = engine.fn.choose([
+      [0, 2, 4], // Root is root of triad
+      [-2, 0, 2], // Root is third of triad
+      [-4, -2, 0], // Root is fifth of triad
+    ], srand())
+
+    this.triadFrequencies = [
+      engine.fn.fromMidi(rootNote + scale[rootIndex + triadIndexes[0]]),
+      engine.fn.fromMidi(rootNote + scale[rootIndex + triadIndexes[1]]),
+      engine.fn.fromMidi(rootNote + scale[rootIndex + triadIndexes[2]]),
+    ]
+
+    this.triadFrequenciesTransposed = [
+      engine.fn.transpose(
+        this.triadFrequencies[0],
+        engine.fn.fromMidi(rootNote - (3 * 12)),
+        engine.fn.fromMidi(rootNote - (2 * 12)),
+      ),
+      engine.fn.transpose(
+        this.triadFrequencies[1],
+        engine.fn.fromMidi(rootNote),
+        engine.fn.fromMidi(rootNote + (1 * 12)),
+      ),
+      engine.fn.transpose(
+        this.triadFrequencies[2],
+        engine.fn.fromMidi(rootNote),
+        engine.fn.fromMidi(rootNote + (1 * 12)),
+      ),
+    ]
+
+    // Build primes
+    const fastPrimes = [
+      29, 31, 37, 41, 43, 47, 53, 59,
+    ]
+
+    const slowPrimes = [
+      89, 97, 101, 103, 107, 109, 113,
+    ]
+
+    this.primeNumbers = [
+      engine.fn.choose(slowPrimes, srand()),
+      engine.fn.chooseSplice(fastPrimes, srand()),
+      engine.fn.chooseSplice(fastPrimes, srand()),
+    ]
+
+    return this
   },
   getDistance: function () {
     const value = engine.tool.vector3d.create(this)
@@ -72,8 +148,6 @@ content.ports.model.prototype = {
       goods.push(
         content.goods.getLuxuryForPort(this.index)
       )
-
-      console.log(content.goods.getLuxuryForPort(this.index))
     }
 
     goods.sort((a, b) => a.name.localeCompare(b.name))
