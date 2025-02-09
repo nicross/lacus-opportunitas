@@ -25,8 +25,6 @@ app.screen.tutorial = app.screenManager.invent({
     }).forEach(([event, element]) => {
       element.addEventListener('click', () => app.screenManager.dispatch(event))
     })
-
-    root.querySelector('.c-screen--items').addEventListener('click', () => app.screenManager.dispatch('continue'))
   },
   onEnter: function (e) {
     this.state.tutorial = e.tutorial

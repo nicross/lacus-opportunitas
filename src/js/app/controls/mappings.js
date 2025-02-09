@@ -181,10 +181,8 @@ app.controls.mappings = {
         0,
       ],
       keyboard: [
-        'Enter',
         'KeyF',
         'NumpadEnter',
-        'Space',
       ],
       mouseAxis: [],
       mouseButton: [],
