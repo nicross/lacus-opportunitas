@@ -40,7 +40,7 @@ content.audio.windDirectional = (() => {
 
     return {
       color: engine.fn.lerpExp(0.5, 4, value, 2),
-      gain: engine.fn.fromDb(-12) * engine.fn.fromDb(engine.fn.lerp(0, -6, value)),
+      gain: engine.fn.fromDb(-9) * engine.fn.fromDb(engine.fn.lerp(0, -6, value)),
       playbackRate: value,
       vector,
     }

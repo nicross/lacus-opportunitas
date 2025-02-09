@@ -29,11 +29,11 @@ content.audio.surfaceDirectional = (() => {
       time = content.time.value()
 
     const strength = engine.fn.clamp(point.z / 50)
-    const modDepth = engine.fn.fromDb(engine.fn.lerp(-15, -9, modDepthField.value(index * 3, time / 3 / 4)))
+    const modDepth = engine.fn.fromDb(engine.fn.lerp(-12, -9, modDepthField.value(index * 3, time / 3 / 4)))
 
     return {
       carrierGain: 1 - modDepth,
-      frequency: engine.fn.lerpExp(50, 2500, strength, 3/4),
+      frequency: engine.fn.lerpExp(50, 2500, strength, 0.5),
       gain: engine.fn.fromDb(-15) * (strength ** 0.5),
       modDepth,
       modFrequency: engine.fn.lerp(8, 16, modFrequencyField.value(index * 3, time / 3 / 4)),

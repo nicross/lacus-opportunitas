@@ -25,7 +25,7 @@ content.audio.surfaceAmbient = (() => {
     load: function () {
       synth = engine.synth.buffer({
         buffer: content.audio.buffer.brownNoise.get(2),
-        gain: engine.fn.fromDb(-21),
+        gain: engine.fn.fromDb(-18),
         playbackRate: engine.const.zero,
       }).filtered({
         frequency: 125,
