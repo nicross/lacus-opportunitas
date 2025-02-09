@@ -2,15 +2,8 @@ content.ports = (() => {
   const ports = [],
     tree = engine.tool.quadtree.create()
 
-  let target
-
   return {
     all: () => [...ports],
-    clearTarget: function () {
-      target = undefined
-
-      return this
-    },
     closest: () => tree.find(engine.position.getVector(), Infinity),
     discovered: () => {
       const discovered = ports.filter((port) => port.isDiscovered)
@@ -42,7 +35,6 @@ content.ports = (() => {
         : undefined
     },
     get: (index) => ports[index],
-    getTarget: () => target,
     import: function (exports) {
       for (const exported of exports) {
         const port = content.ports.model.instantiate(exported)
@@ -54,13 +46,9 @@ content.ports = (() => {
     },
     reset: function () {
       ports.length = []
-      target = undefined
       tree.clear()
 
-      return this
-    },
-    setTarget: function (value) {
-      target = value
+      this.target.reset()
 
       return this
     },

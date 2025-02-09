@@ -29,7 +29,7 @@ app.screen.game.port = {
       minimumFractionDigits: 0,
     })
 
-    const port = content.ports.getTarget(),
+    const port = content.ports.target.get(),
       position = engine.position.getVector()
 
     if (!port) {

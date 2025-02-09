@@ -74,7 +74,7 @@ void main(void) {
 
     const drawDistance = content.gl.drawDistance(),
       position = engine.position.getVector(),
-      target = content.ports.getTarget(),
+      target = content.ports.target.get(),
       time = content.time.value()
 
     for (const port of content.ports.all()) {
@@ -115,7 +115,7 @@ void main(void) {
       offsets = [],
       position = engine.position.getVector(),
       quaternion = engine.position.getQuaternion(),
-      target = content.ports.getTarget(),
+      target = content.ports.target.get(),
       velocity = 5 * delta
 
     const origins = new Map()

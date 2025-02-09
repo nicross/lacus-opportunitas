@@ -22,7 +22,7 @@ app.screen.game = app.screenManager.invent({
   // Hooks
   onReady: function () {
     content.dock.on('dock', () => {
-      content.ports.clearTarget()
+      content.ports.target.reset()
       app.screenManager.dispatch('dock')
     })
 
@@ -55,8 +55,8 @@ app.screen.game = app.screenManager.invent({
     if (ui.target) {
       const target = content.ports.facing()
 
-      content.ports.setTarget(
-        target == content.ports.getTarget()
+      content.ports.target.set(
+        target === content.ports.target.get()
           ? undefined
           : target
       )
