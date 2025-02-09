@@ -11,7 +11,11 @@ app.screen.gameMenu = app.screenManager.invent({
       this.change('inventory')
     },
     mainMenu: function () {
+      app.screen.dock.clearFocusMemory()
+      app.screen.gameMenu.clearFocusMemory()
+
       app.autosave.trigger()
+
       this.change('mainMenu')
     },
     ports: function () {

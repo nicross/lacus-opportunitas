@@ -51,11 +51,8 @@ app.component.sellable.prototype = {
     return this
   },
   onKeydown: function (e) {
-    if (e.code == 'Enter' || e.code == 'NumpadEnter' || e.code == 'Space') {
+    if (['Enter','NumpadEnter','Space'].includes(e.key)) {
       e.preventDefault()
-      e.stopPropagation()
-
-      this.rootElement.click()
     }
 
     return this

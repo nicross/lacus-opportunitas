@@ -10,6 +10,7 @@ app.component.toggle.prototype = {
     this.rootElement = root
 
     this.buttonElement.addEventListener('click', this.onClick.bind(this))
+    this.buttonElement.addEventListener('keydown', this.onKeydown.bind(this))
 
     this.setValue(initialValue, true)
 
@@ -22,6 +23,13 @@ app.component.toggle.prototype = {
   },
   onClick: function () {
     return this.setValue(!this.getValue())
+  },
+  onKeydown: function (e) {
+    if (['Enter','NumpadEnter','Space'].includes(e.key)) {
+      e.preventDefault()
+    }
+
+    return this
   },
   setValue: function (value, isInitial = false) {
     this.buttonElement.setAttribute('aria-checked', value ? 'true' : 'false')
