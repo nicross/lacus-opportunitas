@@ -71,9 +71,18 @@ app.screen.dock = app.screenManager.invent({
     this.rootElement.querySelector('.a-dock--portName').title = port.name
 
     this.rootElement.querySelector('.a-dock--back').ariaDisabled = app.storage.tutorial.has(this.id, 1) ? 'false' : 'true'
+    this.rootElement.querySelector('.a-dock--gameMenu').ariaDisabled = app.storage.tutorial.has(this.id, 1) ? 'false' : 'true'
+    this.rootElement.querySelector('.a-dock--sell').ariaDisabled = app.storage.tutorial.has(this.id, 1) ? 'false' : 'true'
   },
   onExit: function () {},
   onFrame: function () {
     this.handleBasicInput()
+  },
+  getFocusWithinTarget: function () {
+    if (!app.storage.tutorial.has(this.id, 1)) {
+      return this.rootElement.querySelector('.a-dock--buy')
+    }
+
+    return (this.useBasicFocusMemory ? this.state.focusMemory : undefined) || this.rootElement
   },
 })
