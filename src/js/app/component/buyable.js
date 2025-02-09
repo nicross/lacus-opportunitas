@@ -34,7 +34,7 @@ app.component.buyable.prototype = {
 
     this.rootElement.innerHTML = `
       <th class="c-buyable--name" scope="row">${this.good.name}</th>
-      <td class="c-buyable--price">${numberFormat.format(this.cost)} credits</td>
+      <td class="c-buyable--price">${numberFormat.format(this.cost)} credit${this.cost == 1 ? '' : 's'}</td>
     `
 
     this.update()

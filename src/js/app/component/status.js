@@ -23,7 +23,7 @@ app.component.status.prototype = {
       content.credits.value()
     )
 
-    return `${credits} credits`
+    return `${credits} credit${credits == 1 ? '' : 's'}`
   },
   describeInventory: function () {
     const capacity = content.inventory.capacity(),
