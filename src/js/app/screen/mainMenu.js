@@ -9,7 +9,10 @@ app.screen.mainMenu = app.screenManager.invent({
     },
     continue: function () {
       app.screen.mainMenu.clearFocusMemory()
+
       app.storage.game.load()
+      app.gameState.setLoaded(true)
+
       this.change(content.dock.is() ? 'dock' : 'game')
     },
     newGame: function () {
@@ -19,6 +22,8 @@ app.screen.mainMenu = app.screenManager.invent({
 
       app.screen.mainMenu.clearFocusMemory()
       app.storage.game.new()
+      app.gameState.setLoaded(true)
+
       this.change(content.dock.is() ? 'dock' : 'game')
     },
     quit: function () {

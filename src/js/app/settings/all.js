@@ -10,6 +10,14 @@ app.settings.register('graphicsOn', {
   default: true,
   update: function (computedValue) {
     content.gl.setActive(computedValue)
+
+    if (app.gameState.isLoaded()) {
+      if (computedValue) {
+        content.video.load()
+      } else {
+        content.video.unload()
+      }
+    }
   },
 })
 

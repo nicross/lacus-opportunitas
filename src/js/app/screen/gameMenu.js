@@ -15,6 +15,7 @@ app.screen.gameMenu = app.screenManager.invent({
       app.screen.gameMenu.clearFocusMemory()
 
       app.autosave.trigger()
+      app.gameState.setLoaded(false)
 
       this.change('mainMenu')
     },
