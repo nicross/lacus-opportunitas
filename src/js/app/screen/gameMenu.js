@@ -17,7 +17,8 @@ app.screen.gameMenu = app.screenManager.invent({
       app.autosave.trigger()
       app.gameState.setLoaded(false)
 
-      engine.state.reset()
+      // XXX: Autosave trigger uses setTimeout, so enqueue a state reset to prevent progress loss.
+      setTimeout(() => engine.state.reset(), 0)
 
       this.change('mainMenu')
     },
