@@ -1,9 +1,10 @@
 # TODO
 - Phase 3
   - Movement sounds
-  - Focus changes, clicks, and screen transitions
-- Phase 4?
-  - Upgrades?
+  - Fix first undock tutorial audio transition
+- Phase 4
+  - Port upgrades
+  - Ship upgrades
+  - Credits in bottles
   - Trick system?
   - Dolphins?
-  - Vary ore production between extraction ports?

@@ -49,11 +49,13 @@ app.screen.buy = app.screenManager.invent({
         content.credits.adjust(-component.cost)
         content.inventory.adjust(good.id, 1)
 
-        this.statusComponent.update()
+        window.requestAnimationFrame(() => {
+          this.statusComponent.update()
 
-        for (const component of this.state.components) {
-          component.update()
-        }
+          for (const component of this.state.components) {
+            component.update()
+          }
+        })
       })
 
       return component
