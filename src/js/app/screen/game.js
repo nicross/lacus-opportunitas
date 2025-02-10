@@ -56,7 +56,7 @@ app.screen.game = app.screenManager.invent({
       const target = content.ports.facing()
 
       content.ports.target.set(
-        target === content.ports.target.get()
+        content.ports.target.is(target)
           ? undefined
           : target
       )

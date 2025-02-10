@@ -94,6 +94,14 @@ content.ports.model.prototype = {
     ]
 
     // Build primes
+    const portPrimes = engine.fn.shuffle([
+      13, 17, 19, 23, 29,
+      31, 37, 41, 43, 47,
+      53, 59, 73, 79, 83,
+    ], engine.fn.srand('port', 'primes'))
+
+    this.primeNumber = portPrimes[this.index]
+
     const fastPrimes = [
       29, 31, 37, 41, 43, 47, 53, 59,
     ]
@@ -126,6 +134,13 @@ content.ports.model.prototype = {
       .dotProduct(engine.position.getQuaternion().forward())
 
     return engine.fn.scale(value, -1, 1, 0, 1)
+  },
+  getRelative: function () {
+    return engine.tool.vector3d.create(this)
+      .subtract(engine.position.getVector())
+      .zeroZ()
+      .normalize()
+      .rotateQuaternion(engine.position.getQuaternion().conjugate())
   },
   getBuying: function () {
     const goods = this.economy.getBuying(),

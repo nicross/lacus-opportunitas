@@ -5,6 +5,7 @@ content.ports.target = (() => {
 
   return pubsub.decorate({
     get: () => target,
+    is: (value) => target === value || target?.index == value,
     reset: function () {
       target = undefined
 

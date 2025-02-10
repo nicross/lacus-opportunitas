@@ -39,8 +39,8 @@ content.audio.windDirectional = (() => {
       })
 
     return {
-      color: engine.fn.lerpExp(0.5, 4, value, 2),
-      gain: engine.fn.fromDb(-9) * engine.fn.fromDb(engine.fn.lerp(0, -6, value)),
+      color: engine.fn.lerpExp(0.5, 6, value, 2),
+      gain: engine.fn.fromDb(-6) * engine.fn.fromDb(engine.fn.lerp(0, -6, value)),
       playbackRate: value,
       vector,
     }
@@ -72,8 +72,8 @@ content.audio.windDirectional = (() => {
         coneRadius: engine.const.tau * 0.25,
         frequency: rootFrequency,
         minColor: 1,
-        maxColor: 8,
-        power: 1,
+        maxColor: 12,
+        power: 2,
       }),
       gainModel: engine.ear.gainModel.normalize,
       ...vector,

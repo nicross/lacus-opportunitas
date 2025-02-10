@@ -197,9 +197,9 @@ void main(void) {
 
       // Bind mesh
       const mesh = content.gl.createQuad({
-        height: 1/32,
+        height: 1/16,
         quaternion: content.camera.quaternion(),
-        width: 1/32,
+        width: 1/16,
       })
 
       gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer())

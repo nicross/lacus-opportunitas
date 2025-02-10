@@ -47,7 +47,7 @@ content.audio.target = (() => {
 
       for (const i in frequencies) {
         play({
-          color: 2,
+          color: 4,
           duration: 1/64,
           gain: engine.fn.fromDb(-12),
           frequency: frequencies[i],
