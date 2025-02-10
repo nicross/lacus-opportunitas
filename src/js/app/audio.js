@@ -31,13 +31,14 @@ app.audio = (() => {
   }
 
   return {
-    click: engine.fn.debounced(function () {
+    click: engine.fn.debounced(function (direction = 1) {
       if (!clickSynth) {
         clickIndex = clickIndex
           ? ((clickIndex % 5) + engine.fn.randomInt(1, 4)) % 5
           : engine.fn.randomInt(0, 4)
       } else {
-        clickIndex = (clickIndex + 1) % 10
+        clickIndex = (clickIndex + (Math.sign(direction) || 1))
+        clickIndex = clickIndex >= 0 ? (clickIndex % 10) : 10 + clickIndex
       }
 
       killClickSynth()
