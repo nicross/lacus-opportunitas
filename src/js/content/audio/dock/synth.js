@@ -35,22 +35,27 @@ content.audio.dock.synth.prototype = {
       bus
     )
 
-    const pans = [0, -0.333, 0.333]
+    const filterLfo = engine.synth.lfo({
+      depth: 1200,
+      frequency: 1 / this.primeNumber / 5,
+    }).connect(this.synth.filter.detune)
+
+    this.synth.chainStop(filterLfo)
 
     const panLfo = engine.synth.lfo({
-      depth: pans[index],
+      depth: [0, -0.333, 0.333][index],
       frequency: 1 / this.primeNumber / 3,
     }).connect(this.synth.panner.pan)
 
     this.synth.chainStop(panLfo)
 
     this.synth.fader.gain.value = 0
-    engine.fn.rampLinear(this.synth.fader.gain, 1, index == 0 ? 4 : this.primeNumber)
+    engine.fn.rampLinear(this.synth.fader.gain, 1, index == 0 ? 3 : this.primeNumber)
 
     return this
   },
   destroy: function (isChange) {
-    const release = isChange ? 4 : 1/4
+    const release = isChange ? 3 : 1/4
 
     engine.fn.rampLinear(this.synth.param.gain, 0, release)
     this.synth.stop(engine.time(release))

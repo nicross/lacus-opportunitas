@@ -82,7 +82,7 @@ content.ports.model.prototype = {
     )
 
     this.triadFrequenciesTransposed = [
-      transposed,
+      transposed / 2,
       engine.fn.transpose(
         this.triadFrequencies[1],
         transposed,

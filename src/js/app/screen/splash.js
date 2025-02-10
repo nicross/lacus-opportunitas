@@ -30,5 +30,9 @@ app.screen.splash = app.screenManager.invent({
     if (ui.confirm || ui.enter || ui.space || ui.start || ui.select) {
       app.screenManager.dispatch('interact')
     }
+
+    if (ui.down || ui.left || ui.right || ui.up) {
+      app.audio.click()
+    }
   },
 })

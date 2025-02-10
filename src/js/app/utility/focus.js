@@ -18,6 +18,9 @@ app.utility.focus = (() => {
     isWithin: function (parentElement) {
       return Boolean(parentElement.querySelector(':focus'))
     },
+    matches: function (selector) {
+      return this.get()?.matches(selector) ?? false
+    },
     onWindowFocus: function () {
       setTimeout(() => {
         if (!this.get() && lastFocused) {

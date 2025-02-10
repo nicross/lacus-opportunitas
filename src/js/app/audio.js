@@ -1,5 +1,5 @@
 app.audio = (() => {
-  const baseGain = engine.fn.fromDb(-15),
+  const baseGain = engine.fn.fromDb(-12),
     bus = content.audio.channel.bypass.createBus()
 
   bus.gain.value = baseGain
