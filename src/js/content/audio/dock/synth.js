@@ -26,7 +26,7 @@ content.audio.dock.synth.prototype = {
       modDepth: index == 0 ? 2/3 : 1/2,
       modFrequency: 1 / this.primeNumber,
     }).filtered({
-      frequency: this.rootFrequency,
+      frequency: this.rootFrequency * (index == 0 ? 2 : 1),
     }).chainAssign(
       'fader', context.createGain()
     ).chainAssign(
@@ -50,12 +50,12 @@ content.audio.dock.synth.prototype = {
     this.synth.chainStop(panLfo)
 
     this.synth.fader.gain.value = 0
-    engine.fn.rampLinear(this.synth.fader.gain, 1, index == 0 ? 3 : this.primeNumber)
+    engine.fn.rampLinear(this.synth.fader.gain, 1, index == 0 ? 2 : this.primeNumber)
 
     return this
   },
   destroy: function (isChange) {
-    const release = isChange ? 3 : 1/4
+    const release = isChange ? 2 : 8
 
     engine.fn.rampLinear(this.synth.param.gain, 0, release)
     this.synth.stop(engine.time(release))
