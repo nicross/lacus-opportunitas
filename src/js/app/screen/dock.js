@@ -18,7 +18,7 @@ app.screen.dock = app.screenManager.invent({
         )
       )
 
-      content.dock.reset()
+      content.dock.set(undefined)
 
       this.change('game')
     },

@@ -15,7 +15,7 @@ content.audio.ports.synth.prototype = {
     const isTarget = content.ports.target.is(this.port) ? 1 : 0
 
     this.fadeAccelerated = 'fadeAccelerated' in this
-      ? engine.fn.accelerateValue(this.fadeAccelerated, 1, 1 / this.port.primeNumber)
+      ? engine.fn.accelerateValue(this.fadeAccelerated, 1, 2 / this.port.primeNumber)
       : (isTarget ? 1 : 0)
 
     this.isTargetAccelerated = 'isTargetAccelerated' in this
@@ -42,7 +42,7 @@ content.audio.ports.synth.prototype = {
       amodFrequency: engine.fn.lerp(1 / this.port.primeNumber, engine.fn.lerp(12, 1, distance), this.isTargetAccelerated),
       carrierFrequency,
       carrierGain: 1 - amodDepth,
-      color: engine.fn.lerp(engine.fn.lerpExp(4, 2, octave, 0.5), engine.fn.lerpExp(12, 4, octave, 0.5), this.isTargetAccelerated),
+      color: engine.fn.lerp(engine.fn.lerpExp(4, 2, octave, 0.5), engine.fn.lerpExp(12, 2, octave, 0.5), this.isTargetAccelerated),
       minColor: engine.fn.lerp(1, 2, this.isTargetAccelerated),
       fmodDepth: carrierFrequency * 0.5,
       fmodFrequency: carrierFrequency * 0.5,
@@ -101,10 +101,13 @@ content.audio.ports.synth.prototype = {
     return this
   },
   destroy: function () {
-    // TODO: release
+    const release = 1/4
 
-    this.synth.stop()
-    this.binaural.destroy()
+    this.synth.stop(engine.time(release))
+
+    setTimeout(() => this.binaural.destroy(), release * 1000)
+
+    return this
   },
   update: function () {
     const {
@@ -131,5 +134,7 @@ content.audio.ports.synth.prototype = {
     this.binaural.left.filterModel.options.minColor = minColor
     this.binaural.right.filterModel.options.minColor = minColor
     this.binaural.update(vector)
+
+    return this
   },
 }

@@ -1,11 +1,9 @@
 content.audio.ports = (() => {
-  const synths = []
-  let bus
+  const bus = content.audio.channel.default.createBus(),
+    synths = []
 
   return {
     load: function () {
-      bus = content.audio.channel.default.createBus()
-
       for (const port of content.ports.all()) {
         synths.push(
           this.synth.create({
@@ -18,13 +16,8 @@ content.audio.ports = (() => {
       return this
     },
     unload: function () {
-      if (bus) {
-        bus.disconnect()
-        bus = undefined
-      }
-
       for (const synth of synths) {
-        synth.update()
+        synth.destroy()
       }
 
       synths.length = 0
@@ -49,5 +42,12 @@ engine.loop.on('frame', ({paused}) => {
   content.audio.ports.update()
 })
 
-engine.state.on('import', () => content.audio.ports.load())
+engine.state.on('import', ({dock}) => {
+  if (!dock) {
+    content.audio.ports.load()
+  }
+})
+
+content.dock.on('dock', () => content.audio.ports.unload())
+content.dock.on('undock', () => content.audio.ports.load())
 engine.state.on('reset', () => content.audio.ports.unload())

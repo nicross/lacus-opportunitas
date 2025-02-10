@@ -31,7 +31,9 @@ content.audio.facing = (() => {
       return this
     },
     update: function () {
-      const facing = content.ports.facing(1/32)
+      const facing = !content.dock.is()
+        ? content.ports.facing(1/32)
+        : undefined
 
       if (facing && previous !== facing) {
         play(facing)

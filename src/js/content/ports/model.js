@@ -75,21 +75,23 @@ content.ports.model.prototype = {
       engine.fn.fromMidi(rootNote + scale[rootIndex + triadIndexes[2]]),
     ]
 
+    const transposed = engine.fn.transpose(
+      this.triadFrequencies[0],
+      engine.fn.fromMidi(rootNote + (-1 * 12)),
+      engine.fn.fromMidi(rootNote + (0 * 12)),
+    )
+
     this.triadFrequenciesTransposed = [
-      engine.fn.transpose(
-        this.triadFrequencies[0],
-        engine.fn.fromMidi(rootNote - (3 * 12)),
-        engine.fn.fromMidi(rootNote - (2 * 12)),
-      ),
+      transposed,
       engine.fn.transpose(
         this.triadFrequencies[1],
-        engine.fn.fromMidi(rootNote),
-        engine.fn.fromMidi(rootNote + (1 * 12)),
+        transposed,
+        transposed * 2,
       ),
       engine.fn.transpose(
         this.triadFrequencies[2],
-        engine.fn.fromMidi(rootNote),
-        engine.fn.fromMidi(rootNote + (1 * 12)),
+        transposed,
+        transposed * 2,
       ),
     ]
 

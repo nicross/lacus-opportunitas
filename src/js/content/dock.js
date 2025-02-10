@@ -20,7 +20,18 @@ content.dock = (() => {
       return this
     },
     set: function (value) {
+      const isChange = index != value,
+        isUndock = typeof value == 'undefined'
+
+      if (isUndock) {
+        pubsub.emit('undock')
+      }
+
       index = value
+
+      if (isChange && !isUndock) {
+        pubsub.emit('change')
+      }
 
       return this
     },

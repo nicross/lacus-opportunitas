@@ -17,6 +17,8 @@ app.screen.gameMenu = app.screenManager.invent({
       app.autosave.trigger()
       app.gameState.setLoaded(false)
 
+      engine.state.reset()
+
       this.change('mainMenu')
     },
     ports: function () {

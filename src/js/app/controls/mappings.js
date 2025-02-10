@@ -104,8 +104,8 @@ app.controls.mappings = {
     up: {
       gamepadAnalog: [],
       gamepadAxis: [
-        [1, 1],
-        [3, 1],
+        [1, -1],
+        [3, -1],
       ],
       gamepadDigital: [
         12,
@@ -121,8 +121,8 @@ app.controls.mappings = {
     down: {
       gamepadAnalog: [],
       gamepadAxis: [
-        [1, -1],
-        [3, -1],
+        [1, 1],
+        [3, 1],
       ],
       gamepadDigital: [
         13,
