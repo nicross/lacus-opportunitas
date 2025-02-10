@@ -42,7 +42,7 @@ content.audio.ports.synth.prototype = {
       amodFrequency: engine.fn.lerp(1 / this.port.primeNumber, engine.fn.lerp(12, 1, distance), this.isTargetAccelerated),
       carrierFrequency,
       carrierGain: 1 - amodDepth,
-      color: engine.fn.lerp(2, engine.fn.lerpExp(12, 4, octave, 0.5), this.isTargetAccelerated),
+      color: engine.fn.lerp(engine.fn.lerpExp(4, 2, octave, 0.5), engine.fn.lerpExp(12, 4, octave, 0.5), this.isTargetAccelerated),
       minColor: engine.fn.lerp(1, 2, this.isTargetAccelerated),
       fmodDepth: carrierFrequency * 0.5,
       fmodFrequency: carrierFrequency * 0.5,

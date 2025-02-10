@@ -7,10 +7,9 @@ content.audio.facing = (() => {
     const synth = engine.synth.pwm({
       gain: engine.fn.fromDb(-12),
       frequency: port.rootFrequency,
-      type: 'triangle',
       width: 0.75,
     }).filtered({
-      frequency: port.rootFrequency * 4,
+      frequency: port.rootFrequency * 2,
     }).connect(bus)
 
     const now = engine.time(),
