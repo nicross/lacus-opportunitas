@@ -65,8 +65,8 @@ content.ports.model.prototype = {
 
     const triadIndexes = engine.fn.choose([
       [0, 2, 4], // Root is root of triad
-      [-2, 0, 2], // Root is third of triad
-      [-4, -2, 0], // Root is fifth of triad
+      [0, -2, 2], // Root is third of triad
+      [0, -4, -2], // Root is fifth of triad
     ], srand())
 
     this.triadFrequencies = [
