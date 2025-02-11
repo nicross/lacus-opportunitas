@@ -6,6 +6,7 @@ content.goods = (() => {
   return {
     all: () => [...registry.values(), ...luxuries.values()],
     get: (id) => registry.get(id) || luxuries.get(id),
+    getDiscoveredLuxuries: () => [...luxuries.values()].filter((good) => good.getPort().isDiscovered),
     getLuxuryForPort: function (port) {
       for (const good of luxuries.values()) {
         if (good.port == port) {

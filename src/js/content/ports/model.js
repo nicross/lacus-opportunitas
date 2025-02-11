@@ -145,14 +145,10 @@ content.ports.model.prototype = {
       .rotateQuaternion(engine.position.getQuaternion().conjugate())
   },
   getBuying: function () {
-    const goods = this.economy.getBuying(),
-      inventory = content.inventory.goods()
-
-    for (const good of inventory) {
-      if (good.id != this.luxuryGood && content.goods.luxury.isPrototypeOf(good)) {
-        goods.push(good)
-      }
-    }
+    const goods = [
+      ...this.economy.getBuying(),
+      ...content.goods.getDiscoveredLuxuries().filter((good) => good.getPort() !== this),
+    ]
 
     goods.sort((a, b) => a.name.localeCompare(b.name))
 
