@@ -128,12 +128,6 @@ app.screen.base = {
       return true
     }
 
-    if (ui.left || ui.right) {
-      if (!app.utility.focus.matches('.c-slider *')) {
-        app.audio.click(ui.left ? -1 : 1)
-      }
-    }
-
     return false
   },
   nextTutorial: function () {
