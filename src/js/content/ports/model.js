@@ -150,7 +150,7 @@ content.ports.model.prototype = {
       ...content.goods.getDiscoveredLuxuries().filter((good) => good.getPort() !== this),
     ]
 
-    goods.sort((a, b) => a.name.localeCompare(b.name))
+    goods.sort((a, b) => a.getSellCost(this) - b.getSellCost(this))
 
     return goods
   },
@@ -163,7 +163,7 @@ content.ports.model.prototype = {
       )
     }
 
-    goods.sort((a, b) => a.name.localeCompare(b.name))
+    goods.sort((a, b) => a.getBuyCost(this) - b.getBuyCost(this))
 
     return goods
   },
