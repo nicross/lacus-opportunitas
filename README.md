@@ -1,6 +1,15 @@
 # Lacus Opportunitas
 A lunar lake trading simulator created for [Games for Blind Gamers 4](https://itch.io/jam/games-for-blind-gamers-4).
 
+## Getting started
+To get started, please use [npm](https://nodejs.org) to install the required dependencies:
+```sh
+npm install
+```
+
+### Common tasks
+Common tasks have been automated with [Gulp](https://gulpjs.com):
+
 #### Build once
 ```sh
 gulp build
