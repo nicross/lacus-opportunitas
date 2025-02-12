@@ -151,7 +151,19 @@ content.ports.model.prototype = {
       ...content.goods.getDiscoveredLuxuries().filter((good) => good.getPort() !== this),
     ]
 
-    goods.sort((a, b) => a.getSellCost(this) - b.getSellCost(this))
+    const isSellable = new Map(),
+      sellCosts = new Map()
+
+    for (const good of goods) {
+      isSellable.set(good, content.inventory.has(good.id))
+      sellCosts.set(good, good.getBuyCost(this))
+    }
+
+    goods.sort((a, b) => {
+      return isSellable.get(a) == isSellable.get(b)
+        ? isSellable.get(a) ? sellCosts.get(b) - sellCosts.get(a) : sellCosts.get(a) - sellCosts.get(b)
+        : isSellable.get(a) ? -1 : 1
+    })
 
     return goods
   },
@@ -164,7 +176,19 @@ content.ports.model.prototype = {
       )
     }
 
-    goods.sort((a, b) => a.getBuyCost(this) - b.getBuyCost(this))
+    const buyCosts = new Map(),
+      isBuyable = new Map()
+
+    for (const good of goods) {
+      isBuyable.set(good, !content.inventory.isFull() && content.credits.has(good.getBuyCost(this)))
+      buyCosts.set(good, good.getBuyCost(this))
+    }
+
+    goods.sort((a, b) => {
+      return isBuyable.get(a) == isBuyable.get(b)
+        ? isBuyable.get(a) ? buyCosts.get(b) - buyCosts.get(a) : buyCosts.get(a) - buyCosts.get(b)
+        : isBuyable.get(a) ? -1 : 1
+    })
 
     return goods
   },
