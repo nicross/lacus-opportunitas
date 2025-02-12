@@ -43,9 +43,10 @@ content.ports.model.prototype = {
     const rootNote = 60
 
     const rootNotes = engine.fn.shuffle([
-      -12,-10,-8,-5,-3,
+      -8,-5,-3,
       0,2,4,7,9,
       12,14,16,19,21,
+      24,26
     ], engine.fn.srand('port', 'notes'))
 
     const rootBase = rootNotes[this.index]

@@ -19,7 +19,7 @@ content.audio.acceleration = (() => {
       carrierGain: 1 - amodDepth,
       color: 8,
       detune: engine.fn.lerp(0, 1200, value + (stressAccelerated * 0.5)),
-      gain: engine.fn.fromDb(-12) * (value ** 0.5),
+      gain: engine.fn.fromDb(engine.fn.lerp(-9, -15, value)) * (value ** 0.5),
       vector: content.movement.velocity().normalize().rotate(-engine.position.getEuler().yaw).inverse(),
       width: engine.fn.randomFloat(0.125, 0.875),
     }
