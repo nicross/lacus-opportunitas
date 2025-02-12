@@ -41,11 +41,11 @@ in vec3 vertex;
 out float alpha;
 
 void main(void) {
-  vec3 v = vertex + offset;
+  vec3 v = (mix(2.0, 1.0, life) * vertex) + offset;
   gl_Position = u_projection * vec4(v.xyz, 1.0);
 
   ${content.gl.sl.passUniforms()}
-  alpha = sqrt(sin(PI * life));
+  alpha = pow(sin(PI * life), 1.5);
 }
 `
 
