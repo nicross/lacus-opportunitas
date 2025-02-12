@@ -1,10 +1,10 @@
 content.ports.generate = (() => {
   const defaultLuxuries = [
-    'Dust',
-    'Elixir',
-    'Sauce',
-    'Spice',
-    'Zest',
+    'dust',
+    'elixir',
+    'sauce',
+    'spice',
+    'zest',
   ]
 
   const defaultNamePrefixes = [
@@ -39,7 +39,7 @@ content.ports.generate = (() => {
     'Quant',
     'Penta',
     'Rich',
-    'Rocks',
+    'Rock',
     'Sol',
     'Spring',
     'Sprocket',
