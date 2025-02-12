@@ -43,5 +43,5 @@ content.audio = (() => {
   }
 })()
 
-engine.loop.on('resume', () => engine.fn.rampLinear(content.audio.main().gain, 1, 0.25))
-engine.loop.on('pause', () => engine.fn.rampLinear(content.audio.main().gain, 0, 0.25))
+engine.loop.on('resume', () => engine.loop.once('frame', () => engine.fn.rampLinear(content.audio.main().gain, 1, 0.25)))
+engine.loop.on('pause', () => engine.loop.once('frame', () => engine.fn.rampLinear(content.audio.main().gain, 0, 0.25)))

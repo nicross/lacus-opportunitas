@@ -1,5 +1,5 @@
 content.video.surface = (() => {
-  const maxParticles = 15000
+  const maxParticles = 12500
 
   const fragmentShader = `#version 300 es
 

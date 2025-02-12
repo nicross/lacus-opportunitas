@@ -1,7 +1,7 @@
 content.movement = (() => {
-  const acceleration = 10,
+  const acceleration = 20,
     angularVelocity = engine.const.tau / 2,
-    deceleration = 10,
+    deceleration = 20,
     maxVelocity = 40
 
   let rawInput = {},
@@ -38,6 +38,7 @@ content.movement = (() => {
   }
 
   return {
+    calculateSpeedLimit,
     export: () => velocity.clone(),
     import: function (value) {
       velocity = engine.tool.vector2d.create(value)
