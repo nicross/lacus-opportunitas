@@ -1,8 +1,8 @@
 content.movement = (() => {
-  const acceleration = 20,
+  const acceleration = 25,
     angularVelocity = engine.const.tau / 2,
-    deceleration = 20,
-    maxVelocity = 40
+    deceleration = 25,
+    maxVelocity = 50
 
   let rawInput = {},
     turningSpeed = 1,
