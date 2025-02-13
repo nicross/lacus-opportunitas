@@ -139,6 +139,9 @@ content.bottles = (() => {
 })()
 
 engine.ready(() => {
+  // XXX: Needed to support fast travel
+  content.dock.on('change', () => content.bottles.onDock())
+
   content.dock.on('dock', () => content.bottles.onDock())
   content.dock.on('undock', () => content.bottles.onUndock())
 })

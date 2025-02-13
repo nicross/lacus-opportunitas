@@ -164,5 +164,8 @@ engine.state.on('import', ({movement}) => content.movement.import(movement))
 engine.state.on('reset', () => content.movement.reset())
 
 engine.ready(() => {
+  // XXX: Needed to support fast travel
+  content.dock.on('change', () => content.movement.reset())
+
   content.dock.on('dock', () => content.movement.reset())
 })
