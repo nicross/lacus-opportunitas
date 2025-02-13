@@ -42,4 +42,4 @@ engine.state.on('import', ({dock}) => {
   }
 })
 
-engine.state.on('reset', () => content.audio.dock.unload())
+engine.state.on('reset', () => content.audio.dock.unload(true))

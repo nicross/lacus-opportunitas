@@ -34,7 +34,7 @@ content.bottles = (() => {
   function generateTimer() {
     // Lake radius at maxCount
     // TODO: Make dynamic to support different maxCount values
-    return (500 * count) + engine.fn.randomFloat(250, 500)
+    return (250 * count) + engine.fn.randomFloat(250, 500)
   }
 
   function generateVector() {
