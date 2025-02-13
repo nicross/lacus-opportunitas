@@ -1,6 +1,10 @@
 # TODO
 - Phase 4
   - Credits in bottles
+    - Particle effects
+    - Sound
+    - Collection toast
+    - Collection sound
   - Port upgrades
   - Ship upgrades
   - Trick system?

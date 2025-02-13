@@ -7,6 +7,7 @@ content.credits = (() => {
 
       return this
     },
+    calculateNetWorth: () => credits + content.inventory.goods().reduce((sum, good) => sum + good.getBaseCost() * content.inventory.get(good.id), 0),
     has: (value) => value <= credits,
     import: function (value) {
       credits = value || 0
