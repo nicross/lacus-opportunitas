@@ -10,11 +10,11 @@ content.bottles = (() => {
     vector
 
   function generateReward() {
-    // Methodology: Collecting all bottles in an excursion is equivalent to trading an extra of the highest good you can trade
+    // Methodology: Collecting all bottles in an excursion is equivalent to 2x the highest good you can afford
     // The reward can jump up to higher tiers within the same excursion
     const netWorth = content.credits.calculateNetWorth()
 
-    const totalReward = content.goods.all().reduce((max, good) => {
+    const totalReward = 2 * content.goods.all().reduce((max, good) => {
       const cost = good.getBaseCost()
 
       return cost >= max && cost <= netWorth
