@@ -1,9 +1,8 @@
 # TODO
 - Phase 4
   - Credits in bottles
-    - Particle effects
-    - Sound
-    - Collection toast
+    - Directional audio cue
+    - `Bottle collected, +X credits` toast on game screen
     - Collection sound
   - Port upgrades
   - Ship upgrades

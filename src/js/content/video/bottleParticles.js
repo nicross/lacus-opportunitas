@@ -1,4 +1,4 @@
-content.video.portParticles = (() => {
+content.video.bottleParticles = (() => {
   const maxParticles = 1000
 
   const fragmentShader = `#version 300 es
@@ -52,7 +52,7 @@ void main(void) {
   let particles = [],
     program
 
-  function generateParticle(port) {
+  function generateParticle(bottle) {
     const velocity = engine.tool.vector3d.create({
       x: engine.fn.randomFloat(-1, 1),
       y: engine.fn.randomFloat(-1, 1),
@@ -61,8 +61,7 @@ void main(void) {
 
     return {
       life: 1,
-      port,
-      vector: velocity.clone(),
+      vector: velocity.add(bottle),
       velocity,
     }
   }
@@ -72,37 +71,15 @@ void main(void) {
       return
     }
 
-    const position = engine.position.getVector(),
-      target = content.ports.target.get()
+    const bottle = content.bottles.vector()
 
-    for (const port of content.ports.all()) {
-      const dot = port.getDot(),
-        isTarget = port === target
-
-      if (!isTarget && dot < 0.85) {
-        continue
-      }
-
-      const chance = isTarget
-        ? 1
-        : engine.fn.scale(dot, 0.85, 1, 0, 1) ** 12
-
-      if (Math.random() > chance) {
-        continue
-      }
-
-      const count = isTarget ? 2 : 1
-
-      for (let i = 0; i < count; i+= 1) {
-        particles.push(
-          generateParticle(port)
-        )
-      }
-
-      if (particles.length > maxParticles) {
-        break
-      }
+    if (!bottle) {
+      return
     }
+
+    particles.push(
+      generateParticle(bottle)
+    )
   }
 
   function updateParticles() {
@@ -111,45 +88,25 @@ void main(void) {
       lifeRate = 2 * delta,
       lifes = [],
       offsets = [],
-      position = engine.position.getVector(),
-      quaternion = engine.position.getQuaternion(),
-      target = content.ports.target.get(),
-      velocity = 5 * delta
-
-    const origins = new Map()
-
-    for (const port of content.ports.all()) {
-      const relative = engine.tool.vector3d.create(port)
-        .subtract(camera)
-        .zeroZ()
-
-      origins.set(port,
-        relative.subtractRadius(
-          Math.max(0, relative.distance() - content.dock.radius())
-        ).add({z: 24})
-      )
-    }
+      velocity = 10 * delta
 
     particles = particles.reduce((particles, particle) => {
-      const isTarget = particle.port === target,
-        origin = origins.get(particle.port)
-
-      particle.life -= lifeRate * (isTarget ? 0.5 : 1)
+      particle.life -= lifeRate
 
       if (particle.life <= 0) {
         return particles
       }
 
-      particle.vector.x += particle.velocity.x * velocity * (isTarget ? 2 : 1)
-      particle.vector.y += particle.velocity.y * velocity * (isTarget ? 2 : 1)
-      particle.vector.z += particle.velocity.z * velocity * (isTarget ? 2 : 1)
+      particle.vector.x += particle.velocity.x * velocity
+      particle.vector.y += particle.velocity.y * velocity
+      particle.vector.z += particle.velocity.z * velocity
 
       lifes.push(particle.life)
 
       offsets.push(
-        origin.x + particle.vector.x,
-        origin.y + particle.vector.y,
-        origin.z + particle.vector.z,
+        particle.vector.x - camera.x,
+        particle.vector.y - camera.y,
+        particle.vector.z - camera.z,
       )
 
       particles.push(particle)
@@ -195,9 +152,9 @@ void main(void) {
 
       // Bind mesh
       const mesh = content.gl.createQuad({
-        height: 1/16,
+        height: 1/12,
         quaternion: content.camera.quaternion(),
-        width: 1/16,
+        width: 1/12,
       })
 
       gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer())
