@@ -23,6 +23,10 @@ content.credits = (() => {
   }
 })()
 
+engine.ready(() => {
+  content.bottles.on('collect', (reward) => content.credits.adjust(reward))
+})
+
 engine.state.on('export', (data) => data.credits = content.credits.value())
 engine.state.on('import', ({credits}) => content.credits.import(credits))
 engine.state.on('reset', () => content.credits.reset())
