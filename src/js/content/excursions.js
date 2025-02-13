@@ -1,3 +1,6 @@
+// This was intended to provide a seed for random events during excursions.
+// It's currently unused and can be removed.
+
 content.excursions = (() => {
   let count = 0
 

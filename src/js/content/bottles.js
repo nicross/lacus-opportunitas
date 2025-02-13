@@ -1,5 +1,5 @@
 content.bottles = (() => {
-  const collectRadius = 5,
+  const collectRadius = 10,
     maxCount = 3,
     maxDistance = 250,
     pubsub = engine.tool.pubsub.create()
@@ -10,9 +10,20 @@ content.bottles = (() => {
     vector
 
   function generateReward() {
-    // Methodology: Collecting all bottles in an excursion is equivalent to trading an extra of the highest good in your inventory
-    const totalReward = content.inventory.goods().reduce((max, good) => Math.max(max, good.getBaseCost()), 10)
+    // Methodology: Collecting all bottles in an excursion is equivalent to trading an extra of the highest good you can trade
+    // The reward can jump up to higher tiers within the same excursion
+    const netWorth = content.credits.calculateNetWorth()
 
+    const totalReward = content.goods.all().reduce((max, good) => {
+      const cost = good.getBaseCost()
+
+      return cost >= max && cost <= netWorth
+        ? cost
+        : max
+    }, 10)
+
+    // Always add up to total reward, rounding up the smaller amounts
+    // TODO: Make dynamic to support different maxCount values
     return [
       Math.ceil(1/6 * totalReward),
       Math.ceil(1/3 * totalReward),
@@ -21,16 +32,22 @@ content.bottles = (() => {
   }
 
   function generateTimer() {
-    return engine.fn.randomFloat(125, 375)
+    return engine.fn.randomFloat(250, 500)
   }
 
   function generateVector() {
+    if (content.movement.velocity().isZero()) {
+      return
+    }
+
     // Generate a random vector ahead of current velocity
     const vector = engine.tool.vector3d.create(
       content.movement.velocity()
         .normalize()
         .scale(maxDistance - 1)
-        .rotate(engine.const.tau * engine.fn.randomFloat(-1/8, 1/8))
+        .rotate(engine.const.tau * engine.fn.randomSign() * engine.fn.randomFloat(1/36, 1/16))
+    ).add(
+      engine.position.getVector().zeroZ()
     )
 
     if (vector.distance() >= content.lake.radius() - content.dock.radius()) {
@@ -99,12 +116,13 @@ content.bottles = (() => {
             vector = nextVector
           } else {
             timer = 1
+            vector = undefined
           }
         }
       }
 
       // Update vector position
-      if (vector) {
+      if (isSpawned) {
         if (position.distance(vector) < maxDistance) {
           // Glue to surface when within range
           vector.z = content.surface.value(vector)
@@ -123,14 +141,14 @@ content.bottles = (() => {
       }
 
       // Handle collection
-      if (isSpawned && position.distance(vector) <= collectRadius) {
+      if (isSpawned && position.zeroZ().distance(vector.zeroZ()) <= collectRadius) {
         pubsub.emit('collect', generateReward())
 
         count += 1
         isSpawned = false
         timer = generateTimer()
+        vector = undefined
       }
-
 
       return this
     },
