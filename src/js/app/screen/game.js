@@ -27,6 +27,7 @@ app.screen.game = app.screenManager.invent({
     })
 
     this.port.onReady()
+    this.toasts.onReady()
   },
   onEnter: function () {
     app.autosave.enable()
@@ -35,6 +36,7 @@ app.screen.game = app.screenManager.invent({
     engine.loop.resume()
 
     this.port.onEnter()
+    this.toasts.onEnter()
   },
   onExit: function () {
     app.autosave.disable()
@@ -43,6 +45,7 @@ app.screen.game = app.screenManager.invent({
     engine.loop.pause()
 
     this.port.onExit()
+    this.toasts.onExit()
   },
   onFrame: function () {
     const game = app.controls.game(),
@@ -70,5 +73,6 @@ app.screen.game = app.screenManager.invent({
     content.camera.applyLook(game.look)
 
     this.port.onFrame()
+    this.toasts.onFrame()
   },
 })
