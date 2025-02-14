@@ -1,9 +1,24 @@
 # TODO
-- Phase 4
+- Phase 4: Excursion benefits
   - Credits in bottles
     - Directional audio cue
     - Collection sound
+- Phase 5: Horizontal progression
   - Port upgrades
-  - Ship upgrades
-  - Trick system?
-  - Dolphins?
+    - Mechanics
+    - Screen
+  - Craft upgrades
+    - Mechanics
+    - Screen
+- Stretch goals: More excursion benefits
+  - Tricks
+    - Movement physics
+    - Input mapping
+    - State machine
+    - Rewards and toasts
+    - Audio cues
+  - Haptics (or remove slider)
+  - Dolphins
+    - Spawner
+    - Particle effects
+    - Audio cues
