@@ -60,6 +60,10 @@ app.screen.game.toasts = {
 
 engine.ready(() => {
   content.bottles.on('collect', (reward) => {
-    app.screen.game.toasts.enqueue(`<strong>Bottles recovered</strong><br />+${reward} credit${reward != 1 ? 's' : ''}`)
+    const numberFormat = Intl.NumberFormat('en-US', {
+      maximumFractionDigits: 0,
+    })
+
+    app.screen.game.toasts.enqueue(`<strong>Bottles recovered</strong><br />+${numberFormat.format(reward)} credit${reward != 1 ? 's' : ''}`)
   })
 })
