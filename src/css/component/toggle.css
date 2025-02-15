@@ -18,8 +18,11 @@
   }
   .c-toggle--off,
   .c-toggle--on {
+    background-color: #FFFFFF;
+    color: #FF0069;
     font-size: calc(1em - 2px);
     line-height: 1;
+    opacity: 1;
     text-align: center;
     text-transform: uppercase;
     transition: all 0.125s ease;
@@ -28,8 +31,5 @@
   }
   .c-toggle--button[aria-checked="true"] .c-toggle--off,
   .c-toggle--button[aria-checked="false"] .c-toggle--on {
-    background-color: #FFFFFF;
-    font-family: RobotoBold, sans-serif;
-    font-weight: 700;
-    opacity: 1;
+    opacity: 0;
   }
