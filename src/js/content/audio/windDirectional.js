@@ -47,6 +47,10 @@ content.audio.windDirectional = (() => {
   }
 
   function createSynth() {
+    if (synth) {
+      return
+    }
+
     const bus = content.audio.channel.default.createBus(),
       context = engine.context()
 
@@ -95,6 +99,8 @@ content.audio.windDirectional = (() => {
 
     await engine.fn.promise(release * 1000)
     binaural.destroy()
+
+    synth = undefined
   }
 
   function updateSynth() {

@@ -39,5 +39,6 @@ engine.loop.on('frame', ({paused}) => {
   content.audio.bottle.update()
 })
 
+content.dock.on('change', () => content.audio.bottle.reset())
 content.dock.on('dock', () => content.audio.bottle.reset())
 engine.state.on('reset', () => content.audio.bottle.reset())
