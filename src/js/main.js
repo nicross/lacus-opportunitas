@@ -31,6 +31,9 @@
   engine.mixer.param.limiter.threshold.value = -24
   engine.mixer.param.preGain.value = 1.5
 
+  // Prevent the Doppler effect
+  engine.const.speedOfSound = engine.const.maxSafeFloat
+
   // Start the loop
   engine.loop.start().pause()
 

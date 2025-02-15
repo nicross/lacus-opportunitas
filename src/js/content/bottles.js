@@ -10,11 +10,11 @@ content.bottles = (() => {
     vector
 
   function generateReward() {
-    // Methodology: Collecting all bottles in an excursion is equivalent to 2x the highest good you can afford
+    // Methodology: Collecting all bottles in an excursion is equivalent to 1x the highest good you can afford
     // The reward can jump up to higher tiers within the same excursion
     const netWorth = content.credits.calculateNetWorth()
 
-    const totalReward = 2 * content.goods.all().reduce((max, good) => {
+    const totalReward = content.goods.all().reduce((max, good) => {
       const cost = good.getBaseCost()
 
       return cost >= max && cost <= netWorth
@@ -91,6 +91,7 @@ content.bottles = (() => {
 
       return this
     },
+    relativeVector: () => vector.subtract(engine.position.getVector()).rotateQuaternion(engine.position.getQuaternion().conjugate()),
     reset: function () {
       resetExcursion()
 

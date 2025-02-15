@@ -46,7 +46,7 @@ app.screen.game.toasts = {
     )
 
     // Reset timer
-    this.timeout = 2
+    this.timeout = 3
 
     return this
   },

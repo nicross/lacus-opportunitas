@@ -18,9 +18,11 @@
   .a-game--toast[aria-hidden="true"] {
     animation: a-game--toast--out 0.5s ease 0s 1 normal both;
   }
-  .a-game--toast strong {
-    font-family: FiraCodeMedium, monospace;
-    font-weight: 600;
+  .a-game--toast strong:after {
+    content: ']' / '';
+  }
+  .a-game--toast strong:before {
+    content: '[' / '';
   }
   .a-game--toasts {
     font-size: 0.75em;
