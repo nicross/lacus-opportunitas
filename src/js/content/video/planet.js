@@ -63,9 +63,9 @@ void main(void) {
 
       // Bind mesh
       const mesh = content.gl.createQuad({
-        height: 66.6,
+        height: 33.3,
         quaternion: content.camera.quaternion(),
-        width: 66.6,
+        width: 33.3,
       })
 
       const vertexBuffer = gl.createBuffer()
