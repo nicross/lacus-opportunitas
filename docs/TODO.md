@@ -1,7 +1,4 @@
 # TODO
-- Phase 4: Excursion benefits
-  - Credits in bottles
-    - Collection sound
 - Phase 5: Horizontal progression
   - Port upgrades
     - Mechanics
