@@ -36,17 +36,29 @@ content.audio.acceleration = (() => {
       return content.movement.velocityValue()
     }
 
+    const velocity = content.movement.velocity()
+
     const targetVelocity = engine.tool.vector2d.create({
       x: content.movement.calculateSpeedLimit(),
     }).rotate(
       engine.position.getEuler().yaw
     )
 
-    return engine.fn.scale(
-      content.movement.velocity().normalize().dotProduct(targetVelocity.normalize()),
+    const dot = engine.fn.scale(
+      velocity.normalize().dotProduct(targetVelocity.normalize()),
       -1, 1,
       1, 0
     )
+
+    const difference = engine.fn.clamp(
+      engine.fn.scale(
+        targetVelocity.distance(velocity),
+        0, content.movement.maxVelocity(),
+        0, 1
+      )
+    )
+
+    return Math.max(dot, difference)
   }
 
   function createSynth() {
@@ -153,6 +165,7 @@ content.audio.acceleration = (() => {
 
       return this
     },
+    stressAccelerated: () => stressAccelerated,
     update: function () {
       if (content.movement.velocityValue()) {
         if (!synth) {

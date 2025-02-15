@@ -13,7 +13,6 @@
     - State machine
     - Rewards and toasts
     - Audio cues
-  - Haptics (or remove slider)
   - Dolphins
     - Spawner
     - Particle effects
