@@ -2,6 +2,16 @@
   max-width: unset;
   position: relative;
 }
+  .a-game-blanked::after {
+    background-color: #000000;
+    content: '';
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+  }
   .a-game--target {
     background-color: #000000;
     bottom: 2em;

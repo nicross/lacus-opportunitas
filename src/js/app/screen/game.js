@@ -30,6 +30,8 @@ app.screen.game = app.screenManager.invent({
     this.toasts.onReady()
   },
   onEnter: function () {
+    this.setBlanked(!app.settings.computed.graphicsOn)
+
     app.autosave.enable()
     app.autosave.trigger()
 
@@ -74,5 +76,15 @@ app.screen.game = app.screenManager.invent({
 
     this.port.onFrame()
     this.toasts.onFrame()
+  },
+  // Methods
+  setBlanked: function (value) {
+    if (value) {
+      this.rootElement.classList.add('a-game-blanked')
+    } else {
+      this.rootElement.classList.remove('a-game-blanked')
+    }
+
+    return this
   },
 })
