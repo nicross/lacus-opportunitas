@@ -250,6 +250,12 @@ content.audio.theme = (() => {
 
       return this
     },
+    randomSequenceSlice: (length) => {
+      const slices = Math.floor(639 / length)
+      const index = engine.fn.randomInt(0, slices)
+
+      return sequence.slice(index * length, (index + 1) * length)
+    },
     stop: function () {
       isPlaying = false
 

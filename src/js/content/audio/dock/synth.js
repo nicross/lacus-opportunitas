@@ -22,11 +22,11 @@ content.audio.dock.synth.prototype = {
       carrierFrequency: this.rootFrequency,
       carrierGain: index == 0 ? 1/3 : 1/2,
       carrierType: 'sawtooth',
-      gain: engine.fn.fromDb(-15),
+      gain: engine.fn.fromDb(-18),
       modDepth: index == 0 ? 2/3 : 1/2,
       modFrequency: 1 / this.primeNumber,
     }).filtered({
-      frequency: this.rootFrequency * (index == 0 ? 2 : 1),
+      frequency: this.rootFrequency,
     }).chainAssign(
       'fader', context.createGain()
     ).chainAssign(

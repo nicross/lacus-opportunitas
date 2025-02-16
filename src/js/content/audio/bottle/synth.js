@@ -22,19 +22,16 @@ content.audio.bottle.synth.prototype = {
       }),
       gainModel: engine.ear.gainModel.linear.instantiate({
         maxDistance: 250,
-        maxGain: engine.fn.fromDb(-24),
+        maxGain: engine.fn.fromDb(-22.5),
         minGain: engine.fn.fromDb(-36),
       }),
       ...content.bottles.relativeVector(),
     }).from(this.fader).to(bus)
 
-    this.index = engine.fn.randomInt(0, 9)
+    this.index = engine.fn.randomInt(0, 19)
     this.timer = 1
 
-    this.notes = engine.fn.shuffle([
-      60, 62, 64, 67, 69,
-      72, 74, 76, 79, 81,
-    ]).map((note) => engine.fn.fromMidi(note))
+    this.notes = content.audio.theme.randomSequenceSlice(20)
 
     this.stab()
 
