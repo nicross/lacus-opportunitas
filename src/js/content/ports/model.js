@@ -12,6 +12,7 @@ content.ports.model.prototype = {
     isDiscovered = false,
     luxuryGood = undefined,
     name = '',
+    transactions = {},
   } = {}) {
     this.angle = angle
     this.economy = content.economies.get(economy)
@@ -19,6 +20,7 @@ content.ports.model.prototype = {
     this.isDiscovered = isDiscovered
     this.luxuryGood = luxuryGood
     this.name = name
+    this.transactions = transactions
     this.x = Math.cos(angle) * content.lake.radius()
     this.y = Math.sin(angle) * content.lake.radius()
 
@@ -34,6 +36,7 @@ content.ports.model.prototype = {
       isDiscovered: this.isDiscovered,
       luxuryGood: this.luxuryGood,
       name: this.name,
+      transactions: {...this.transactions},
     }
   },
   generate: function () {
@@ -191,5 +194,14 @@ content.ports.model.prototype = {
     })
 
     return goods
+  },
+  logTransaction: function (id, amount = 0) {
+    if (!(id in this.transactions)) {
+      this.transactions[id] = 0
+    }
+
+    this.transactions[id] += amount
+
+    return this
   },
 }

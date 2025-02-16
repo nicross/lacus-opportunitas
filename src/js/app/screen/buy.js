@@ -48,6 +48,7 @@ app.screen.buy = app.screenManager.invent({
       component.on('click', () => {
         content.credits.adjust(-component.cost)
         content.inventory.adjust(good.id, 1)
+        content.dock.getPort().logTransaction(good.id, 1)
 
         window.requestAnimationFrame(() => {
           this.statusComponent.update()
