@@ -16,7 +16,7 @@
     engine.buffer.impulse({
       buffer: engine.buffer.whiteNoise({
         channels: 2,
-        duration: 2,
+        duration: 4,
       }),
       power: 2,
     })

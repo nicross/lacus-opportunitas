@@ -213,3 +213,11 @@ document.addEventListener('input', (e) => {
 
   app.audio.value(engine.fn.scale(e.target.value, e.target.min, e.target.max, 0, 1))
 })
+
+// Menu music
+engine.ready(() => {
+  content.audio.theme.play()
+
+  app.gameState.on('load', () => content.audio.theme.stop())
+  app.gameState.on('unload', () => content.audio.theme.play())
+})
