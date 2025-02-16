@@ -195,6 +195,21 @@ content.ports.model.prototype = {
 
     return goods
   },
+  getTransactionLevel: function (roundDown = true) {
+    const exclude = [
+      this.economy.byproduct,
+      this.economy.consumes,
+    ].filter((x) => x)
+
+    const reduceSum = (sum, [id, value]) => sum + (exclude.includes(id) ? 0 : value)
+
+    let value = Object.entries(this.transactions).reduce(reduceSum, 0)
+    value = Math.log2(value + 4) - 2
+
+    return roundDown
+      ? Math.floor(value)
+      : value
+  },
   logTransaction: function (id, amount = 0) {
     if (!(id in this.transactions)) {
       this.transactions[id] = 0

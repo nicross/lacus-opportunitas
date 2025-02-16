@@ -5,4 +5,11 @@
   .a-dock--economy {
     font-size: 1.333em;
   }
+  .a-dock--level {
+    background-color: #FFFFFF;
+    color: #FF0069;
+    font-size: 0.75em;
+    padding: 0.25em;
+    vertical-align: middle;
+  }
   .a-dock--welcome {}

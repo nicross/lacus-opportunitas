@@ -13,7 +13,6 @@
   .a-tutorial--text kbd {
     background-color: #FFFFFF;
     color: #FF0069;
-    border-radius: 0.25em;
     padding: 0 0.25em;
   }
   .a-tutorial--text p + p {

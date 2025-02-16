@@ -29,6 +29,10 @@ app.screen.game.port = {
       minimumFractionDigits: 0,
     })
 
+    const numberFormat3 = Intl.NumberFormat('en-US', {
+      maximumFractionDigits: 0,
+    })
+
     const port = content.ports.target.get(),
       position = engine.position.getVector()
 
@@ -45,10 +49,11 @@ app.screen.game.port = {
     const distance = position.distance(port) / 1000,
       distanceRounded1 = numberFormat1.format(distance),
       distanceRounded2 = numberFormat2.format(Math.ceil(distance * 4) / 4),
+      level = numberFormat3.format(port.getTransactionLevel()),
       name = port.isDiscovered ? port.name : 'Unknown'
 
     this.visualElement.innerHTML = port.isDiscovered
-      ? `[${port.name}]<br />${port.economy.name} port<br />${distanceRounded1} km`
+      ? `[${port.name}${level > 0 ? ' +' + level : ''}]<br />${port.economy.name} port<br />${distanceRounded1} km`
       : `[Unknown port]<br />Dock to discover<br />${distanceRounded1} km`
 
     if (this.currentPort !== port || this.currentDistance != distanceRounded2) {
@@ -56,7 +61,7 @@ app.screen.game.port = {
         ? `${distanceRounded2} kilometer${distanceRounded2 == 1 ? '' : 's'}`
         : (
           port.isDiscovered
-            ? `${port.name}, ${port.economy.name} port, ${distanceRounded1} kilometer${distanceRounded1 == 1 ? '' : 's'}`
+            ? `${port.name},${level > 0 ? ' Level ' + level : ''} ${port.economy.name} port, ${distanceRounded1} kilometer${distanceRounded1 == 1 ? '' : 's'}`
             : `Unknown port, Dock to discover, ${distanceRounded2} kilometer${distanceRounded1 == 1 ? '' : 's'}`
         )
     }

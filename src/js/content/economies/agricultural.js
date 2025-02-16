@@ -5,6 +5,8 @@ content.economies.agricultural = content.economies.invent({
     'agricultural-equipment',
     'waste',
   ],
+  byproduct: undefined,
+  consumes: 'waste',
   sells: [
     'essentials',
   ],

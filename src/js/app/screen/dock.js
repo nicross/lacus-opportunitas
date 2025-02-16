@@ -66,7 +66,8 @@ app.screen.dock = app.screenManager.invent({
   onEnter: function () {
     const port = content.dock.getPort()
 
-    this.rootElement.querySelector('.a-dock--economy').innerHTML = `${port.economy.name} port`
+    this.rootElement.querySelector('.a-dock--economyType').innerHTML = port.economy.name
+    this.rootElement.querySelector('.a-dock--level').innerHTML = `Level ${port.getTransactionLevel()}`
     this.rootElement.querySelector('.a-dock--portName').innerHTML = port.name
     this.rootElement.querySelector('.a-dock--portName').title = port.name
 

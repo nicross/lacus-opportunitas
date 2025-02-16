@@ -3,6 +3,8 @@ content.economies.base = {
   id: undefined,
   name: '',
   buys: [],
+  byproduct: 'waste',
+  consumes: 'essentials',
   sells: [],
   luxuryGood: false,
   // Methods
