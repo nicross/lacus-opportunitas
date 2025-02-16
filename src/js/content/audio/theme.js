@@ -5,7 +5,7 @@ content.audio.theme = (() => {
 
   const reverb = engine.mixer.reverb.send.create({
     gainModel: engine.mixer.reverb.gainModel.normalize.instantiate({
-      gain: engine.fn.fromDb(-1.5),
+      gain: engine.fn.fromDb(0),
     })
   }).from(input)
 
@@ -124,7 +124,7 @@ content.audio.theme = (() => {
       return
     }
 
-    const duration = 1/10,
+    const duration = isDucked ? 1/5 : 1/10,
       frequency = sequence[index],
       now = engine.time()
 
@@ -147,7 +147,7 @@ content.audio.theme = (() => {
         frequency: frequency * engine.fn.lerpExp(0.5, isDucked ? 0.5 : 4, progress, 2),
       }).connect(input)
 
-      const release = engine.fn.lerpExp(1/20, 1, progress, 3)
+      const release = engine.fn.lerpExp(0.5, 10, progress, 3) * duration
 
       engine.fn.rampLinear(synth.param.gain, 0, release - engine.const.zeroTime)
       synth.stop(now + release)
