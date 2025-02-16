@@ -54,9 +54,7 @@ content.audio.dock.synth.prototype = {
 
     return this
   },
-  destroy: function (isChange) {
-    const release = isChange ? 2 : 8
-
+  destroy: function (release = 1) {
     engine.fn.rampLinear(this.synth.param.gain, 0, release)
     this.synth.stop(engine.time(release))
 

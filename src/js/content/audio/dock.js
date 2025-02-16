@@ -18,9 +18,9 @@ content.audio.dock = (() => {
 
       return this
     },
-    unload: function (isChange = false) {
+    unload: function (release) {
       for (const synth of synths) {
-        synth.destroy(isChange)
+        synth.destroy(release)
       }
 
       synths.length = 0
@@ -30,9 +30,9 @@ content.audio.dock = (() => {
   }
 })()
 
-content.dock.on('change', () => content.audio.dock.unload(true).load())
+content.dock.on('change', () => content.audio.dock.unload(2).load())
 content.dock.on('dock', () => content.audio.dock.load())
-content.dock.on('undock', () => content.audio.dock.unload())
+content.dock.on('undock', () => content.audio.dock.unload(4))
 
 engine.state.on('import', ({dock}) => {
   if (dock) {
@@ -42,4 +42,4 @@ engine.state.on('import', ({dock}) => {
   }
 })
 
-engine.state.on('reset', () => content.audio.dock.unload(true))
+engine.state.on('reset', () => content.audio.dock.unload(1/8))
