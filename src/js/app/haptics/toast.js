@@ -1,4 +1,4 @@
-content.bottles.on('collect', () => {
+app.toasts.on('toast', () => {
   app.haptics.enqueue({
     duration: 100,
     startDelay: 100,

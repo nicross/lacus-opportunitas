@@ -159,6 +159,11 @@ app.audio = (() => {
 engine.loop.on('pause', () => app.audio.unduck())
 engine.loop.on('resume', () => app.audio.duck())
 
+// Toasts
+engine.ready(() => {
+  app.toasts.on('toast', () => content.audio.toast())
+})
+
 // Clicking
 engine.ready(() => {
   app.screenManager.on('enter', (e) =>  {

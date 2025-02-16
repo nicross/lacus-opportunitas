@@ -1,5 +1,6 @@
 app.toasts = (() => {
-  const queue = []
+  const pubsub = engine.tool.pubsub.create(),
+    queue = []
 
   let rootElement,
     timeout = 0
@@ -8,9 +9,11 @@ app.toasts = (() => {
     rootElement = document.querySelector('.a-toasts')
   })
 
-  return {
+  return pubsub.decorate({
     enqueue: function (value) {
       queue.push(value)
+
+      throttledToast()
 
       return this
     },
@@ -40,13 +43,13 @@ app.toasts = (() => {
         )
       )
 
-      content.audio.toast()
+      timeout = 2
 
-      timeout = 3
+      pubsub.emit('toast')
 
       return this
     },
-  }
+  })
 })()
 
 engine.loop.on('frame', () => app.toasts.update())
