@@ -161,11 +161,13 @@ content.audio.theme = (() => {
         ? engine.fn.clamp(engine.fn.scale(index, 0, 600, 0, 1))
         : engine.fn.clamp(engine.fn.scale(index, 600, 675, 1, 0)) ** 0.5
 
-      const compensation = engine.fn.fromDb(engine.fn.lerp(0, -6, engine.fn.clamp(engine.fn.scale(
+      const frequencyRatio = engine.fn.clamp(engine.fn.scale(
         Math.log2(frequency),
-        7, 12,
+        8, 11,
         0, 1,
-      ))))
+      ))
+
+      const compensation = engine.fn.fromDb(engine.fn.lerp(0, -9, frequencyRatio))
 
       const synth = engine.synth.simple({
         frequency,
@@ -173,7 +175,13 @@ content.audio.theme = (() => {
         type: 'sawtooth',
       }).filtered({
         frequency: frequency * engine.fn.lerpExp(0.5, isDucked ? 0.5 : 4, progress, 2),
-      }).connect(input)
+      }).chainAssign(
+        'panner', context.createStereoPanner()
+      ).connect(input)
+
+      synth.panner.pan.value = engine.fn.lerp(-1, 1, Math.random())
+        * engine.fn.lerp(0, 0.333, progress)
+        * (index % 5 == 0 ? 0.333 : 1)
 
       const release = engine.fn.lerpExp(0.5, 10, progress, 3) * duration
 
@@ -181,6 +189,7 @@ content.audio.theme = (() => {
       synth.stop(now + release)
     }
 
+    // Play bass notes when ducked
     if (isDucked && index % 5 == 0) {
       const bassIndex = index / 5
       const bassFrequency = bass[bassIndex]
@@ -194,26 +203,17 @@ content.audio.theme = (() => {
           frequency: bassFrequency * 1.5,
         }).connect(inputBass)
 
-        const release = duration * (
-          bass[bassIndex + 1]
-            ? 0.875 * 5
-            : (
-                bass[bassIndex + 2]
-                  ? 1.875 * 5
-                  : (
-                      bass[bassIndex + 3]
-                        ? 2.875 * 5
-                        : (
-                            bass[bassIndex + 4]
-                              ? 3.875 * 5
-                              : (
-                                  bass[bassIndex + 6]
-                                    ? 5.875 * 5
-                                    : 7.875 * 5
-                                )
-                           )
-                     )
-               )
+        // Determine release based on when next note should play
+        const release = 5 * duration * (
+          bass[bassIndex + 1] ? 0.875 : (
+                bass[bassIndex + 2] ? 1.875 : (
+                      bass[bassIndex + 3] ? 2.875 : (
+                            bass[bassIndex + 4] ? 3.875 : (
+                                  bass[bassIndex + 6] ? 5.875 : 7.875
+                            )
+                      )
+                )
+          )
         )
 
         engine.fn.rampLinear(bassSynth.param.gain, 0, release - engine.const.zeroTime)
@@ -234,7 +234,7 @@ content.audio.theme = (() => {
   return {
     duck: function () {
       isDucked = true
-      engine.fn.rampLinear(bus.gain, 1/64, 1/8)
+      engine.fn.rampLinear(bus.gain, 1/6, 1/8)
 
       return this
     },
