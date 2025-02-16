@@ -39,6 +39,7 @@
   }
   .c-screen--scrollable {
     overflow-y: auto;
+    max-height: calc(3rem * 6);
     padding: 0.25em;
   }
     .c-screen--scrollable-smooth {
@@ -46,7 +47,6 @@
     }
   .c-screen--table {
     border-spacing: 0;
-    margin-top: 0.5rem;
     width: 100%;
   }
   .c-screen--table:not(:empty) {
@@ -96,5 +96,5 @@
   .c-screen--title {
     font-family: HybridBold;
     font-size: 4em;
-    line-height: 0.666;
+    line-height: 0.75;
   }

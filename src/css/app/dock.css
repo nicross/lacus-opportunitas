@@ -1,15 +1,18 @@
 .a-dock {}
   .a-dock .c-screen--title {
-    margin: -0.25rem 0 1rem 0;
+    margin: -0.05em 0 0.4em 0;
   }
   .a-dock--economy {
     font-size: 1.333em;
+    line-height: 1;
   }
   .a-dock--level {
     background-color: #FFFFFF;
     color: #FF0069;
-    font-size: 0.75em;
-    padding: 0.25em;
+    font-size: 0.666em;
+    padding: 0.125em 0.25em;
+    position: relative;
+    top: -1px;
     vertical-align: middle;
   }
   .a-dock--welcome {}
