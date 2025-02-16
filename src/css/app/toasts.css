@@ -1,0 +1,63 @@
+.a-toasts {
+  font-size: 0.75em;
+}
+  .a-toasts--toast {
+    animation: a-toasts--toast--in 0.5s ease 0s 1 normal both;
+    background-color: #000000;
+    left: 0;
+    padding: 0.5em 1em;
+    position: absolute;
+    top: 0;
+    white-space: nowrap;
+  }
+  .a-toasts--toast[aria-hidden="true"] {
+    animation: a-toasts--toast--out 0.5s ease 0s 1 normal both;
+  }
+  .a-toasts--toast strong:after {
+    content: ']' / '';
+  }
+  .a-toasts--toast strong:before {
+    content: '[' / '';
+  }
+
+@keyframes a-toasts--toast--in {
+  0% {
+    opacity: 0;
+    transform: translateY(1em);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes a-toasts--toast--out {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-1em);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @keyframes a-toasts--toast--in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes a-toasts--toast--out {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+}

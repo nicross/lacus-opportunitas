@@ -1,5 +1,5 @@
-content.audio.bottle.collect = () => {
-  const bus = content.audio.channel.default.createBus(),
+content.audio.toast = () => {
+  const bus = content.audio.channel.bypass.createBus(),
     detune = engine.fn.randomFloat(-12.5, 12.5),
     rootFrequency = engine.fn.fromMidi(72)
 
@@ -54,5 +54,3 @@ content.audio.bottle.collect = () => {
   mid.stop(now + duration/3)
   low.stop(now + duration/3)
 }
-
-content.bottles.on('collect', () => content.audio.bottle.collect())

@@ -14,71 +14,9 @@
   }
   .a-game--target {
     background-color: #000000;
-    bottom: 2em;
+    bottom: 1.5rem;
     font-size: 0.75em;
-    left: 2em;
+    left: 1.5rem;
     padding: 0.5em 1em;
     position: absolute;
   }
-  .a-game--toast {
-    animation: a-game--toast--in 0.5s ease 0s 1 normal both;
-    background-color: #000000;
-    padding: 0.5em 1em;
-  }
-  .a-game--toast[aria-hidden="true"] {
-    animation: a-game--toast--out 0.5s ease 0s 1 normal both;
-  }
-  .a-game--toast strong:after {
-    content: ']' / '';
-  }
-  .a-game--toast strong:before {
-    content: '[' / '';
-  }
-  .a-game--toasts {
-    font-size: 0.75em;
-    left: 2em;
-    position: absolute;
-    top: 2em;
-  }
-
-@keyframes a-game--toast--in {
-  0% {
-    opacity: 0;
-    transform: translateY(1em);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes a-game--toast--out {
-  0% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-1em);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  @keyframes a-game--toast--in {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @keyframes a-game--toast--out {
-    0% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
-  }
-}

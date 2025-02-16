@@ -12,12 +12,12 @@
     background-color: #FF0069;
     height: 100%;
     left: 0;
-    oapcity: 1;
+    opacity: 1;
     pointer-events: none;
     position: absolute;
     top: 0;
     transition: all 0.5s ease;
-    transition-property: filter opacity;
+    transition-property: filter, opacity;
     width: 100%;
     z-index: 0;
   }
@@ -64,6 +64,12 @@
     .a-app--screen-transparent {
       background-color: transparent;
     }
+  .a-app--toasts {
+    left: 1.75rem;
+    position: absolute;
+    top: 1.75rem;
+    z-index: 4;
+  }
 
 .a-app-active {
   opacity: 1;
