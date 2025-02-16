@@ -1,11 +1,6 @@
 # TODO
 - Phase 5: Horizontal progression
-  - Port upgrades
-    - Mechanics
-    - Screen
-  - Craft upgrades
-    - Mechanics
-    - Screen
+  - Level-up and cargo-up notifications on buy/sell screens
 - Stretch goals: More excursion benefits
   - Tricks
     - Movement physics

@@ -1,7 +1,14 @@
 content.inventory = (() => {
-  const capacity = 4
+  const baseCapacity = 4
 
   let inventory = {}
+
+  function calculateCapacity() {
+    const ports = content.ports.all()
+    const averageLevel = ports.reduce((sum, port) => sum + port.getTransactionLevel(false), 0) / ports.length
+
+    return baseCapacity + Math.round(averageLevel * 2)
+  }
 
   return {
     adjust: function (id, value) {
@@ -19,7 +26,7 @@ content.inventory = (() => {
 
       return this
     },
-    capacity: () => capacity,
+    capacity: () => calculateCapacity(),
     count: () => Object.values(inventory).reduce((sum, value) => sum + value, 0),
     export: () => ({...inventory}),
     get: (id) => inventory[id] || 0,
@@ -41,10 +48,10 @@ content.inventory = (() => {
       return this
     },
     isFull: function () {
-      return this.count() >= this.capacity()
+      return this.count() >= calculateCapacity()
     },
     remaining: function () {
-      return this.capacity() - this.count()
+      return calculateCapacity() - this.count()
     },
     reset: function () {
       inventory = {}
