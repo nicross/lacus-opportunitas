@@ -162,7 +162,7 @@ engine.loop.on('resume', () => app.audio.duck())
 // Clicking
 engine.ready(() => {
   app.screenManager.on('enter', (e) =>  {
-    if (['splash'].includes(e.currentState)) {
+    if (e.currentState == 'splash' && e.event != 'back') {
       return
     }
 
