@@ -16,14 +16,14 @@ content.audio.bottle.synth.prototype = {
       filterModel: engine.ear.filterModel.musical.instantiate({
         coneRadius: engine.const.tau * 0.25,
         frequency: engine.fn.fromMidi(72),
-        minColor: 0.5,
+        minColor: 2,
         maxColor: 6,
         power: 2,
       }),
       gainModel: engine.ear.gainModel.linear.instantiate({
         maxDistance: 250,
         maxGain: engine.fn.fromDb(-22.5),
-        minGain: engine.fn.fromDb(-36),
+        minGain: engine.fn.fromDb(-33),
       }),
       ...content.bottles.relativeVector(),
     }).from(this.fader).to(bus)
