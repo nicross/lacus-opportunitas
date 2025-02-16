@@ -1,4 +1,4 @@
-content.audio.toast = () => {
+app.toasts.sound = () => {
   const bus = content.audio.channel.bypass.createBus(),
     detune = engine.fn.randomFloat(-12.5, 12.5),
     rootFrequency = engine.fn.fromMidi(72)
@@ -33,7 +33,7 @@ content.audio.toast = () => {
   }).connect(bus)
 
   const duration = engine.fn.randomFloat(0.5, 0.75),
-    gain = engine.fn.fromDb(-6),
+    gain = engine.fn.fromDb(engine.loop.isPaused() ? -12 : -6),
     now = engine.time()
 
   high.param.detune.linearRampToValueAtTime(detune + 700, now + duration/16)

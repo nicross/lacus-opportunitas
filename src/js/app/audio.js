@@ -161,7 +161,7 @@ engine.loop.on('resume', () => app.audio.duck())
 
 // Toasts
 engine.ready(() => {
-  app.toasts.on('toast', () => content.audio.toast())
+  app.toasts.on('toast', () => app.toasts.sound())
 })
 
 // Clicking

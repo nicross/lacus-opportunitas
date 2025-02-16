@@ -36,6 +36,8 @@ app.screen.sell = app.screenManager.invent({
     )
   },
   onEnter: function () {
+    app.toasts.memory.remember()
+
     this.statusComponent.update().setLive(true)
 
     this.state.components = []
@@ -49,6 +51,8 @@ app.screen.sell = app.screenManager.invent({
         content.credits.adjust(component.cost)
         content.inventory.adjust(good.id, -1)
         content.dock.getPort().logTransaction(good.id, 1)
+
+        app.toasts.memory.check()
 
         window.requestAnimationFrame(() => {
           this.statusComponent.update()

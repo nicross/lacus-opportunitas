@@ -1,6 +1,4 @@
 # TODO
-- Phase 5: Horizontal progression
-  - Level-up and cargo-up notifications on buy/sell screens
 - Stretch goals: More excursion benefits
   - Tricks
     - Movement physics

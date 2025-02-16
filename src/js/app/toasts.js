@@ -13,8 +13,6 @@ app.toasts = (() => {
     enqueue: function (value) {
       queue.push(value)
 
-      throttledToast()
-
       return this
     },
     update: function () {
