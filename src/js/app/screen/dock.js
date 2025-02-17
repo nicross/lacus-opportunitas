@@ -36,12 +36,35 @@ app.screen.dock = app.screenManager.invent({
   state: {},
   // Tutorials
   tutorials: [
+    // Introduction
     {
       text: `Welcome to <em>Lacus Opportunatis: Lunar lake trading simulator!</em> We have arrived at an agricultural port with just ten meager credits. First, let's <strong>Buy goods</strong>.`,
     },
     {
       criteria: () => content.inventory.has('essentials'),
       text: `Now, let's turn those essentials into profit! Feel free to look around before we leave. We will <strong>Undock</strong> at your command.`,
+    },
+    // Economy types
+    {
+      criteria: () => content.dock.getPort().economy.id == 'extraction',
+      text: () => `Extraction ports like <em>${content.dock.getPort().name}</em> draw a variety of raw ores from the lunar crust. Without them, the more advanced economies around this lake would not exist.`,
+    },
+    {
+      criteria: () => content.dock.getPort().economy.id == 'refinement',
+      text: () => `Refinement ports like <em>${content.dock.getPort().name}</em> convert raw ores into usable metals. They bridge the economies of the lake's extraction and manufacturing ports.`,
+    },
+    {
+      criteria: () => content.dock.getPort().economy.id == 'manufacturing',
+      text: () => `Manufacturing ports like <em>${content.dock.getPort().name}</em> convert metals into the equipment necessary for everybody else. Therefore, they syngergize well with any trading partner.`,
+    },
+    {
+      criteria: () => content.dock.getPort().economy.id == 'luxury',
+      text: () => `Luxury ports like <em>${content.dock.getPort().name}</em> are reknown around the lake for their rare goods. Distributing them to faraway ports could be a marvelous strategy!`,
+    },
+    // Level up ports
+    {
+      criteria: () => content.dock.getPort().getTransactionLevel() >= 1,
+      text: () => `It seems that your hard work is paying off! Whenever a port levels up, it will offer its goods for a discount, and pay premiums on anything you sell.`,
     },
   ],
   // Hooks

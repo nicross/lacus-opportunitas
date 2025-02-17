@@ -30,7 +30,10 @@ app.screen.tutorial = app.screenManager.invent({
   },
   onEnter: function (e) {
     this.state.tutorial = e.tutorial
-    this.rootElement.querySelector('.a-tutorial--text').innerHTML = e.tutorial.tutorial.text
+
+    this.rootElement.querySelector('.a-tutorial--text').innerHTML = typeof e.tutorial.tutorial.text == 'function'
+      ? e.tutorial.tutorial.text()
+      : e.tutorial.tutorial.text
   },
   onFrame: function () {
     const ui = app.controls.ui()

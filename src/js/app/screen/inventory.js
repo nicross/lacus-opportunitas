@@ -17,6 +17,11 @@ app.screen.inventory = app.screenManager.invent({
     {
       text: `From the <strong>Cargo manifest</strong> you may browse your current cargo. The prices here reflect the current market rate. Cargo space is limited, so manage it attentively!`
     },
+    // Level up capacity
+    {
+      criteria: () => content.inventory.capacity() > 4,
+      text: `Remember when you could only hold four goods at a time? It seems that raising the average economic level of the lake lets us ferry more stuff!`,
+    },
   ],
   // Hooks
   onReady: function () {

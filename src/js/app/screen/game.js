@@ -15,8 +15,14 @@ app.screen.game = app.screenManager.invent({
   state: {},
   // Tutorials
   tutorials: [
+    // Controls
     {
-      text: `<em>I insist, please take control of the watercraft!</em><br /><br />Hold <kbd>Turn</kbd> to face any direction, <kbd>Accelerate</kbd> to apply thrust in that direction, and <kbd>Brake</kbd> to stop. Tap <kbd>Target</kbd> to track a port, and approach any port to dock.`,
+      text: `<em>I insist! please take control of the watercraft!</em><br /><br />Hold <kbd>Turn</kbd> to face any direction, <kbd>Accelerate</kbd> to apply thrust in that direction, and <kbd>Brake</kbd> to stop. Tap <kbd>Target</kbd> to track a port, and approach any port to dock.`,
+    },
+    // Bottles
+    {
+      criteria: () => content.excursions.count() > 1,
+      text: `Occasionally you may find bottles of credits floating casually in the lake. Implausible, <em>you bet!</em> but I promise that they're worth recovering!`,
     },
   ],
   // Hooks
