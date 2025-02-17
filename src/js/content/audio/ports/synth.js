@@ -7,12 +7,15 @@ content.audio.ports.synth.create = function (...args) {
 content.audio.ports.synth.prototype = {
   calculateParameters: function () {
     const distance = this.port.getDistance(),
-      dot = this.port.getDot()
+      dot = this.port.getDot(),
+      isPaused = engine.loop.isPaused()
 
     const carrierFrequency = this.port.rootFrequency,
       octave = engine.fn.clamp(engine.fn.scale(Math.log2(carrierFrequency), 5, 10, 0, 1))
 
-    const isTarget = content.ports.target.is(this.port) ? 1 : 0
+    const isTarget = isPaused
+      ? 0
+      : (content.ports.target.is(this.port) ? 1 : 0)
 
     this.fadeAccelerated = 'fadeAccelerated' in this
       ? engine.fn.accelerateValue(this.fadeAccelerated, 1, 2 / this.port.primeNumber)
@@ -21,6 +24,10 @@ content.audio.ports.synth.prototype = {
     this.isTargetAccelerated = 'isTargetAccelerated' in this
       ? engine.fn.accelerateValue(this.isTargetAccelerated, isTarget, 8)
       : isTarget
+
+    this.isPausedAccelerated = 'isPausedAccelerated' in this
+      ? engine.fn.accelerateValue(this.isPausedAccelerated, isPaused, 8)
+      : isPaused
 
     const amodDepth = engine.fn.fromDb(
       engine.fn.lerp(-4.5, -6, this.isTargetAccelerated)
@@ -36,13 +43,20 @@ content.audio.ports.synth.prototype = {
             octave
           )
         )
+      * engine.fn.fromDb(
+          engine.fn.lerp(0, -3, this.isPausedAccelerated)
+        )
 
     return {
       amodDepth,
       amodFrequency: engine.fn.lerp(1 / this.port.primeNumber, engine.fn.lerpExp(16, 4, distance, 0.5) * engine.fn.lerpExp(0.25, 1, dot, 2), this.isTargetAccelerated),
       carrierFrequency,
       carrierGain: 1 - amodDepth,
-      color: engine.fn.lerp(engine.fn.lerpExp(4, 2, octave, 0.5), engine.fn.lerpExp(12, 2, octave, 0.5), this.isTargetAccelerated),
+      color: engine.fn.lerp(
+        engine.fn.lerp(engine.fn.lerpExp(4, 2, octave, 0.5), engine.fn.lerpExp(12, 2, octave, 0.5), this.isTargetAccelerated),
+        1,
+        this.isPausedAccelerated,
+      ),
       minColor: engine.fn.lerp(0.5, 2, this.isTargetAccelerated),
       fmodDepth: carrierFrequency * 0.5,
       fmodFrequency: carrierFrequency * 0.5,
@@ -101,8 +115,9 @@ content.audio.ports.synth.prototype = {
     return this
   },
   destroy: function () {
-    const release = 1/4
+    const release = 1
 
+    engine.fn.rampLinear(this.synth.param.gain, 0, release)
     this.synth.stop(engine.time(release))
 
     setTimeout(() => this.binaural.destroy(), release * 1000)

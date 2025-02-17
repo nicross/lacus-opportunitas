@@ -1,5 +1,5 @@
 content.audio.ports = (() => {
-  const bus = content.audio.channel.default.createBus(),
+  const bus = content.audio.channel.bypass.createBus(),
     synths = []
 
   return {
@@ -35,10 +35,6 @@ content.audio.ports = (() => {
 })()
 
 engine.loop.on('frame', ({paused}) => {
-  if (paused) {
-    return
-  }
-
   content.audio.ports.update()
 })
 
