@@ -38,6 +38,12 @@ button[disabled] * {
   cursor: not-allowed;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  :focus {
+    animation: none;
+  }
+}
+
 /* Responsive fluid font sizing */
 @media (max-width: 20rem) {
   body {
