@@ -21,7 +21,7 @@ content.goods.base = {
     return Math.max(
       1,
       Math.round(
-        (this.getBaseCost() - bonus) * engine.fn.lerp(1, 0.5, supply)
+        (this.getBaseCost() - (2 ** bonus)) * engine.fn.lerp(1, 0.5, supply)
       ),
     )
   },
@@ -42,7 +42,7 @@ content.goods.base = {
     const bonus = port.getTransactionLevel(false)
 
     return Math.round(
-      (this.getBaseCost() + bonus) * engine.fn.lerp(1, 2, demand)
+      (this.getBaseCost() + (2 ** bonus)) * engine.fn.lerp(1, 2, demand)
     )
   },
 }
