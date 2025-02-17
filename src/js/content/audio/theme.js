@@ -1,16 +1,15 @@
 content.audio.theme = (() => {
   const bus = content.audio.channel.bypass.createBus(),
     context = engine.context(),
-    input = context.createGain(),
-    inputBass = context.createGain()
+    inputBass = context.createGain(),
+    inputReverb = context.createGain(),
+    inputSequence = context.createGain()
 
   const reverb = engine.mixer.reverb.send.create({
     gainModel: engine.mixer.reverb.gainModel.normalize.instantiate({
-      gain: engine.fn.fromDb(0),
+      gain: engine.fn.fromDb(-6),
     })
-  }).from(input).from(inputBass)
-
-  input.connect(bus)
+  }).from(inputReverb)
 
   const sequence = [
     // Section 1
@@ -51,35 +50,35 @@ content.audio.theme = (() => {
     // Section 3.1 (240 - 279)
     57,60,62,64,67,57,69,76,72,67,
     57,67,64,62,60,57,69,76,72,60,
-    57,60,62,64,67,57,69,76,72,67,
-    57,67,64,62,60,57,69,76,72,60,
+    57,60,62,64,67,57,69,76,74,67,
+    57,67,64,62,60,57,69,76,71,60,
     // Section 3.2 (280 - 319)
     55,59,60,62,67,55,69,76,72,67,
-    55,67,62,60,59,55,69,76,72,60,
+    55,67,62,60,59,55,69,76,74,60,
     55,59,60,62,67,55,69,76,72,67,
-    55,67,62,60,59,55,69,76,72,60,
+    55,67,62,60,59,55,69,76,71,60,
     // Section 3.2 (320 - 359)
-    53,57,59,60,67,53,69,76,72,67,
+    53,57,59,60,67,53,69,76,74,67,
     53,67,60,59,57,53,69,76,72,59,
     53,57,59,60,67,53,69,76,72,67,
-    53,67,60,59,57,53,69,76,72,59,
+    53,67,60,59,57,53,69,76,77,59,
 
     // Section 4
     // Section 4.1 (360 - 399)
     57,60,62,64,67,57,77,72,69,67,
     57,64,62,60,67,57,79,74,72,67,
     57,60,62,64,67,57,81,72,69,67,
-    57,64,62,60,67,57,79,72,71,67,
+    57,64,62,60,67,57,79,72,67,71,
     // Section 4.2 (400 - 439)
     55,59,60,62,67,55,81,72,69,67,
     55,62,60,59,67,55,83,72,71,67,
     55,59,60,62,67,55,81,72,69,67,
-    55,62,60,59,67,55,83,72,71,67,
+    55,62,60,59,67,55,83,72,67,71,
     // Section 4.2 (440 - 479)
     53,57,59,60,67,53,84,72,69,67,
     53,60,59,57,67,53,83,72,71,67,
     53,57,59,60,67,53,84,74,71,67,
-    53,60,72,76,69,53,86,67,77,72,
+    53,60,72,76,69,53,86,67,72,77,
 
     // Section 5
     // Section 5.1 (480 - 519)
@@ -96,7 +95,7 @@ content.audio.theme = (() => {
     53,57,59,77,76,53,88,67,72,71,
     53,60,59,74,72,53,88,67,72,71,
     53,57,59,77,76,53,89,67,76,74,
-    55,71,60,59,69,62,91,67,76,72,
+    55,71,60,59,69,62,91,67,72,76,
 
     // Section 6
     // Section 6.1 (600 - 639)
@@ -147,6 +146,10 @@ content.audio.theme = (() => {
     isDucked,
     isPlaying
 
+  inputBass.gain.value = 0
+  inputBass.connect(bus)
+  inputSequence.connect(bus)
+
   function trigger() {
     if (!isPlaying) {
       return
@@ -168,56 +171,75 @@ content.audio.theme = (() => {
       ))
 
       const compensation = engine.fn.fromDb(engine.fn.lerp(0, -9, frequencyRatio))
+      const synthGain = engine.fn.fromDb(engine.fn.lerp(-6, -12, progress))
+        * compensation
+        * engine.fn.fromDb(isDucked ? 3 : 0)
 
-      const synth = engine.synth.simple({
-        frequency,
-        gain: engine.fn.fromDb(engine.fn.lerp(-6, -12, progress)) * compensation,
-        type: 'sawtooth',
-      }).filtered({
-        frequency: frequency * engine.fn.lerpExp(0.5, isDucked ? 0.5 : 4, progress, 2),
-      }).chainAssign(
-        'panner', context.createStereoPanner()
-      ).connect(input)
+      const panner = context.createStereoPanner()
 
-      synth.panner.pan.value = engine.fn.lerp(-1, 1, Math.random())
+      panner.pan.value = engine.fn.lerp(-1, 1, Math.random())
         * engine.fn.lerp(0, 0.333, progress)
         * (index % 5 == 0 ? 0.333 : 1)
 
-      const release = engine.fn.lerpExp(0.5, 10, progress, 3) * duration
+      panner.connect(inputSequence)
 
-      engine.fn.rampLinear(synth.param.gain, 0, release - engine.const.zeroTime)
+      const synth = engine.synth.simple({
+        frequency,
+        gain: synthGain,
+        type: 'sawtooth',
+      }).filtered({
+        frequency: frequency * engine.fn.lerpExp(0.5, isDucked ? 0.5 : 4, progress, 2),
+      }).connect(panner).connect(inputReverb)
+
+      const release = engine.fn.lerpExp(0.5, 1, progress, 2) * duration
+
+      if (!isDucked) {
+        synth.param.gain.linearRampToValueAtTime(engine.fn.lerpExp(synthGain/4, synthGain, progress, 2), now + release/3)
+      }
+
+      synth.param.gain.linearRampToValueAtTime(0, now + release - engine.const.zeroTime)
+
       synth.stop(now + release)
     }
 
-    // Play bass notes when ducked
+    // Bass notes
     if (isDucked && index % 5 == 0) {
       const bassIndex = index / 5
-      const bassFrequency = bass[bassIndex]
+
+      const bassFrequency = bass[bassIndex],
+        bassGain = engine.fn.fromDb(-21)
 
       if (bassFrequency) {
-        const bassSynth = engine.synth.simple({
-          frequency: bassFrequency,
-          gain: engine.fn.fromDb(-18),
-          type: 'sawtooth',
+        const bassSynth = engine.synth.fm({
+          carrierFrequency: bassFrequency,
+          carrierType: 'sawtooth',
+          gain: bassGain,
+          modDepth: bassFrequency / engine.fn.randomFloat(12, 24),
+          modFrequency: engine.fn.randomFloat(4, 8),
         }).filtered({
-          frequency: bassFrequency * 1.5,
+          frequency: bassFrequency,
         }).connect(inputBass)
 
         // Determine release based on when next note should play
-        const release = 5 * duration * (
-          bass[bassIndex + 1] ? 0.875 : (
-                bass[bassIndex + 2] ? 1.875 : (
-                      bass[bassIndex + 3] ? 2.875 : (
-                            bass[bassIndex + 4] ? 3.875 : (
-                                  bass[bassIndex + 6] ? 5.875 : 7.875
+        const bassRelease = 5 * duration * (
+          bass[bassIndex + 1] ? 1 : (
+                bass[bassIndex + 2] ? 2 : (
+                      bass[bassIndex + 3] ? 3: (
+                            bass[bassIndex + 4] ? 4 : (
+                                  bass[bassIndex + 6] ? 6 : 8
                             )
                       )
                 )
           )
         )
 
-        engine.fn.rampLinear(bassSynth.param.gain, 0, release - engine.const.zeroTime)
-        bassSynth.stop(now + release)
+        bassSynth.filter.detune.linearRampToValueAtTime(1200, now + 1/32)
+        bassSynth.filter.detune.linearRampToValueAtTime(0, now + bassRelease)
+
+        bassSynth.param.gain.setValueAtTime(bassGain, now + bassRelease - 1/128 - engine.const.zeroTime)
+        bassSynth.param.gain.linearRampToValueAtTime(0, now + bassRelease - engine.const.zeroTime)
+
+        bassSynth.stop(now + bassRelease)
       }
     }
 
@@ -234,7 +256,10 @@ content.audio.theme = (() => {
   return {
     duck: function () {
       isDucked = true
-      engine.fn.rampLinear(bus.gain, 1/6, 1/8)
+
+      engine.fn.rampLinear(inputBass.gain, 1, 1/8)
+      engine.fn.rampLinear(inputReverb.gain, 2, 1/8)
+      engine.fn.rampLinear(inputSequence.gain, 1/8, 1/8)
 
       return this
     },
@@ -263,7 +288,10 @@ content.audio.theme = (() => {
     },
     unduck: function () {
       isDucked = false
-      engine.fn.rampLinear(bus.gain, 1, 1/8)
+
+      engine.fn.rampLinear(inputBass.gain, 0, 1/8)
+      engine.fn.rampLinear(inputReverb.gain, 1, 1/8)
+      engine.fn.rampLinear(inputSequence.gain, 1, 1/8)
 
       return this
     },
