@@ -32,7 +32,7 @@ content.audio.dock = (() => {
 
 content.dock.on('change', () => content.audio.dock.unload(2).load())
 content.dock.on('dock', () => content.audio.dock.load())
-content.dock.on('undock', () => content.audio.dock.unload(4))
+content.dock.on('undock', () => content.audio.dock.unload(1))
 
 engine.state.on('import', ({dock}) => {
   if (dock) {
