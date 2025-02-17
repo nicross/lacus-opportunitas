@@ -14,7 +14,7 @@ app.screen.newGame = app.screenManager.invent({
       app.storage.tutorial.clear()
       app.gameState.setLoaded(true)
 
-      this.change(content.dock.is() ? 'dock' : 'game')
+      this.change('dock')
     },
   },
   // State
