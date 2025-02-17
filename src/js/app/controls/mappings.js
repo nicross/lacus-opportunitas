@@ -7,7 +7,6 @@ app.controls.mappings = {
       ],
       gamepadDigital: [],
       keyboard: [
-        'ArrowDown',
         'PageDown',
       ],
       mouseAxis: [
@@ -22,7 +21,6 @@ app.controls.mappings = {
       ],
       gamepadDigital: [],
       keyboard: [
-        'ArrowUp',
         'PageUp',
       ],
       mouseAxis: [
@@ -39,6 +37,7 @@ app.controls.mappings = {
       ],
       gamepadDigital: [],
       keyboard: [
+        'ArrowDown',
         'KeyS',
         'Numpad5',
       ],
@@ -56,6 +55,7 @@ app.controls.mappings = {
       ],
       gamepadDigital: [],
       keyboard: [
+        'ArrowUp',
         'KeyW',
         'Numpad8',
       ],
