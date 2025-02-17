@@ -1,0 +1,17 @@
+.u-helper {
+  animation: u-helper 1s linear 0s infinite alternate;
+  margin-left: 0.5rem;
+}
+
+.u-helper-material {
+  animation: none;
+}
+
+@keyframes u-helper {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}

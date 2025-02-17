@@ -4,9 +4,7 @@ app.storage.game = {
   get: () => app.storage.get('game'),
   set: (value) => app.storage.set('game', value),
   // Helpers
-  new: function () {
-    this.clear()
-
+  generate: function () {
     const seed = app.fn.generateSeed()
     engine.seed.set(seed)
 
@@ -19,7 +17,7 @@ app.storage.game = {
 
     start.isDiscovered = true
 
-    engine.state.import({
+    return {
       credits: 10,
       dock: start.index,
       inventory: {},
@@ -31,9 +29,7 @@ app.storage.game = {
       },
       seed,
       time: 0,
-    })
-
-    return this.save()
+    }
   },
   load: function () {
     engine.state.import(
@@ -41,6 +37,23 @@ app.storage.game = {
     )
 
     return this
+  },
+  new: function () {
+    engine.state.import(
+      this.generate()
+    )
+
+    return this.save()
+  },
+  plus: function () {
+    const next = this.generate(),
+      previous = this.get()
+
+    next.credits = Math.max(previous.credits || 0, 10)
+
+    engine.state.import(next)
+
+    return this.save()
   },
   save: function () {
     this.set(

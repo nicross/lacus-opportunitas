@@ -16,6 +16,15 @@ app.screen.newGame = app.screenManager.invent({
 
       this.change('dock')
     },
+    plus: function () {
+      app.screen.mainMenu.clearFocusMemory()
+
+      app.storage.game.plus()
+      app.storage.tutorial.clear()
+      app.gameState.setLoaded(true)
+
+      this.change('dock')
+    },
   },
   // State
   state: {},
@@ -27,6 +36,7 @@ app.screen.newGame = app.screenManager.invent({
     Object.entries({
       back: root.querySelector('.a-newGame--back'),
       confirm: root.querySelector('.a-newGame--confirm'),
+      plus: root.querySelector('.a-newGame--plus'),
     }).forEach(([event, element]) => {
       element.addEventListener('click', () => app.screenManager.dispatch(event))
     })
