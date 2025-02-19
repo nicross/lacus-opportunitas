@@ -43,14 +43,12 @@ content.bottles = (() => {
     }
 
     // Generate a random vector ahead of current velocity
-    const vector = engine.tool.vector3d.create(
-      content.movement.velocity()
-        .normalize()
-        .scale(maxDistance - 1)
-        .rotate(engine.const.tau * engine.fn.randomSign() * engine.fn.randomFloat(1/36, 1/16))
-    ).add(
-      engine.position.getVector().zeroZ()
-    )
+    const vector = content.movement.velocity()
+      .zeroZ()
+      .normalize()
+      .scale(maxDistance - 1)
+      .rotateEuler({yaw: engine.const.tau * engine.fn.randomSign() * engine.fn.randomFloat(1/36, 1/16)})
+      .add(engine.position.getVector().zeroZ())
 
     if (vector.distance() >= content.lake.radius() - content.dock.radius()) {
       return

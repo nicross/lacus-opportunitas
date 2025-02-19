@@ -66,8 +66,8 @@ content.audio.edge = (() => {
       filterModel: engine.ear.filterModel.musical.instantiate({
         coneRadius: engine.const.tau * 0.25,
         frequency: rootFrequency,
-        minColor: 6,
-        maxColor: 12,
+        minColor: 8,
+        maxColor: 16,
         power: 2,
       }),
       gainModel: engine.ear.gainModel.normalize,

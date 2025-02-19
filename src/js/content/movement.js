@@ -2,11 +2,15 @@ content.movement = (() => {
   const acceleration = 25,
     angularVelocity = engine.const.tau / 2,
     deceleration = 25,
-    maxVelocity = 50
+    maxVelocity = 50,
+    pubsub = engine.tool.pubsub.create()
 
-  let rawInput = {},
+  let isJump = false,
+    previousPosition = engine.tool.vector3d.create(),
+    rawInput = {},
+    surfaceLaunchVelocity = 0,
     turningSpeed = 1,
-    velocity = engine.tool.vector2d.create()
+    velocity = engine.tool.vector3d.create()
 
   function calculateSpeedLimit() {
     const majorRadius = content.lake.radius() - 1,
@@ -37,18 +41,174 @@ content.movement = (() => {
     )
   }
 
-  return {
+  function handleJump() {
+    const delta = engine.loop.delta(),
+      gravity = 10,
+      position = engine.position.getVector()
+
+    // Calculate next position
+    velocity.z -= gravity * delta
+
+    const next = position.add(
+      velocity.scale(delta)
+    )
+
+    // Enforce boundary
+    const lakeRadius = content.lake.radius() - 1
+    const centerDistance = engine.fn.distance({x: next.x, y: next.y})
+
+    if (centerDistance > lakeRadius) {
+      const scalar = lakeRadius / centerDistance
+      next.x *= scalar
+      next.y *= scalar
+    }
+
+    // Handle transitions to
+    const surface = content.surface.value(next),
+      velocityZ = velocity.z
+
+    if (next.z <= surface) {
+      isJump = false
+      next.z = surface
+      velocity.z = 0
+    }
+
+    previousPosition = position
+    engine.position.setVector(next)
+
+    if (!isJump) {
+      pubsub.emit('surface', engine.fn.clamp(-velocityZ / gravity))
+    }
+  }
+
+  function handleSurface(move) {
+    const delta = engine.loop.delta(),
+      isAccelerate = move > 0,
+      isBrake = move < 0,
+      position = engine.position.getVector()
+
+    const {yaw} = engine.position.getEuler()
+
+    // Apply acceleration
+    if (isAccelerate) {
+      const thrust = engine.tool.vector2d.create({
+        x: move * delta * acceleration,
+      }).rotate(yaw)
+
+      velocity = velocity.add(thrust)
+    }
+
+    // Apply brakes
+    if (isBrake) {
+      velocity = engine.tool.vector3d.create(
+        engine.fn.accelerateVector(
+          velocity,
+          {x: 0, y: 0},
+          deceleration,
+        )
+      )
+    }
+
+    // Enforce the speed limit
+    const speedLimit = calculateSpeedLimit()
+    let magnitude = velocity.distance()
+
+    if (magnitude > speedLimit) {
+      velocity = velocity.scale(speedLimit / magnitude)
+      magnitude = speedLimit
+    }
+
+    // Apply extra turning force (proportional to dot product with target vector)
+    if (isAccelerate) {
+      const target = engine.tool.vector2d.unitX().scale(magnitude).rotate(yaw)
+
+      const dot = engine.fn.scale(
+        target.dotProduct(),
+        -1, 1,
+        0, 1
+      )
+
+      velocity = engine.tool.vector3d.create(
+        engine.fn.accelerateVector(
+          velocity,
+          target,
+          dot * acceleration,
+        )
+      )
+    }
+
+    // Calculate next position
+    const next = position.add(
+      velocity.scale(delta)
+    )
+
+    // Enforce boundary
+    const lakeRadius = content.lake.radius() - 1
+    const centerDistance = engine.fn.distance({x: next.x, y: next.y})
+
+    if (centerDistance > lakeRadius) {
+      const scalar = lakeRadius / centerDistance
+      next.x *= scalar
+      next.y *= scalar
+    }
+
+    // Handle jumps (emit event at end)
+    // There is probably a more elegant way to handle this
+    // Essentially the launch velocity is a value that gets accelerated based on the slope of the terrain
+    next.z = content.surface.value(next)
+
+    const nextLaunchVelocity = magnitude
+      * Math.max(0, (position.z - previousPosition.z) / previousPosition.zeroZ().distance(position.zeroZ()) || 0)
+
+    if (magnitude > 1 && nextLaunchVelocity/surfaceLaunchVelocity < 0.5) {
+      isJump = true
+      next.z = position.z
+      velocity.z = surfaceLaunchVelocity
+      surfaceLaunchVelocity = 0
+    }
+
+    // Otherwise glue to surface
+    surfaceLaunchVelocity = engine.fn.accelerateValue(surfaceLaunchVelocity, nextLaunchVelocity, magnitude * 0.25)
+    previousPosition = position
+    engine.position.setVector(next)
+
+    if (isJump) {
+      pubsub.emit('jump')
+    }
+  }
+
+  function handleTurn(turn) {
+    const delta = engine.loop.delta()
+
+    let {yaw} = engine.position.getEuler()
+
+    // Calculate next yaw
+    yaw += (turn * turningSpeed * angularVelocity * delta)
+    yaw %= engine.const.tau
+
+    // Apply next yaw
+    engine.position.setEuler({
+      yaw,
+    })
+  }
+
+  return pubsub.decorate({
     calculateSpeedLimit,
     export: () => velocity.clone(),
     import: function (value) {
-      velocity = engine.tool.vector2d.create(value)
+      previousPosition = engine.position.getVector()
+      velocity = engine.tool.vector3d.create(value)
 
       return this
     },
+    isJump: () => isJump,
     maxVelocity: () => maxVelocity,
     rawInput: () => ({...rawInput}),
     reset: function () {
-      velocity = engine.tool.vector2d.create()
+      isJump = false
+      previousPosition = engine.tool.vector3d.create()
+      surfaceLaunchVelocity = 0
+      velocity = engine.tool.vector3d.create()
 
       return this
     },
@@ -66,97 +226,20 @@ content.movement = (() => {
 
       rawInput = {...input}
 
-      const delta = engine.loop.delta(),
-        position = engine.position.getVector()
+      handleTurn(turn)
 
-      const isAccelerate = move > 0,
-        isBrake = move < 0
-
-      let {yaw} = engine.position.getEuler()
-
-      // Calculate next yaw
-      yaw += (turn * turningSpeed * angularVelocity * delta)
-      yaw %= engine.const.tau
-
-      // Apply next yaw
-      engine.position.setEuler({
-        yaw,
-      })
-
-      // Apply acceleration
-      if (isAccelerate) {
-        const thrust = engine.tool.vector2d.create({
-          x: move * delta * acceleration,
-        }).rotate(yaw)
-
-        velocity = velocity.add(thrust)
+      if (isJump) {
+        handleJump()
+      } else {
+        handleSurface(move)
       }
-
-      // Apply brakes
-      if (isBrake) {
-        velocity = engine.tool.vector2d.create(
-          engine.fn.accelerateVector(
-            velocity,
-            {x: 0, y: 0},
-            deceleration,
-          )
-        )
-      }
-
-      // Enforce the speed limit
-      const speedLimit = calculateSpeedLimit()
-      let magnitude = velocity.distance()
-
-      if (magnitude > speedLimit) {
-        velocity = velocity.scale(speedLimit / magnitude)
-        magnitude = speedLimit
-      }
-
-      // Apply extra turning force (proportional to dot product with target vector)
-      if (isAccelerate) {
-        const target = engine.tool.vector2d.unitX().scale(magnitude).rotate(yaw)
-
-        const dot = engine.fn.scale(
-          target.dotProduct(),
-          -1, 1,
-          0, 1
-        )
-
-        velocity = engine.tool.vector2d.create(
-          engine.fn.accelerateVector(
-            velocity,
-            target,
-            dot * acceleration,
-          )
-        )
-      }
-
-      // Calculate next velocity
-      const next = position.add(
-        velocity.scale(delta)
-      )
-
-      // Enforce boundary
-      const lakeRadius = content.lake.radius() - 1
-      const centerDistance = engine.fn.distance({x: next.x, y: next.y})
-
-      if (centerDistance > lakeRadius) {
-        const scalar = lakeRadius / centerDistance
-        next.x *= scalar
-        next.y *= scalar
-      }
-
-      // Glue to surface
-      next.z = content.surface.value(next)
-
-      engine.position.setVector(next)
 
       return this
     },
     velocity: () => velocity.clone(),
     velocityMax: () => maxVelocity,
-    velocityValue: () => engine.fn.clamp(velocity.distance() / maxVelocity),
-  }
+    velocityValue: () => engine.fn.clamp(velocity.zeroZ().distance() / maxVelocity),
+  })
 })()
 
 engine.state.on('export', (data) => data.movement = content.movement.export())

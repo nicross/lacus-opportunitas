@@ -78,9 +78,9 @@ content.surface = (() => {
 
       const v3 = (noise3.value(
         ((x + (time * -10)) / 100) * skewFactor,
-        y / 500 * skewFactor,
+        y / 300 * skewFactor,
         time / 60 * skewFactor
-      ) ** 4) * 40
+      ) ** 5) * 50
 
       return v1 + (centerRatio * (v2 + v3))
     },

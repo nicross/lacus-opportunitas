@@ -2,7 +2,7 @@ engine.loop.on('frame', ({
   delta,
   paused,
 }) => {
-  if (paused) {
+  if (paused || content.movement.isJump()) {
     return
   }
 

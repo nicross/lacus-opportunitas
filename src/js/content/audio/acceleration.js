@@ -2,7 +2,8 @@ content.audio.acceleration = (() => {
   const bus = content.audio.channel.default.createBus(),
     rootFrequency = engine.fn.fromMidi(24)
 
-  let binaural,
+  let airStressAccelerated = 0,
+    binaural,
     stressAccelerated = 0,
     synth
 
@@ -17,26 +18,34 @@ content.audio.acceleration = (() => {
       amodDepth,
       amodFrequency: engine.fn.lerp(1, 12, value),
       carrierGain: 1 - amodDepth,
-      color: 8,
+      color: engine.fn.lerp(16, 32, airStressAccelerated),
       detune: engine.fn.lerp(0, 1200, value + (stressAccelerated * 0.5)),
       gain: engine.fn.fromDb(engine.fn.lerp(-9, -15, value)) * (value ** 0.5),
-      vector: content.movement.velocity().normalize().rotate(-engine.position.getEuler().yaw).inverse(),
+      vector: content.movement.velocity().normalize().rotateEuler({yaw: -engine.position.getEuler().yaw}).inverse(),
       width: engine.fn.randomFloat(0.125, 0.875),
     }
   }
 
   function calculateStress() {
+    if (content.movement.isJump()) {
+      airStressAccelerated = engine.fn.accelerateValue(airStressAccelerated, 1, 2)
+
+      return airStressAccelerated
+    }
+
+    airStressAccelerated = engine.fn.accelerateValue(airStressAccelerated, 0, 16)
+
     const move = content.movement.rawInput().move || 0
 
     if (move == 0) {
-      return 0
+      return Math.max(0, airStressAccelerated)
     }
 
     if (move < 0) {
-      return content.movement.velocityValue()
+      return Math.max(content.movement.velocityValue(), airStressAccelerated)
     }
 
-    const velocity = content.movement.velocity()
+    const velocity = content.movement.velocity().zeroZ()
 
     const targetVelocity = engine.tool.vector2d.create({
       x: content.movement.calculateSpeedLimit(),
@@ -58,7 +67,7 @@ content.audio.acceleration = (() => {
       )
     )
 
-    return Math.max(dot, difference)
+    return Math.max(dot, difference, airStressAccelerated)
   }
 
   function createSynth() {
@@ -113,7 +122,7 @@ content.audio.acceleration = (() => {
       filterModel: engine.ear.filterModel.musical.instantiate({
         coneRadius: engine.const.tau * 0.25,
         frequency: rootFrequency,
-        minColor: 2,
+        minColor: 6,
         maxColor: 16,
         power: 1,
       }),
@@ -157,6 +166,7 @@ content.audio.acceleration = (() => {
 
   return {
     reset: function () {
+      airStressAccelerated = 0
       stressAccelerated = 0
 
       if (synth) {
