@@ -77,7 +77,7 @@ content.surface = (() => {
       ) * 10
 
       const v3 = (noise3.value(
-        ((x + (time * -10)) / 100) * skewFactor,
+        ((x + (time * -10)) / 75) * skewFactor,
         y / 300 * skewFactor,
         time / 60 * skewFactor
       ) ** 5) * 50
