@@ -171,7 +171,7 @@ content.audio.theme = (() => {
       ))
 
       const compensation = engine.fn.fromDb(engine.fn.lerp(0, -9, frequencyRatio))
-      const synthGain = engine.fn.fromDb(engine.fn.lerp(-6, -12, progress))
+      const synthGain = engine.fn.fromDb(engine.fn.lerp(-3, -4.5, progress))
         * compensation
         * engine.fn.fromDb(isDucked ? 3 : 0)
 
@@ -259,7 +259,7 @@ content.audio.theme = (() => {
 
       engine.fn.rampLinear(inputBass.gain, 1, 1/8)
       engine.fn.rampLinear(inputReverb.gain, 2, 1/8)
-      engine.fn.rampLinear(inputSequence.gain, 1/8, 1/8)
+      engine.fn.rampLinear(inputSequence.gain, 1/12, 1/8)
 
       return this
     },
