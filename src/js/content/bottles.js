@@ -142,7 +142,7 @@ content.bottles = (() => {
       }
 
       // Handle collection
-      if (isSpawned && position.zeroZ().distance(vector.zeroZ()) <= collectRadius) {
+      if (isSpawned && position.distance(vector) <= collectRadius) {
         pubsub.emit('collect', generateReward())
 
         count += 1
