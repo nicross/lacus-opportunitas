@@ -32,10 +32,14 @@ app.component.status.prototype = {
     return `${count} of ${capacity} cargo`
   },
   setLive: function (value) {
+    if (!this.liveElement) {
+      return this
+    }
+
     this.liveElement.innerHTML = ''
 
     if (value) {
-      this.liveElement.setAttribute('aria-live', 'assertive')
+      this.liveElement.setAttribute('aria-live', 'polite')
     } else {
       this.liveElement.removeAttribute('aria-live')
     }
@@ -46,8 +50,12 @@ app.component.status.prototype = {
     this.creditsElement.innerHTML = this.describeCredits()
     this.inventoryElement.innerHTML = this.describeInventory()
 
+    const label = `${this.describeInventory()}, ${this.describeCredits()}`
+
+    this.rootElement.ariaLabel = label
+
     if (this.liveElement) {
-      this.liveElement.innerHTML = `${this.describeInventory()}, ${this.describeCredits()}`
+      this.liveElement.innerHTML = label
     }
 
     return this
