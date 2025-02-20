@@ -90,10 +90,12 @@ app.audio = (() => {
         frequency: frequency,
       }).connect(bus)
 
-      const now = engine.time(),
-        release = 1/32
+      const attack = 1/64,
+        now = engine.time(),
+        release = 1/24
 
-      engine.fn.rampLinear(synth.param.gain, 0, release)
+      synth.param.gain.linearRampToValueAtTime(1, now + attack)
+      synth.param.gain.linearRampToValueAtTime(0, now + release)
       synth.stop(now + release)
 
       return this
