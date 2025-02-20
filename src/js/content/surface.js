@@ -58,7 +58,7 @@ content.surface = (() => {
 
       centerRatio = (centerRatio ** 0.5) * engine.fn.clamp(engine.fn.scale(
         centerRatio,
-        0, (100 / lakeRadius),
+        0, (250 / lakeRadius),
         0, 1
       ))
 
