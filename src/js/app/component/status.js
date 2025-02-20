@@ -47,7 +47,7 @@ app.component.status.prototype = {
     this.inventoryElement.innerHTML = this.describeInventory()
 
     if (this.liveElement) {
-      this.liveElement.innerHTML = `${this.describeCredits()}, ${this.describeInventory()}`
+      this.liveElement.innerHTML = `${this.describeInventory()}, ${this.describeCredits()}`
     }
 
     return this
