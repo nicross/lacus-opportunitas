@@ -1,7 +1,6 @@
 # TODO
 - Stretch goals: More excursion benefits
   - Jumps
-    - Landing sound
     - Altitude sound
   - Tricks
     - Input mapping
