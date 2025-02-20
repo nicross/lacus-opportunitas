@@ -12,9 +12,13 @@ app.component.port.prototype = {
   construct: function (port = {}) {
     engine.tool.pubsub.decorate(this)
 
-    const numberFormat = Intl.NumberFormat('en-US', {
+    const numberFormat1 = Intl.NumberFormat('en-US', {
       maximumFractionDigits: 2,
       minimumFractionDigits: 2,
+    })
+
+    const numberFormat2 = Intl.NumberFormat('en-US', {
+      maximumFractionDigits: 0,
     })
 
     this.port = port
@@ -38,10 +42,13 @@ app.component.port.prototype = {
 
     this.distance = engine.position.getVector().zeroZ().distance(port)
 
+    const distance = numberFormat1.format(this.distance / 1000),
+      level = numberFormat2.format(port.getTransactionLevel())
+
     this.rootElement.innerHTML = `
-      <th class="c-port--name" scope="row">${this.port.name}</th>
+      <th class="c-port--name" scope="row">${this.port.name}${level > 0 ? ` <abbr aria-label="Level ${level}">+${level}</abbr>` : ''}</th>
       <td class="c-port--type">${port.economy.name} port</td>
-      <td class="c-port--distance">&nbsp;at ${isDocked ? '0.00' : numberFormat.format(this.distance / 1000)} <abbr aria-label="kilometers">km</abbr></td>
+      <td class="c-port--distance">&nbsp;at ${isDocked ? '0.00' : distance} <abbr aria-label="kilometers">km</abbr></td>
     `
 
     return this
