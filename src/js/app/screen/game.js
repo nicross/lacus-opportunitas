@@ -24,6 +24,11 @@ app.screen.game = app.screenManager.invent({
       criteria: () => content.excursions.count() > 1,
       text: `Occasionally you may find bottles of credits floating casually in the lake. Implausible, <em>you bet!</em> but I promise that they're worth recovering!`,
     },
+    // Jumps
+    {
+      criteria: () => content.excursions.count() > 1,
+      text: `Occasionally you may find large waves in the middle of the lake. Let go of the controls to launch us at the peak of your approach!`,
+    },
   ],
   // Hooks
   onReady: function () {

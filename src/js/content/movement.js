@@ -43,7 +43,7 @@ content.movement = (() => {
 
   function handleJump() {
     const delta = engine.loop.delta(),
-      gravity = 10,
+      gravity = 7.5,
       position = engine.position.getVector()
 
     // Calculate next position
@@ -160,7 +160,7 @@ content.movement = (() => {
     const nextLaunchVelocity = magnitude
       * Math.max(0, (position.z - previousPosition.z) / previousPosition.zeroZ().distance(position.zeroZ()) || 0)
 
-    if (magnitude > 1 && nextLaunchVelocity/surfaceLaunchVelocity < 0.5) {
+    if (!isAccelerate && !isBrake && magnitude/maxVelocity > 0.5 && nextLaunchVelocity/surfaceLaunchVelocity < 0.5) {
       isJump = true
       next.z = position.z
       velocity.z = surfaceLaunchVelocity
@@ -168,7 +168,7 @@ content.movement = (() => {
     }
 
     // Otherwise glue to surface
-    surfaceLaunchVelocity = engine.fn.accelerateValue(surfaceLaunchVelocity, nextLaunchVelocity, magnitude * 0.25)
+    surfaceLaunchVelocity = engine.fn.accelerateValue(surfaceLaunchVelocity, nextLaunchVelocity, magnitude * 0.5)
     previousPosition = position
     engine.position.setVector(next)
 

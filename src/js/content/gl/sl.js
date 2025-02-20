@@ -146,7 +146,7 @@ vec4 calculateSkyColor() {
   vec4 color = vec4(hsv2rgb(vec3(
     mix(275.0, 335.0, pow(scale(pitch, -1.0, 1.0, 0.0, 1.0), 0.5)) / 360.0,
     1.0,
-    clamp(scale(pitch, 0.0, 1.0, 0.75, 0.25), 0.0, 1.0)
+    pitch > 0.0 ? scale(pitch, 0.0, 1.0, 0.75, 0.25) : scale(pitch, 0.0, -1.0, 0.75, 0.5)
   )), 1.0);
 
   // Sun glow
