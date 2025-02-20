@@ -3,7 +3,7 @@ content.goods.luxury = engine.fn.extend(content.goods.base, {
     return this.getBaseCostRaw() * content.goods.priceMultiplier()
   },
   getBaseCostRaw: function () {
-    return 6 ** engine.fn.srand('luxury', this.port, 'basePrice')(4, 5)
+    return 8 ** engine.fn.srand('luxury', this.port, 'basePrice')(4, 5)
   },
   getBuyCost: function (port) {
     const bonus = port.getTransactionLevel(false)
@@ -23,8 +23,10 @@ content.goods.luxury = engine.fn.extend(content.goods.base, {
       bonus = port.getTransactionLevel(false),
       distance = engine.fn.distance(port, this.getPort())
 
-    // Up to 6^6 at optimal conditions
-    const inflated = base * (6 ** (distance / 1000 / 2.5))
+    // Up to 100% profit at optimal conditions
+    const inflated = base * engine.fn.lerpExp(1, 2, engine.fn.clamp(
+      distance / 1000 / 2.5
+    ), 0.5)
 
     return Math.round(
       (inflated * content.goods.priceMultiplier()) + (2 ** bonus)
