@@ -6,7 +6,10 @@
   .a-tutorial .c-screen--items:focus {
     outline: none;
   }
-  .a-tutorial--text {}
+  .a-tutorial--text {
+    margin: 1.5rem -0.5em -0.5em -0.5em;
+    padding: 0.5em;
+  }
   .a-tutorial--text em {
     font-style: italic;
   }

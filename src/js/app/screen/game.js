@@ -26,7 +26,7 @@ app.screen.game = app.screenManager.invent({
     },
     // Jumps
     {
-      criteria: () => content.excursions.count() > 1,
+      criteria: () => content.excursions.count() > 2,
       text: `Occasionally you may find large waves in the middle of the lake. Let go of the controls to launch us at the peak of your approach!`,
     },
   ],
