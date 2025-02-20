@@ -159,7 +159,7 @@ content.ports.model.prototype = {
 
     for (const good of goods) {
       isSellable.set(good, content.inventory.has(good.id))
-      sellCosts.set(good, good.getBuyCost(this))
+      sellCosts.set(good, good.getSellCost(this))
     }
 
     goods.sort((a, b) => {
