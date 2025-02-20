@@ -45,6 +45,9 @@
     .c-screen--scrollable-smooth {
       scroll-behavior: smooth;
     }
+  .c-screen--status {
+    margin-bottom: -0.5em;
+  }
   .c-screen--table {
     border-spacing: 0;
     width: 100%;
