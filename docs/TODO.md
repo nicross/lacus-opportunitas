@@ -1,12 +1,15 @@
 # TODO
-- Stretch goals: More excursion benefits
-  - Jumps
-    - Altitude sound
+- v0.5.0
+  - "Target or travel?" screen after selecting a port
+  - Next/previous target mappings
+  - Jump altitude sound
+- v1.0.0
   - Tricks
     - Input mapping
     - State machine
     - Rewards and toasts
     - Audio cues
+- Stretch goals
   - Dolphins
     - Spawner
     - Particle effects

@@ -183,9 +183,9 @@ document.addEventListener('click', (e) => {
     return app.audio.value(button.getAttribute('aria-checked') == 'true' ? 1 : 0)
   }
 
-  const button = e.target.closest('button, [role="button"]') || e.target
+  const button = e.target.closest('button, [role="button"]')
 
-  if (button.getAttribute('aria-disabled') == 'true') {
+  if (!button || button.getAttribute('aria-disabled') == 'true') {
     return app.audio.unavailable()
   }
 

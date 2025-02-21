@@ -115,7 +115,7 @@ content.audio.ports.synth.prototype = {
     return this
   },
   destroy: function () {
-    const release = 1
+    const release = 1/4
 
     engine.fn.rampLinear(this.synth.param.gain, 0, release)
     this.synth.stop(engine.time(release))
