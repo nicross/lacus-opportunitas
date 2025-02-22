@@ -3,7 +3,15 @@ content.goods.luxury = engine.fn.extend(content.goods.base, {
     return this.getBaseCostRaw() * content.goods.priceMultiplier()
   },
   getBaseCostRaw: function () {
-    return 8 ** engine.fn.srand('luxury', this.port, 'basePrice')(4, 5)
+    const power = {
+      0: 4,
+      1: 5,
+      2: 3,
+    }[
+      Math.floor(this.port / 5)
+    ]
+
+    return 8 ** engine.fn.srand('luxury', this.port, 'basePrice')(power, power + 1)
   },
   getBuyCost: function (port) {
     const bonus = port.getTransactionLevel(false)

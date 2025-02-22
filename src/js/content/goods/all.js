@@ -67,23 +67,23 @@ content.goods.invent({
 content.goods.invent({
   id: 'agricultural-equipment',
   name: 'Agricultural equipment',
-  baseCost: 8 ** 3,
+  baseCost: 8 ** 6,
 })
 
 content.goods.invent({
   id: 'extraction-equipment',
   name: 'Extraction equipment',
-  baseCost: 8 ** 4,
+  baseCost: 8 ** 5,
 })
 
 content.goods.invent({
   id: 'refinement-equipment',
   name: 'Refinement equipment',
-  baseCost: 8 ** 5,
+  baseCost: 8 ** 4,
 })
 
 content.goods.invent({
   id: 'consumer-goods',
   name: 'Consumer goods',
-  baseCost: 8 ** 6,
+  baseCost: 8 ** 3,
 })
