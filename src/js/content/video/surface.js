@@ -1,5 +1,5 @@
 content.video.surface = (() => {
-  const maxParticles = 10000
+  const maxParticles = 15000
 
   const fragmentShader = `#version 300 es
 
@@ -43,17 +43,32 @@ out float alpha;
 out vec4 color_out;
 
 void main(void) {
-  gl_Position = u_projection * vec4(vertex + offset, 1.0);
+  vec3 shift = vec3(0.0);
+  float distance = length(offset.xy + u_camera.xy);
+
+  float identifier = float(
+      (int(mod(round(u_camera.x + offset.x), 1024.0)) << 8)
+    + int(mod(round(u_camera.y + offset.y), 1024.0))
+  );
+
+  if (distance < u_lakeRadius) {
+    shift.z = perlin2d(vec2(identifier / 4.0, (u_time / 4.0) + (identifier / 1024.0)), 333.0);
+    shift.z *= clamp(scale(distance, u_lakeRadius - 25.0, u_lakeRadius, 1.0, 0.0), 0.0, 1.0);
+  }
+
+  gl_Position = u_projection * vec4(vertex + offset + shift, 1.0);
 
   ${content.gl.sl.passUniforms()}
-  alpha = pow(sin(life * PI), 0.5);
-  color_out = vec4(hsv2rgb(vec3(
-    80.0 / 360.0,
-    perlin3d(vec3(offset.xy * 0.25, u_time), 666.0),
-    1.0
-  )), 1.0);
 
-  if (length(offset.xy + camera.xy) > lakeRadius) {
+  alpha = pow(sin(life * PI), 0.5);
+
+  if (distance < u_lakeRadius) {
+    color_out = vec4(hsv2rgb(vec3(
+      80.0 / 360.0,
+      perlin3d(vec3(offset.xy * 0.25, u_time), 666.0),
+      1.0
+    )), 1.0);
+  } else {
     color_out = vec4(hsv2rgb(vec3(
       335.0 / 360.0,
       0.5,

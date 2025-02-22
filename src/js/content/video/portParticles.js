@@ -108,7 +108,7 @@ void main(void) {
   function updateParticles() {
     const camera = content.camera.vector(),
       delta = engine.loop.delta(),
-      lifeRate = 2 * delta,
+      lifeRate = 1.5 * delta,
       lifes = [],
       offsets = [],
       position = engine.position.getVector(),

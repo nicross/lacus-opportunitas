@@ -11,18 +11,11 @@ content.surface = (() => {
     type: 'simplex3d',
   })
 
-  const noise3 = engine.fn.createNoise({
-    octaves: 1,
-    seed: ['surface', 'noise2'],
-    type: 'simplex3d',
-  })
-
   return {
     load: function () {
       engine.ephemera
         .add(noise1)
         .add(noise2)
-        .add(noise3)
 
       return this
     },
@@ -30,7 +23,6 @@ content.surface = (() => {
       engine.ephemera
         .remove(noise1)
         .remove(noise2)
-        .remove(noise3)
 
       return this
     },
@@ -65,24 +57,18 @@ content.surface = (() => {
       const skewFactor = engine.tool.simplex3d.prototype.skewFactor
 
       const v1 = noise1.value(
-        x / 10 * skewFactor,
-        y / 10 * skewFactor,
-        time / 5 * skewFactor
-      ) * 0.5
-
-      const v2 = noise2.value(
         ((x + (time * -5)) / 25) * skewFactor,
         y / 25 * skewFactor,
         time / 15 * skewFactor
       ) * 10
 
-      const v3 = (noise3.value(
+      const v2 = (noise2.value(
         ((x + (time * -10)) / 75) * skewFactor,
         y / 300 * skewFactor,
         time / 60 * skewFactor
       ) ** 5) * 50
 
-      return v1 + (centerRatio * (v2 + v3))
+      return centerRatio * (v1 + v2)
     },
   }
 })()

@@ -260,7 +260,7 @@ float perlin2d(vec2 v, float seed) {
       dx
     ),
     mix(
-      rand(vec2(hash(vec2(x1, y0)), seed)),
+      rand(vec2(hash(vec2(x0, y1)), seed)),
       rand(vec2(hash(vec2(x1, y1)), seed)),
       dx
     ),
