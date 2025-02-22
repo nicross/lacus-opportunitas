@@ -11,7 +11,9 @@ app.screen.travel = app.screenManager.invent({
       const port = app.screen.travel.state.port
 
       if (content.dock.is()) {
-        const vector = engine.tool.vector3d.create(port)
+        const vector = engine.tool.vector3d.create(
+          content.dock.getPort()
+        )
 
         engine.position.setQuaternion(
           vector.normalize().inverse().quaternion()
