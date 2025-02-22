@@ -64,6 +64,45 @@ app.controls.mappings = {
         0,
       ],
     },
+    trick1: {
+      gamepadAnalog: [],
+      gamepadAxis: [],
+      gamepadDigital: [
+        1,
+      ],
+      keyboard: [
+        'Digit1',
+        'NumpadDivide',
+      ],
+      mouseAxis: [],
+      mouseButton: [],
+    },
+    trick2: {
+      gamepadAnalog: [],
+      gamepadAxis: [],
+      gamepadDigital: [
+        2,
+      ],
+      keyboard: [
+        'Digit2',
+        'NumpadMultiply',
+      ],
+      mouseAxis: [],
+      mouseButton: [],
+    },
+    trick3: {
+      gamepadAnalog: [],
+      gamepadAxis: [],
+      gamepadDigital: [
+        3,
+      ],
+      keyboard: [
+        'Digit3',
+        'NumpadSubtract',
+      ],
+      mouseAxis: [],
+      mouseButton: [],
+    },
     turnLeft: {
       gamepadAnalog: [],
       gamepadAxis: [
@@ -263,6 +302,7 @@ app.controls.mappings = {
       ],
       keyboard: [
         'KeyR',
+        'Numpad0',
       ],
       mouseAxis: [],
       mouseButton: [],

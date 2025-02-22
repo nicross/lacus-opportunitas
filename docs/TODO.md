@@ -1,7 +1,6 @@
 # TODO
 - v1.0.0
   - Tricks
-    - Input mapping
     - State machine
     - Rewards and toasts
     - Audio cues
