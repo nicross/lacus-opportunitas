@@ -26,15 +26,15 @@ app.screen.travel = app.screenManager.invent({
         content.dock.set(undefined)
       }
 
-      if (!content.ports.target.is(port)) {
-        content.ports.target.set(port)
-      }
-
       app.screen.dock.clearFocusMemory()
       app.screen.gameMenu.clearFocusMemory()
       app.screen.ports.clearFocusMemory()
 
       this.change('game')
+
+      if (!content.ports.target.is(port)) {
+        content.ports.target.set(port)
+      }
     },
     travel: function () {
       const port = app.screen.travel.state.port
