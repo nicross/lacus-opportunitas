@@ -1,6 +1,4 @@
 # TODO
-- v0.5.0
-  - Jump altitude sound
 - v1.0.0
   - Tricks
     - Input mapping

@@ -7,8 +7,27 @@ content.audio.acceleration = (() => {
     stressAccelerated = 0,
     synth
 
+  function calculateHeight() {
+    if (!content.movement.isJump()) {
+      return 0
+    }
+
+    const position = engine.position.getVector(),
+      surface = content.surface.value(position),
+      velocity = content.movement.velocity()
+
+    return engine.fn.clamp(
+      engine.fn.scale(
+        position.z - surface,
+        0, 75,
+        0, 1,
+      )
+    )
+  }
+
   function calculateParameters() {
-    const value = content.movement.velocityValue()
+    const height = calculateHeight(),
+      value = content.movement.velocityValue()
 
     stressAccelerated = engine.fn.accelerateValue(stressAccelerated, calculateStress(), 2)
 
@@ -19,7 +38,7 @@ content.audio.acceleration = (() => {
       amodFrequency: engine.fn.lerp(1, 12, value),
       carrierGain: 1 - amodDepth,
       color: engine.fn.lerp(16, 32, airStressAccelerated),
-      detune: engine.fn.lerp(0, 1200, value + (stressAccelerated * 0.5)),
+      detune: engine.fn.lerp(0, 1200, value + (stressAccelerated * 0.5)) + (1800 * height),
       gain: engine.fn.fromDb(engine.fn.lerp(-9, -15, value)) * (value ** 0.5),
       vector: content.movement.velocity().normalize().rotateEuler({yaw: -engine.position.getEuler().yaw}).inverse(),
       width: engine.fn.randomFloat(0.125, 0.875),
