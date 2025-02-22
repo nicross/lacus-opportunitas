@@ -73,6 +73,10 @@ app.screen.game = app.screenManager.invent({
           ? undefined
           : target
       )
+    } else if (ui.targetNext) {
+      content.ports.target.setNext()
+    } else if (ui.targetPrevious) {
+      content.ports.target.setPrevious()
     }
 
     content.movement.update({

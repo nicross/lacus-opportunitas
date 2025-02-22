@@ -24,5 +24,23 @@ content.ports.target = (() => {
 
       return this
     },
+    setNext: function () {
+      return this.set(
+        content.ports.get(
+          target
+            ? target.index + 1
+            : 0
+        )
+      )
+    },
+    setPrevious: function () {
+      return this.set(
+        content.ports.get(
+          target
+            ? target.index - 1
+            : content.ports.count() - 1
+        )
+      )
+    },
   })
 })()

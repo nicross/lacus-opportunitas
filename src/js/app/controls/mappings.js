@@ -242,6 +242,31 @@ app.controls.mappings = {
         1,
       ],
     },
+    targetNext: {
+      gamepadAnalog: [],
+      gamepadAxis: [],
+      gamepadDigital: [
+        5,
+      ],
+      keyboard: [
+        'NumpadAdd',
+        'Tab',
+      ],
+      mouseAxis: [],
+      mouseButton: [],
+    },
+    targetPrevious: {
+      gamepadAnalog: [],
+      gamepadAxis: [],
+      gamepadDigital: [
+        4,
+      ],
+      keyboard: [
+        'KeyR',
+      ],
+      mouseAxis: [],
+      mouseButton: [],
+    },
     // Individual special buttons
     enter: {
       gamepadAnalog: [],

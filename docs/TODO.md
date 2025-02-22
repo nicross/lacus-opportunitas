@@ -1,7 +1,6 @@
 # TODO
 - v0.5.0
   - "Target or travel?" screen after selecting a port
-  - Next/previous target mappings
   - Jump altitude sound
 - v1.0.0
   - Tricks

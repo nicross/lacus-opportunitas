@@ -5,6 +5,7 @@ content.ports = (() => {
   return {
     all: () => [...ports],
     closest: () => tree.find(engine.position.getVector(), Infinity),
+    count: () => ports.length,
     discovered: () => {
       const discovered = ports.filter((port) => port.isDiscovered)
 

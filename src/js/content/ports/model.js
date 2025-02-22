@@ -21,8 +21,8 @@ content.ports.model.prototype = {
     this.luxuryGood = luxuryGood
     this.name = name
     this.transactions = transactions
-    this.x = Math.cos(angle) * content.lake.radius()
-    this.y = Math.sin(angle) * content.lake.radius()
+    this.x = Math.cos(-angle) * content.lake.radius()
+    this.y = Math.sin(-angle) * content.lake.radius()
 
     this.generate()
 
