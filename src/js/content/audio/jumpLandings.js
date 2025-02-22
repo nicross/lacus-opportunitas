@@ -1,4 +1,4 @@
-content.audio.jumpLandings = (value) => {
+content.audio.jumpLandings = content.fn.throttled((value) => {
   value **= 1.5
 
   const bus = content.audio.channel.default.createBus(),
@@ -21,7 +21,7 @@ content.audio.jumpLandings = (value) => {
   synth.param.gain.linearRampToValueAtTime(gain, now + attack)
   synth.param.gain.linearRampToValueAtTime(0, now + release)
   synth.stop(now + release)
-}
+}, 250)
 
 engine.ready(() => {
   content.movement.on('surface', (value) => content.audio.jumpLandings(value))
