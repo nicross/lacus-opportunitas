@@ -29,12 +29,13 @@ content.audio.surfaceDirectional = (() => {
       time = content.time.value()
 
     const strength = engine.fn.clamp(point.z / 60)
+    const distance = 1 - engine.fn.clamp(point.distance / 100)
     const modDepth = engine.fn.fromDb(engine.fn.lerp(-12, -9, modDepthField.value(index * 3, time / 3 / 4)))
 
     return {
       carrierGain: 1 - modDepth,
       frequency: engine.fn.lerpExp(50, 4000, strength, 0.5),
-      gain: engine.fn.fromDb(-12) * (strength ** 0.25),
+      gain: engine.fn.fromDb(-13.5) * (strength ** 0.25) * distance,
       modDepth,
       modFrequency: engine.fn.lerp(8, 16, modFrequencyField.value(index * 3, time / 3 / 4)),
     }
@@ -106,7 +107,7 @@ content.audio.surfaceDirectional = (() => {
   }
 
   function findSurface(index) {
-    const maxDistance = 50,
+    const maxDistance = 100,
       position = engine.position.getVector()
 
     const {x: dx, y: dy} = engine.tool.vector2d.unitX().rotate(

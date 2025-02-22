@@ -39,7 +39,8 @@ content.audio.acceleration = (() => {
       carrierGain: 1 - amodDepth,
       color: engine.fn.lerp(16, 32, airStressAccelerated),
       detune: engine.fn.lerp(0, 1200, value + (stressAccelerated * 0.5)) + (1800 * height),
-      gain: engine.fn.fromDb(engine.fn.lerp(-9, -15, value)) * (value ** 0.5),
+      gain: engine.fn.fromDb(engine.fn.lerp(-7.5, -13.5, value)) * (value ** 0.5),
+      minColor: engine.fn.lerp(4, 8, airStressAccelerated),
       vector: content.movement.velocity().normalize().rotateEuler({yaw: -engine.position.getEuler().yaw}).inverse(),
       width: engine.fn.randomFloat(0.125, 0.875),
     }
@@ -101,6 +102,7 @@ content.audio.acceleration = (() => {
       color,
       detune,
       gain,
+      minColor,
       vector,
       width,
     } = calculateParameters()
@@ -141,7 +143,7 @@ content.audio.acceleration = (() => {
       filterModel: engine.ear.filterModel.musical.instantiate({
         coneRadius: engine.const.tau * 0.25,
         frequency: rootFrequency,
-        minColor: 6,
+        minColor,
         maxColor: 16,
         power: 1,
       }),
@@ -167,6 +169,7 @@ content.audio.acceleration = (() => {
       color,
       detune,
       gain,
+      minColor,
       vector,
       width,
     } = calculateParameters()
@@ -181,6 +184,9 @@ content.audio.acceleration = (() => {
     engine.fn.setParam(synth.param.width, width)
 
     binaural.update(vector)
+
+    binaural.left.filterModel.options.minColor = minColor
+    binaural.right.filterModel.options.minColor = minColor
   }
 
   return {
