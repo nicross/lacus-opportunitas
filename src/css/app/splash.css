@@ -16,7 +16,7 @@
     text-align: left;
   }
   .a-splash--instruction {
-    animation: a-splash--instruction 1s ease-in-out 0s infinite alternate both;
+    animation: a-splash--instruction 1s linear 0s infinite alternate both;
     bottom: 1.75rem;
     line-height: 2;
     padding: 0.5em 0.75em;
@@ -25,7 +25,9 @@
     text-transform: uppercase;
   }
   .a-splash--logo {
+    animation: a-splash--logo 24s ease-in-out 0s infinite alternate both;
     font-family: HybridBold, sans-serif;
+    font-size: 1.25em;
     position: relative;
     top: -2em;
   }
@@ -41,9 +43,18 @@
 
 @keyframes a-splash--instruction {
   0% {
-   opacity: 0.5;
+    opacity: 0.5;
   }
   100% {
     opacity: 1.0;
+  }
+}
+
+@keyframes a-splash--logo {
+  0% {
+    transform: scale3d(0.8, 0.8, 1);
+  }
+  100% {
+    transform: scale3d(1, 1, 1);
   }
 }
