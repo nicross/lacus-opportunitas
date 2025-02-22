@@ -40,9 +40,7 @@ app.component.port.prototype = {
       this.rootElement.title = 'Click to travel'
     }
 
-    this.distance = engine.position.getVector().zeroZ().distance(port)
-
-    const distance = numberFormat1.format(this.distance / 1000),
+    const distance = numberFormat1.format(engine.position.getVector().zeroZ().distance(port) / 1000),
       level = numberFormat2.format(port.getTransactionLevel())
 
     this.rootElement.innerHTML = `

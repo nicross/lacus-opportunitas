@@ -7,8 +7,10 @@ app.screen.ports = app.screenManager.invent({
     back: function () {
       this.change('gameMenu')
     },
-    travel: function () {
-      this.change('dock')
+    travel: function (port) {
+      this.change('travel', {
+        port,
+      })
     },
   },
   // State
@@ -43,17 +45,7 @@ app.screen.ports = app.screenManager.invent({
         .attach(this.tableElement)
 
       component.on('click', () => {
-        content.time.add(
-          component.distance / content.movement.maxVelocity() * 3
-        )
-
-        engine.position.setVector(port)
-        content.dock.set(port.index)
-        app.autosave.trigger()
-
-        app.screen.dock.clearFocusMemory()
-        app.screen.gameMenu.clearFocusMemory()
-        app.screenManager.dispatch('travel')
+        app.screenManager.dispatch('travel', port)
       })
 
       return component
