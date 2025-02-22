@@ -56,7 +56,7 @@ content.surface = (() => {
         ) * (content.camera.height() * 0.75)
       }
 
-      centerRatio = (centerRatio ** 0.5) * engine.fn.clamp(engine.fn.scale(
+      centerRatio = (centerRatio ** 0.25) * engine.fn.clamp(engine.fn.scale(
         centerRatio,
         0, (250 / lakeRadius),
         0, 1

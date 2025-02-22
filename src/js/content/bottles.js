@@ -23,7 +23,6 @@ content.bottles = (() => {
     }, 10)
 
     // Always add up to total reward, rounding up the smaller amounts
-    // TODO: Make dynamic to support different maxCount values
     return [
       Math.ceil(1/6 * totalReward),
       Math.ceil(1/3 * totalReward),
@@ -33,8 +32,7 @@ content.bottles = (() => {
 
   function generateTimer() {
     // Lake radius at maxCount
-    // TODO: Make dynamic to support different maxCount values
-    return (250 * count) + engine.fn.randomFloat(250, 500)
+    return (500 * count) + engine.fn.randomFloat(250, 500)
   }
 
   function generateVector() {
