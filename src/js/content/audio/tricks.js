@@ -1,24 +1,13 @@
 content.audio.tricks = (() => {
-  const bus = content.audio.channel.default.createBus()
+  const bus = content.audio.channel.default.createBus(),
+    delays = {}
 
-  let delay = createDelay(),
-    lastTrick,
+  let lastTrick,
     synth
 
   bus.gain.value = engine.fn.fromDb(-6)
 
-  function createDelay() {
-    const effect = engine.effect.pingPongDelay({
-      delay: 0.5,
-      dry: 1,
-      feedback: engine.fn.fromDb(-3),
-      wet: engine.fn.fromDb(-3),
-    })
-
-    effect.output.connect(bus)
-
-    return effect
-  }
+  swapDelays()
 
   function getFrequency() {
     const input = content.tricks.rawInput(),
@@ -59,9 +48,33 @@ content.audio.tricks = (() => {
     synth = undefined
   }
 
+  function swapDelays() {
+    const types = [
+      ['trick1', 0.333],
+      ['trick2', 0.5],
+      ['trick3', 0.75],
+    ]
+
+    for (const [type, delay] of types) {
+      if (delays[type]) {
+        delays[type].output.disconnect()
+      }
+
+      delays[type] = engine.effect.pingPongDelay({
+        delay,
+        dry: 1,
+        feedback: engine.fn.fromDb(-1.5),
+        wet: engine.fn.fromDb(-1.5),
+      })
+
+      delays[type].output.connect(bus)
+    }
+  }
+
   function triggerSynth() {
     const context = engine.context(),
-      frequency = getFrequency()
+      frequency = getFrequency(),
+      trick = content.tricks.trick()
 
     synth = engine.synth.simple({
       frequency,
@@ -72,7 +85,7 @@ content.audio.tricks = (() => {
     ).filtered({
       detune: -600,
       frequency: frequency,
-    }).connect(bus).connect(delay.input)
+    }).connect(bus).connect(delays[trick.type].input)
 
     synth.randomPan = engine.fn.randomFloat(-0.125, 0.125)
     synth.panner.pan.value = engine.fn.clamp(-content.tricks.rawInput().trickX + synth.randomPan, -1, 1)
@@ -115,12 +128,7 @@ content.audio.tricks = (() => {
       lastTrick = undefined
 
       killSynth()
-
-      if (delay) {
-        delay.output.disconnect()
-      }
-
-      delay = createDelay()
+      swapDelays()
 
       return this
     },
