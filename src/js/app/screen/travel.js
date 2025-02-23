@@ -31,6 +31,7 @@ app.screen.travel = app.screenManager.invent({
       app.screen.dock.clearFocusMemory()
       app.screen.gameMenu.clearFocusMemory()
       app.screen.ports.clearFocusMemory()
+      app.screen.travel.clearFocusMemory()
 
       this.change('game')
 
@@ -54,6 +55,7 @@ app.screen.travel = app.screenManager.invent({
       app.screen.dock.clearFocusMemory()
       app.screen.gameMenu.clearFocusMemory()
       app.screen.ports.clearFocusMemory()
+      app.screen.travel.clearFocusMemory()
 
       this.change('dock')
     },
