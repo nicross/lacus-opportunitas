@@ -13,10 +13,12 @@
     z-index: 999;
   }
   .a-game--target {
-    background-color: #000000;
     bottom: 1.5rem;
     font-size: 0.75em;
     left: 1.5rem;
-    padding: 0.5em 1em;
     position: absolute;
+  }
+  .a-game--targetVisual {
+    background-color: #000000;
+    padding: 0.5em 1em;
   }

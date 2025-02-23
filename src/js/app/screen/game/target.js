@@ -41,10 +41,14 @@ app.screen.game.port = {
       delete this.currentPort
 
       this.liveElement.innerHTML = ''
-      this.visualElement.innerHTML = '[No target]'
+      this.visualElement.innerHTML = ''
+
+      this.visualElement.hidden = true
 
       return
     }
+
+    this.visualElement.hidden = false
 
     const distance = position.distance(port) / 1000,
       distanceRounded1 = numberFormat1.format(distance),
