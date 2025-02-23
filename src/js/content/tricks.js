@@ -35,6 +35,8 @@ content.tricks = (() => {
           return
         }
 
+        ignoreType = undefined
+
         for (const type of types) {
           if (input[type]) {
             ignoreType = type

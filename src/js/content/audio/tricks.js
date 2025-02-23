@@ -109,6 +109,25 @@ content.audio.tricks = (() => {
   }
 
   return {
+    onDisallowed: function () {
+      const frequency = engine.fn.fromMidi(36)
+
+      const synth = engine.synth.pwm({
+        frequency,
+        gain: 1,
+        type: 'sawtooth',
+      }).filtered({
+        frequency: frequency * 8,
+      }).connect(bus)
+
+      const now = engine.time(),
+        release = 1/32
+
+      engine.fn.rampLinear(synth.param.gain, 0, release)
+      synth.stop(now + release)
+
+      return this
+    },
     onEnterTrick: function () {
       triggerSynth()
 
@@ -147,6 +166,7 @@ engine.ready(() => {
   content.dock.on('dock', () => content.audio.tricks.reset())
   content.tricks.on('end-run', () => content.audio.tricks.reset())
 
+  content.tricks.on('disallowed', () => content.audio.tricks.onDisallowed())
   content.tricks.on('enter-trick', () => content.audio.tricks.onEnterTrick())
   content.tricks.on('before-trick-fail', () => content.audio.tricks.onTrickFail())
   content.tricks.on('before-trick-success', () => content.audio.tricks.onTrickSuccess())
