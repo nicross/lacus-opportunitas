@@ -18,6 +18,7 @@ app.storage.tutorial = {
     const key = [screen, index].join('~')
     return this.get().has(key)
   },
+  hasAny: () => app.storage.has('tutorial'),
   remove: function (screen, index) {
     const key = [screen, index].join('~'),
       keys = this.get()

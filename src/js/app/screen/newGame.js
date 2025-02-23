@@ -20,7 +20,6 @@ app.screen.newGame = app.screenManager.invent({
       app.screen.mainMenu.clearFocusMemory()
 
       app.storage.game.plus()
-      app.storage.tutorial.clear()
       app.gameState.setLoaded(true)
 
       this.change('dock')
