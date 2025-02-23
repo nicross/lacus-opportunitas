@@ -41,7 +41,7 @@ content.audio.tricks = (() => {
       ) / engine.const.tau * 5
     )
 
-    return content.audio.theme.slice(start, start + 40)[index]
+    return content.audio.theme.slice(start, start + 40)[(index + run[trick.type].count) % 40]
   }
 
   function killSynth(isSuccess = false) {
