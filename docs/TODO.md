@@ -1,8 +1,6 @@
 # TODO
 - v1.0.0
   - Tricks
-    - State machine
-    - Rewards and toasts
     - Audio cues
 - Stretch goals
   - Dolphins

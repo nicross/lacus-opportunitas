@@ -84,6 +84,12 @@ app.screen.game = app.screenManager.invent({
       turn: game.turn,
     })
 
+    content.tricks.update({
+      trick1: game.trick1,
+      trick2: game.trick2,
+      trick3: game.trick3,
+    })
+
     content.camera.applyLook(game.look)
 
     this.port.onFrame()

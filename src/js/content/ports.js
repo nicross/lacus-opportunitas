@@ -4,6 +4,7 @@ content.ports = (() => {
 
   return {
     all: () => [...ports],
+    averageTransactionLevel: () => ports.reduce((sum, port) => sum + port.getTransactionLevel(false), 0) / ports.length,
     closest: () => tree.find(engine.position.getVector(), Infinity),
     count: () => ports.length,
     discovered: () => {

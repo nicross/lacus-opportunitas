@@ -25,6 +25,7 @@ content.credits = (() => {
 
 engine.ready(() => {
   content.bottles.on('collect', (reward) => content.credits.adjust(reward))
+  content.tricks.on('end-run', ({score}) => content.credits.adjust(score))
 })
 
 engine.state.on('export', (data) => data.credits = content.credits.value())

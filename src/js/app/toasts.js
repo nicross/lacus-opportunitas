@@ -59,3 +59,11 @@ content.bottles.on('collect', (reward) => {
 
   app.toasts.enqueue(`<strong>Bottles recovered</strong><br />+${numberFormat.format(reward)} credit${reward != 1 ? 's' : ''}`)
 })
+
+content.tricks.on('end-run', ({count, score}) => {
+  const numberFormat = Intl.NumberFormat('en-US', {
+    maximumFractionDigits: 0,
+  })
+
+  app.toasts.enqueue(`<strong>Sick trick${count != 1 ? 's' : ''}!</strong><br />+${numberFormat.format(score)} credit${score != 1 ? 's' : ''}`)
+})

@@ -44,7 +44,7 @@ content.dock = (() => {
       const closest = content.ports.closest(),
         distance = engine.position.getVector().distance(closest)
 
-      if (closest && distance < radius) {
+      if (closest && distance < radius && !content.tricks.isActive()) {
         index = closest.index
         closest.isDiscovered = true
         pubsub.emit('dock')
