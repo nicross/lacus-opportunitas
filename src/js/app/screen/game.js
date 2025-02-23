@@ -22,12 +22,17 @@ app.screen.game = app.screenManager.invent({
     // Bottles
     {
       criteria: () => content.excursions.count() > 1,
-      text: `Occasionally you may find bottles of credits floating casually in the lake. Implausible, <em>you bet!</em> but I promise that they're worth recovering!`,
+      text: `Occasionally you might find bottles of credits floating casually in the lake. Implausible, <em>you bet!</em> but I promise that they're worth recovering!`,
     },
     // Jumps
     {
       criteria: () => content.excursions.count() > 2,
-      text: `Occasionally you may find large waves in the middle of the lake. Let go of the controls to launch us at the peak of your approach!`,
+      text: `Don't be afraid to approach those bigger waves directly. They're safe, <em>I swear!</em> Let go of the controls, and you'll launch us right over them.`,
+    },
+    // Tricks
+    {
+      criteria: () => content.excursions.count() > 3,
+      text: `Ready for more credits? <kbd>Trick 1</kbd>, <kbd>Trick 2</kbd>, and <kbd>Trick 3</kbd> can be mashed <em>however you want</em> while jumping. Just let loose and be yourself!`,
     },
   ],
   // Hooks

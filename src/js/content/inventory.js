@@ -4,7 +4,7 @@ content.inventory = (() => {
   let inventory = {}
 
   function calculateCapacity() {
-    const averageLevel = cotnent.ports.averageTransactionLevel()
+    const averageLevel = content.ports.averageTransactionLevel()
 
     return baseCapacity + Math.round(averageLevel * 2)
   }

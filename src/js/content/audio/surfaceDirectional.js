@@ -114,8 +114,8 @@ content.audio.surfaceDirectional = (() => {
       (index * engine.const.tau/5) + engine.position.getEuler().yaw
     )
 
-    let max = {x: position.x, y: position.y, z: 0},
-      next = {x: position.x, y: position.y, z: 0}
+    let max = {x: position.x, y: position.y, z: 0, distance: 0},
+      next = {x: position.x, y: position.y, z: 0, distance: 0}
 
     for (let d = 0; d < maxDistance; d += 1) {
       next.x += dx
