@@ -39,7 +39,7 @@
   }
   .c-screen--scrollable {
     overflow-y: auto;
-    max-height: calc(3rem * 6);
+    max-height: calc(2.875rem * 6);
     padding: 0.25em;
   }
     .c-screen--scrollable-smooth {
