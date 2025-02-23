@@ -63,7 +63,11 @@ app.screen.travel = app.screenManager.invent({
     port: undefined,
   },
   // Tutorials
-  tutorials: [],
+  tutorials: [
+    {
+      text: `You may ask me to take you anywhere at any time from here. Convenient, <em>yes but beware!</em> You are the most efficient and skilled pilot in our crew!`,
+    },
+  ],
   // Hooks
   onReady: function () {
     const root = this.rootElement
@@ -83,14 +87,19 @@ app.screen.travel = app.screenManager.invent({
     })
   },
   onEnter: function (e) {
-    this.state.port = e.port
-
     this.rootElement.querySelector('.a-travel--portName').innerHTML = this.state.port.name
     this.rootElement.querySelector('.a-travel--portName').title = this.state.port.name
     this.rootElement.querySelector('.a-travel--target').innerHTML = content.dock.is() ? 'Undock and set as target' : 'Set as target'
   },
-  onExit: function () {},
+  onExit: function () {
+    this.state.port = undefined
+  },
   onFrame: function () {
     this.handleBasicInput()
+  },
+  // Methods
+  setPort: function (port) {
+    this.state.port = port
+    return this
   },
 })

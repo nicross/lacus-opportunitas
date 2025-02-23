@@ -7,10 +7,8 @@ app.screen.ports = app.screenManager.invent({
     back: function () {
       this.change('gameMenu')
     },
-    travel: function (port) {
-      this.change('travel', {
-        port,
-      })
+    travel: function () {
+      this.change('travel')
     },
   },
   // State
@@ -21,7 +19,7 @@ app.screen.ports = app.screenManager.invent({
   // Tutorials
   tutorials: [
     {
-      text: `From the <strong>Lunarspatial memory</strong> you may browse your discoveries. Click on any port to travel to it. Discover more ports to add them to memory.`,
+      text: `From the <strong>Lunarspatial memory</strong> you may browse your discoveries. Discover more ports to add them to memory.`,
     },
   ],
   // Hooks
@@ -45,7 +43,8 @@ app.screen.ports = app.screenManager.invent({
         .attach(this.tableElement)
 
       component.on('click', () => {
-        app.screenManager.dispatch('travel', port)
+        app.screen.travel.setPort(port)
+        app.screenManager.dispatch('travel')
       })
 
       return component

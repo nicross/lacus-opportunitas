@@ -42,7 +42,7 @@ app.screen.dock = app.screenManager.invent({
     },
     {
       criteria: () => content.inventory.has('essentials'),
-      text: `Now, let's turn those essentials into profit! Feel free to look around before we leave. We will <strong>Undock</strong> at your command.`,
+      text: `Now, let's turn those essentials into profit! Feel free to look around before we leave. We'll <strong>Undock</strong> at your command.`,
     },
     // Economy types
     {
