@@ -27,7 +27,7 @@ app.screen.splash = app.screenManager.invent({
   onFrame: function () {
     const ui = app.controls.ui()
 
-    if (ui.confirm || ui.enter || ui.space || ui.start || ui.select) {
+    if (ui.confirm || ui.enter || ui.space || ui.start || ui.select || ui.focus === 0) {
       app.screenManager.dispatch('interact')
     }
   },

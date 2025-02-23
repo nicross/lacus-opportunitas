@@ -128,6 +128,20 @@ app.screen.base = {
       return true
     }
 
+    if ('focus' in ui) {
+      const toFocus = app.utility.focus.selectFocusable(root)[ui.focus]
+
+      if (toFocus) {
+        if (app.utility.focus.is(toFocus)) {
+          toFocus.click()
+        } else {
+          app.utility.focus.set(toFocus)
+        }
+
+        return true
+      }
+    }
+
     return false
   },
   nextTutorial: function () {
