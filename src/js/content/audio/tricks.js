@@ -37,7 +37,7 @@ content.audio.tricks = (() => {
 
     const index = Math.floor(
       engine.fn.normalizeAngle(
-        Math.atan2(input.trickY, input.trickX)
+        Math.atan2(input.trickY, -input.trickX)
       ) / engine.const.tau * 5
     )
 
@@ -75,7 +75,7 @@ content.audio.tricks = (() => {
     }).connect(bus).connect(delay.input)
 
     synth.randomPan = engine.fn.randomFloat(-0.125, 0.125)
-    synth.panner.pan.value = engine.fn.clamp(content.tricks.rawInput().trickX + synth.randomPan, -1, 1)
+    synth.panner.pan.value = engine.fn.clamp(-content.tricks.rawInput().trickX + synth.randomPan, -1, 1)
 
     const now = engine.time()
 
@@ -90,7 +90,7 @@ content.audio.tricks = (() => {
 
     const frequency = getFrequency()
 
-    engine.fn.setParam(synth.panner.pan, engine.fn.clamp(content.tricks.rawInput().trickX + synth.randomPan, -1, 1))
+    engine.fn.setParam(synth.panner.pan, engine.fn.clamp(-content.tricks.rawInput().trickX + synth.randomPan, -1, 1))
     engine.fn.rampExp(synth.filter.frequency, frequency, 1/64)
     engine.fn.rampExp(synth.param.frequency, frequency, 1/64)
   }

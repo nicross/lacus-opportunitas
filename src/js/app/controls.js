@@ -66,6 +66,15 @@ app.controls = (() => {
     gameCache.trickX = gameCache.trickLeft - gameCache.trickRight
     gameCache.trickY = gameCache.trickUp - gameCache.trickDown
     gameCache.turn = gameCache.turnLeft - gameCache.turnRight
+
+    // Nullify some shortcuts
+    if (content.movement.isJump() && (gameCache.trick1 || gameCache.trick2 || gameCache.trick3)) {
+      gameCache.move = 0
+      gameCache.turn = 0
+    } else {
+      gameCache.trickX = 0
+      gameCache.trickY = 0
+    }
   }
 
   function updateMouseAccelerated() {

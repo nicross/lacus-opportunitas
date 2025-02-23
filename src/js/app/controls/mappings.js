@@ -120,7 +120,7 @@ app.controls.mappings = {
     trickLeft: {
       gamepadAnalog: [],
       gamepadAxis: [
-        [0, 1],
+        [0, -1],
       ],
       gamepadDigital: [],
       keyboard: [
@@ -136,7 +136,7 @@ app.controls.mappings = {
     trickRight: {
       gamepadAnalog: [],
       gamepadAxis: [
-        [0, -1],
+        [0, 1],
       ],
       gamepadDigital: [],
       keyboard: [
