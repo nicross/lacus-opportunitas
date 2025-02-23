@@ -84,6 +84,7 @@ content.tricks = (() => {
   }
 
   let ignoreType,
+    rawInput = {},
     run,
     trick
 
@@ -111,7 +112,8 @@ content.tricks = (() => {
       run.score += (run[type].longest + Math.max(0, run[type].count - 1)) * run[type].scoreWeight
     }
 
-    run.score *= 1 + content.ports.averageTransactionLevel()
+    run.score *= content.ports.averageTransactionLevel()
+    run.score = Math.max(1, run.score)
     run.score = Math.ceil(run.score)
 
     machine.pubsub.emit('end-run', run)
@@ -145,6 +147,8 @@ content.tricks = (() => {
       end: undefined,
       longest: 0,
       start: content.time.value(),
+      themeIndex: engine.fn.randomInt(0, 4) * 120,
+      themeIndexOffset: engine.fn.randomInt(0, 3) * 10,
       trick1: {
         count: 0,
         duration: 0,
@@ -165,10 +169,12 @@ content.tricks = (() => {
 
   return machine.pubsub.decorate({
     isActive: () => !machine.is('inactive') || typeof run != 'undefined',
+    rawInput: () => ({...rawInput}),
     reset: function () {
       machine.state = 'inactive'
 
       ignoreType = undefined
+      rawInput = {}
       run = undefined
       trick = undefined
 
@@ -177,6 +183,8 @@ content.tricks = (() => {
     run: () => ({...run}),
     trick: () => ({...trick}),
     update: function (input = {}) {
+      rawInput = {...input}
+
       handlers[machine.state](input)
 
       return this

@@ -63,6 +63,8 @@ app.controls = (() => {
     // Shortcuts
     gameCache.look = gameCache.lookUp - gameCache.lookDown
     gameCache.move = gameCache.moveForward - gameCache.moveBackward
+    gameCache.trickX = gameCache.trickLeft - gameCache.trickRight
+    gameCache.trickY = gameCache.trickUp - gameCache.trickDown
     gameCache.turn = gameCache.turnLeft - gameCache.turnRight
   }
 

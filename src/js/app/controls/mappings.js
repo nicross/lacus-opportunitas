@@ -103,6 +103,66 @@ app.controls.mappings = {
       mouseAxis: [],
       mouseButton: [],
     },
+    trickDown: {
+      gamepadAnalog: [],
+      gamepadAxis: [
+        [1, 1],
+      ],
+      gamepadDigital: [],
+      keyboard: [
+        'ArrowDown',
+        'KeyS',
+        'Numpad5',
+      ],
+      mouseAxis: [],
+      mouseButton: [],
+    },
+    trickLeft: {
+      gamepadAnalog: [],
+      gamepadAxis: [
+        [0, 1],
+      ],
+      gamepadDigital: [],
+      keyboard: [
+        'ArrowLeft',
+        'KeyA',
+        'KeyQ',
+        'Numpad4',
+        'Numpad7',
+      ],
+      mouseAxis: [],
+      mouseButton: [],
+    },
+    trickRight: {
+      gamepadAnalog: [],
+      gamepadAxis: [
+        [0, -1],
+      ],
+      gamepadDigital: [],
+      keyboard: [
+        'ArrowRight',
+        'KeyD',
+        'KeyE',
+        'Numpad6',
+        'Numpad9',
+      ],
+      mouseAxis: [],
+      mouseButton: [],
+    },
+    trickUp: {
+      gamepadAnalog: [],
+      gamepadAxis: [
+        [1, -1],
+      ],
+      gamepadDigital: [],
+      keyboard: [
+        'ArrowUp',
+        'KeyW',
+        'Numpad8',
+      ],
+      mouseAxis: [],
+      mouseButton: [],
+    },
     turnLeft: {
       gamepadAnalog: [],
       gamepadAxis: [

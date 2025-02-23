@@ -93,6 +93,8 @@ app.screen.game = app.screenManager.invent({
       trick1: game.trick1,
       trick2: game.trick2,
       trick3: game.trick3,
+      trickX: game.trickX,
+      trickY: game.trickY,
     })
 
     content.camera.applyLook(game.look)

@@ -281,6 +281,7 @@ content.audio.theme = (() => {
 
       return sequence.slice(index * length, (index + 1) * length)
     },
+    slice: (start, end) => sequence.slice(start, end),
     stop: function () {
       isPlaying = false
 
