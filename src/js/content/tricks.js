@@ -112,7 +112,7 @@ content.tricks = (() => {
       run.score += (run[type].longest + Math.max(0, run[type].count - 1)) * run[type].scoreWeight
     }
 
-    run.score *= content.ports.averageTransactionLevel()
+    run.score *= content.ports.averageTransactionLevel() * 4
     run.score = Math.max(1, run.score)
     run.score = Math.ceil(run.score)
 
