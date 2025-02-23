@@ -27,16 +27,30 @@ content.tricks = (() => {
   const handlers = {
     inactive: (input) => {
       if (!content.movement.isJump()) {
-        if (input.trick1 || input.trick2 || input.trick3) {
-          machine.pubsub.emit('inactive-disallowed')
-        }
-
         if (run) {
           endRun()
         }
 
+        if (ignoreType && input[ignoreType]) {
+          return
+        }
+
+        for (const type of types) {
+          if (input[type]) {
+            ignoreType = type
+            machine.pubsub.emit('disallowed')
+            break
+          }
+        }
+
         return
       }
+
+      if (ignoreType && input[ignoreType]) {
+        return
+      }
+
+      ignoreType = undefined
 
       for (const type of types) {
         if (input[type]) {
@@ -60,6 +74,8 @@ content.tricks = (() => {
       }
 
       if (!content.movement.isJump()) {
+        ignoreType = trick.type
+        trick = undefined
         return machine.dispatch('fail')
       }
 
@@ -67,7 +83,8 @@ content.tricks = (() => {
     },
   }
 
-  let run,
+  let ignoreType,
+    run,
     trick
 
   function endRun() {
@@ -151,8 +168,9 @@ content.tricks = (() => {
     reset: function () {
       machine.state = 'inactive'
 
-      trick = undefined
+      ignoreType = undefined
       run = undefined
+      trick = undefined
 
       return this
     },
