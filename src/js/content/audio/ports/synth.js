@@ -19,7 +19,7 @@ content.audio.ports.synth.prototype = {
 
     this.fadeAccelerated = 'fadeAccelerated' in this
       ? engine.fn.accelerateValue(this.fadeAccelerated, 1, 2 / this.port.primeNumber)
-      : (isTarget ? 1 : 0)
+      : isTarget
 
     this.isTargetAccelerated = 'isTargetAccelerated' in this
       ? engine.fn.accelerateValue(this.isTargetAccelerated, isTarget, 8)
@@ -39,12 +39,12 @@ content.audio.ports.synth.prototype = {
         )
       * engine.fn.fromDb(
           engine.fn.lerp(
-            0, engine.fn.lerp(-9, -12, this.isTargetAccelerated),
+            0, -9,
             octave
           )
         )
       * engine.fn.fromDb(
-          engine.fn.lerp(0, -3, this.isPausedAccelerated)
+          engine.fn.lerp(0, -1.5, this.isPausedAccelerated)
         )
 
     return {
