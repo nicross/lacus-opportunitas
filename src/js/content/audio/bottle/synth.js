@@ -22,7 +22,7 @@ content.audio.bottle.synth.prototype = {
       }),
       gainModel: engine.ear.gainModel.linear.instantiate({
         maxDistance: 250,
-        maxGain: engine.fn.fromDb(-22.5),
+        maxGain: engine.fn.fromDb(-21),
         minGain: engine.fn.fromDb(-33),
       }),
       ...content.bottles.relativeVector(),
