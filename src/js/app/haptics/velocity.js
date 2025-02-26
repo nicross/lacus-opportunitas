@@ -16,7 +16,7 @@ engine.loop.on('frame', ({
 
   value *= Math.random()
   value **= engine.fn.lerp(2, 1, Math.max(stress, value))
-  value *= engine.fn.lerp(1/100, 1/4, stress)
+  value *= engine.fn.lerp(1/90, 1/3, stress)
 
   app.haptics.enqueue({
     duration: delta * 1000,
