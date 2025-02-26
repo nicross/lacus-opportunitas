@@ -38,7 +38,7 @@ app.screen.sell = app.screenManager.invent({
   onEnter: function () {
     app.toasts.memory.remember()
 
-    this.statusComponent.update().setLive(true)
+    this.statusComponent.update()
 
     this.state.components = []
     this.tableElement.innerHTML = ''
