@@ -3,7 +3,8 @@ content.credits = (() => {
 
   return {
     adjust: function (value) {
-      credits += Math.max(value, -credits)
+      credits += Number(value) || 0
+      credits = Math.max(0, credits)
 
       return this
     },

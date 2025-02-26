@@ -61,7 +61,7 @@ content.tricks = (() => {
           }
 
           trick = {
-            duration: 0,
+            duration: engine.loop.delta(),
             type,
           }
 
@@ -111,11 +111,11 @@ content.tricks = (() => {
         ? engine.fn.scale(run[type].durationRatio, 0, idealWeight, idealWeight, 1)
         : engine.fn.scale(run[type].durationRatio, idealWeight, 1, 1, idealWeight)
 
-      run.score += (run[type].longest + Math.max(0, run[type].count - 1)) * run[type].scoreWeight
+      run.score += ((run[type].longest + Math.max(0, run[type].count - 1)) * run[type].scoreWeight) || 0
     }
 
     run.score *= content.ports.averageTransactionLevel() * 4
-    run.score = Math.max(1, run.score)
+    run.score = Math.max(1, run.score) || 1
     run.score = Math.ceil(run.score)
 
     machine.pubsub.emit('end-run', run)
