@@ -94,7 +94,7 @@
       color: rgba(255, 255, 255, 1.0);
     }
     .c-screen--table tr[aria-disabled="true"] {
-      color: rgba(255, 255, 255, 0.5) !important;
+      color: rgba(255, 255, 255, 0.25) !important;
     }
   .c-screen--title {
     font-family: HybridBold;
