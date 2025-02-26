@@ -129,12 +129,14 @@ content.audio.tricks = (() => {
       return this
     },
     onEnterTrick: function () {
+      killSynth()
       triggerSynth()
 
       return this
     },
     onTrickFail: function () {
       killSynth()
+      swapDelays()
 
       return this
     },
