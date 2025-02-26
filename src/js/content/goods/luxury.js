@@ -3,23 +3,27 @@ content.goods.luxury = engine.fn.extend(content.goods.base, {
     return this.getBaseCostRaw() * content.goods.priceMultiplier()
   },
   getBaseCostRaw: function () {
+    const origin = this.getPort()
+
     const power = {
       0: 4,
       1: 5,
       2: 3,
     }[
-      Math.floor(this.port / 5)
+      Math.floor(origin.index / 5) % 3
     ]
 
     return 8 ** engine.fn.srand('luxury', this.port, 'basePrice')(power, power + 1)
   },
   getBuyCost: function (port) {
-    const bonus = port.getTransactionLevel(false)
+    const origin = this.getPort()
+
+    const discount = 1 - (0.05 * origin.getTransactionLevel(true))
 
     return Math.max(
       1,
       Math.round(
-        this.getBaseCost() - (2 ** bonus)
+        this.getBaseCost() * discount
       ),
     )
   },
@@ -27,9 +31,11 @@ content.goods.luxury = engine.fn.extend(content.goods.base, {
     return content.ports.get(this.port)
   },
   getSellCost: function (port) {
+    const origin = this.getPort()
+
     const base = this.getBaseCostRaw(),
-      bonus = port.getTransactionLevel(false),
-      distance = engine.fn.distance(port, this.getPort())
+      bonus = engine.fn.scale(Math.log(base) / Math.log(8), 5, 3, 1.375, 1.125) ** origin.getTransactionLevel(true),
+      distance = engine.fn.distance(port, origin)
 
     // Up to 100% profit at optimal conditions
     const inflated = base * engine.fn.lerpExp(1, 2, engine.fn.clamp(
@@ -37,7 +43,7 @@ content.goods.luxury = engine.fn.extend(content.goods.base, {
     ), 0.5)
 
     return Math.round(
-      (inflated * content.goods.priceMultiplier()) + (2 ** bonus)
+      inflated * content.goods.priceMultiplier() * bonus
     )
   },
 })

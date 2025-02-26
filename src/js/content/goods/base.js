@@ -16,12 +16,12 @@ content.goods.base = {
       time = content.time.value()
 
     const supply = noise.value(time * rate) ** exponent
-    const bonus = port.getTransactionLevel(false)
+    const discount = 1 - (0.05 * port.getTransactionLevel(true))
 
     return Math.max(
       1,
       Math.round(
-        (this.getBaseCost() - (2 ** bonus)) * engine.fn.lerp(1, 0.75, supply)
+        this.getBaseCost() * engine.fn.lerp(1, 0.75, supply) * discount
       ),
     )
   },
@@ -39,10 +39,10 @@ content.goods.base = {
       time = content.time.value()
 
     const demand = noise.value(time * rate) ** exponent
-    const bonus = port.getTransactionLevel(false)
+    const bonus = engine.fn.scale(Math.log(this.baseCost) / Math.log(8), 0, 6, 2, 1.125) ** port.getTransactionLevel(true)
 
     return Math.round(
-      (this.getBaseCost() + (2 ** bonus)) * engine.fn.lerp(1, 1.5, demand)
+      this.getBaseCost() * engine.fn.lerp(1, 1.5, demand) * bonus
     )
   },
 }
