@@ -38,7 +38,7 @@ app.screen.dock = app.screenManager.invent({
   tutorials: [
     // Introduction
     {
-      text: `Welcome to <em>Lacus Opportunatis: Lunar lake trading simulator!</em> We have arrived at an agricultural port with just ten meager credits. First, let's <strong>Buy goods</strong>.`,
+      text: `Welcome to <em>Lacus Opportunitas: Lunar lake trading simulator!</em> We have arrived at an agricultural port with just ten meager credits. First, let's <strong>Buy goods</strong>.`,
     },
     {
       criteria: () => content.inventory.has('essentials'),

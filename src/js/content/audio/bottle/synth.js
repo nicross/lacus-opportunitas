@@ -23,7 +23,7 @@ content.audio.bottle.synth.prototype = {
       gainModel: engine.ear.gainModel.linear.instantiate({
         maxDistance: 250,
         maxGain: engine.fn.fromDb(-21),
-        minGain: engine.fn.fromDb(-33),
+        minGain: engine.fn.fromDb(-30),
       }),
       ...content.bottles.relativeVector(),
     }).from(this.fader).to(bus)
