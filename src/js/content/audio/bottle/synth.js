@@ -21,7 +21,7 @@ content.audio.bottle.synth.prototype = {
         power: 2,
       }),
       gainModel: engine.ear.gainModel.linear.instantiate({
-        maxDistance: 250,
+        maxDistance: content.bottles.maxDistance(),
         maxGain: engine.fn.fromDb(-21),
         minGain: engine.fn.fromDb(-30),
       }),
@@ -66,7 +66,7 @@ content.audio.bottle.synth.prototype = {
     const distanceRatio = 1 - engine.fn.clamp(
       engine.position.getVector().distance(
         content.bottles.vector()
-      ) / 250
+      ) / content.bottles.maxDistance()
     )
 
     this.timer = engine.fn.accelerateValue(this.timer, 0, engine.fn.lerp(2, 4, distanceRatio))

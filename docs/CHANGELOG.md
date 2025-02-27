@@ -1,5 +1,6 @@
 # CHANGELOG
 ## v1.0.2
+- Expanded audible range of bottles by 50%.
 - Increased bottle collection radius by 25%.
 
 ## v1.0.1

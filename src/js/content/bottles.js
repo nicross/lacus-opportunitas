@@ -1,7 +1,7 @@
 content.bottles = (() => {
   const collectRadius = 12.5,
     maxCount = 3,
-    maxDistance = 250,
+    maxDistance = 375,
     pubsub = engine.tool.pubsub.create()
 
   let count = 0,
@@ -87,6 +87,7 @@ content.bottles = (() => {
 
       return this
     },
+    maxDistance: () => maxDistance,
     relativeVector: () => vector.subtract(engine.position.getVector()).rotateQuaternion(engine.position.getQuaternion().conjugate()),
     reset: function () {
       resetExcursion()
