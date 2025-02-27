@@ -1,4 +1,7 @@
 # CHANGELOG
+## v1.0.2
+- Increased bottle collection radius by 25%.
+
 ## v1.0.1
 Fixed a divide by zero error with trick score calculations.
 

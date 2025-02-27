@@ -1,5 +1,5 @@
 content.bottles = (() => {
-  const collectRadius = 10,
+  const collectRadius = 12.5,
     maxCount = 3,
     maxDistance = 250,
     pubsub = engine.tool.pubsub.create()
