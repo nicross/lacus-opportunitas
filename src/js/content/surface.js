@@ -66,7 +66,7 @@ content.surface = (() => {
         ((x + (time * -10)) / 75) * skewFactor,
         y / 300 * skewFactor,
         time / 60 * skewFactor
-      ) ** 5) * 50
+      ) ** 5) * 60
 
       return centerRatio * (v1 + v2)
     },
