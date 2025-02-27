@@ -3,6 +3,7 @@
 - Expanded audible range of bottles by 50%.
 - Increased bottle collection radius by 25%.
 - Increased maximum height of waves by 20%.
+- Fixed a clicking sound when tricks end.
 
 ## v1.0.1
 Fixed a divide by zero error with trick score calculations.

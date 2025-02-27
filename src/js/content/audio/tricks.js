@@ -57,7 +57,9 @@ content.audio.tricks = (() => {
 
     for (const [type, delay] of types) {
       if (delays[type]) {
-        delays[type].output.disconnect()
+        const previous = delays[type]
+        engine.fn.rampLinear(previous.param.gain, 0, 1/16)
+        setTimeout(125, () => previous.output.disconnect())
       }
 
       delays[type] = engine.effect.pingPongDelay({
