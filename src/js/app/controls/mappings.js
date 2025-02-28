@@ -114,7 +114,9 @@ app.controls.mappings = {
         'KeyS',
         'Numpad5',
       ],
-      mouseAxis: [],
+      mouseAxis: [
+        ['y', 1]
+      ],
       mouseButton: [],
     },
     trickLeft: {
@@ -130,7 +132,9 @@ app.controls.mappings = {
         'Numpad4',
         'Numpad7',
       ],
-      mouseAxis: [],
+      mouseAxis: [
+        ['x', -1],
+      ],
       mouseButton: [],
     },
     trickRight: {
@@ -146,7 +150,9 @@ app.controls.mappings = {
         'Numpad6',
         'Numpad9',
       ],
-      mouseAxis: [],
+      mouseAxis: [
+        ['x', 1],
+      ],
       mouseButton: [],
     },
     trickUp: {
@@ -160,7 +166,9 @@ app.controls.mappings = {
         'KeyW',
         'Numpad8',
       ],
-      mouseAxis: [],
+      mouseAxis: [
+        ['y', -1]
+      ],
       mouseButton: [],
     },
     turnLeft: {

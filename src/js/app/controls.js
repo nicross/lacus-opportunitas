@@ -69,6 +69,7 @@ app.controls = (() => {
 
     // Nullify some shortcuts
     if (content.movement.isJump() && (gameCache.trick1 || gameCache.trick2 || gameCache.trick3)) {
+      gameCache.look = 0
       gameCache.move = 0
       gameCache.turn = 0
     } else {
