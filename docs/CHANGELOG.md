@@ -6,6 +6,7 @@
 - Increased bottle collection radius by 25%.
 - Increased maximum height of waves by 20%.
 - Improved visual contrast of disallowed button text.
+- Added cue for focusing disallowed buttons.
 - Fixed a clicking sound when tricks end.
 
 ## v1.0.1
