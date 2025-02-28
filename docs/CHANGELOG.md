@@ -8,6 +8,7 @@
 - Improved visual contrast of disallowed button text.
 - Added cue for focusing disallowed buttons.
 - Fixed a clicking sound when tricks end.
+- Removed reset tutorial button. Start a new game plus instead.
 
 ## v1.0.1
 Fixed a divide by zero error with trick score calculations.

@@ -46,19 +46,9 @@ app.screen.settings = app.screenManager.invent({
       component.on('change', () => setter(component.getValue()))
       return component
     })
-
-    // Reset tutorial button
-    const resetTutorial = root.querySelector('.a-settings--resetTutorial')
-
-    resetTutorial.addEventListener('click', () => {
-      app.storage.tutorial.clear()
-      resetTutorial.ariaDisabled = 'true'
-    })
   },
   onEnter: function (e) {
     this.state.previousState = e.previousState
-
-    this.rootElement.querySelector('.a-settings--resetTutorial').ariaDisabled = app.storage.tutorial.hasAny() ? 'false' : 'true'
   },
   onExit: function () {
     app.settings.save()
