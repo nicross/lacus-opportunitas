@@ -107,3 +107,8 @@ engine.loop.on('frame', ({paused}) => {
 
 engine.state.on('import', () => content.camera.update())
 engine.state.on('reset', () => content.camera.reset())
+
+engine.ready(() => {
+  content.dock.on('dock', () => content.camera.reset())
+  content.dock.on('change', () => content.camera.reset())
+})

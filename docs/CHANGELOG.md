@@ -10,6 +10,7 @@
 - Added cue for focusing disallowed buttons.
 - Fixed a clicking sound when tricks end.
 - Fixed wrong focus order when returning to travel screen.
+- Reset vertical look when docking.
 - Removed reset tutorial button. Start a new game plus instead.
 
 ## v1.0.1
