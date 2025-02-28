@@ -15,6 +15,7 @@
 }
 .c-menuButton[aria-disabled="true"],
 .c-menuButton[disabled] {
-  border-color: rgba(255, 255, 255, 0.25);
-  color: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  cursor: not-allowed;
+  text-decoration: line-through rgba(255, 255, 255, 0.5) 0.0625em;
 }

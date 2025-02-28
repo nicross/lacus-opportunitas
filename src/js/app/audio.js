@@ -87,7 +87,7 @@ app.audio = (() => {
         frequency,
         gain: 1,
       }).filtered({
-        frequency: frequency * (enabled ? 1 : 4),
+        frequency: frequency * (enabled ? 1 : 8),
       }).connect(bus)
 
       const attack = 1/64,
