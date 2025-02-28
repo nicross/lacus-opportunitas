@@ -17,7 +17,7 @@ content.audio.bottle.synth.prototype = {
         coneRadius: engine.const.tau * 0.25,
         frequency: engine.fn.fromMidi(72),
         minColor: 2,
-        maxColor: 6,
+        maxColor: 8,
         power: 2,
       }),
       gainModel: engine.ear.gainModel.linear.instantiate({
@@ -96,7 +96,7 @@ content.audio.bottle.synth.prototype = {
       this.stab()
     }
 
-    engine.fn.setParam(this.sub.filter.detune, engine.fn.lerpExp(0, 8, content.bottles.dot(), 4) * 1200)
+    engine.fn.setParam(this.sub.filter.detune, engine.fn.lerpExp(0, 8, content.bottles.dot(), 5) * 1200)
 
     this.binaural.update(
       content.bottles.relativeVector()
