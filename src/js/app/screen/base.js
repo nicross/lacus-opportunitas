@@ -49,7 +49,7 @@ app.screen.base = {
 
     if (this.useBasicFocusMemory) {
       // XXX: Needs engine.tool.fsm.prototype.dispatch override
-      if (['back','dock','mainMenu','quit','resume'].includes(args[0].event)) {
+      if (['back','dock','mainMenu','quit','resume','travel'].includes(args[0].event)) {
         this.clearFocusMemory()
       } else {
         this.rememberBasicFocus()

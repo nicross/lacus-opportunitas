@@ -8,6 +8,7 @@
 - Improved visual contrast of disallowed button text.
 - Added cue for focusing disallowed buttons.
 - Fixed a clicking sound when tricks end.
+- Fixed wrong focus order when returning to travel screen.
 - Removed reset tutorial button. Start a new game plus instead.
 
 ## v1.0.1
