@@ -85,16 +85,12 @@
       text-align: left;
       width: 100%;
     }
-    .c-screen--table:focus-within tr,
-    .c-screen--table:hover tr {
-      color: rgba(255, 255, 255, 0.75);
-    }
     .c-screen--table:focus-within tr:focus,
     .c-screen--table:hover tr:hover {
       color: rgba(255, 255, 255, 1.0);
     }
     .c-screen--table tr[aria-disabled="true"] {
-      color: rgba(255, 255, 255, 0.25) !important;
+      color: rgba(255, 255, 255, 0.666) !important;
     }
   .c-screen--title {
     font-family: HybridBold;
