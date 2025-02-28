@@ -203,11 +203,11 @@ content.audio.theme = (() => {
     }
 
     // Bass notes
-    if (isDucked && index % 5 == 0) {
+    if (index % 5 == 0) {
       const bassIndex = index / 5
 
       const bassFrequency = bass[bassIndex],
-        bassGain = engine.fn.fromDb(-21)
+        bassGain = engine.fn.fromDb(-19.5)
 
       if (bassFrequency) {
         const bassSynth = engine.synth.fm({
