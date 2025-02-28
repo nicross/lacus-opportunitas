@@ -1,7 +1,9 @@
 :root {
-  background-color: #FF0069;
+  --color-scheme: light dark;
+  background-color: light-dark(#FF0069, #000000);
   color: #FFFFFF;
   font-family: FiraCodeRegular, sans-serif;
+  color-scheme: var(--color-scheme);
   font-size: 18px;
   line-height: 1.5;
   user-select: none;
@@ -14,7 +16,7 @@ html, body {
 
 :focus {
   animation: focus 0.5s linear 0s infinite alternate both;
-  outline: 0.375em solid #000000;
+  outline: 0.375em solid light-dark(#000000, #FF0069);
 }
 
 [hidden] {

@@ -37,6 +37,11 @@ const app = (() => {
         : readyContext
     },
     screen: {},
+    setColorScheme: function (value) {
+      document.documentElement.style.setProperty(`--color-scheme`, value)
+
+      return this
+    },
     utility: {},
     version: () => '0.0.0', // Replaced via Gulpfile.js
   }

@@ -1,3 +1,13 @@
+app.settings.register('darkModeOn', {
+  compute: (rawValue) => Boolean(rawValue),
+  default: () => window.matchMedia('(prefers-color-scheme: dark)').matches,
+  update: (computedValue) => {
+    app.setColorScheme(
+      computedValue ? 'only dark' : 'only light'
+    )
+  },
+})
+
 app.settings.register('gamepadVibration', {
   default: 1,
   update: function (computedValue) {

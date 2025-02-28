@@ -39,6 +39,7 @@ app.screen.settings = app.screenManager.invent({
 
     // Toggles
     this.toggles = [
+      ['.a-settings--darkModeOn', app.settings.raw.darkModeOn, app.settings.setDarkModeOn],
       ['.a-settings--graphicsOn', app.settings.raw.graphicsOn, app.settings.setGraphicsOn],
     ].map(([selector, initialValue, setter]) => {
       const component = app.component.toggle.hydrate(root.querySelector(selector), initialValue)

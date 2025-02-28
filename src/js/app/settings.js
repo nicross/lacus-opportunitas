@@ -24,7 +24,9 @@ app.settings = (() => {
     const defaults = {}
 
     for (const [key, setting] of Object.entries(settings)) {
-      defaults[key] = setting.default
+      defaults[key] = typeof setting.default == 'function'
+        ? setting.default()
+        : setting.default
     }
 
     return defaults

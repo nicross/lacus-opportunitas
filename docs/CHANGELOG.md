@@ -1,5 +1,6 @@
 # CHANGELOG
 ## v1.0.2
+- Added a toggle for a high-contrast dark mode.
 - Added a directional sub bass sound to bottles.
 - Expanded audible range of bottles by 50%.
 - Increased bottle collection radius by 25%.

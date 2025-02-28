@@ -197,8 +197,8 @@
       <div class="a-app--screen a-app--settings">
         <section class="c-screen a-settings" aria-label="Settings">
           <h1 class="c-screen--title" title="Settings">Settings</h1>
-          <div class="c-screen--fields">
-            <div class="c-screen--field">
+          <ul class="c-screen--fields">
+            <li class="c-screen--field">
               <label class="c-screen--label" for="a-settings--mainVolumeInput">Main volume</label>
               <div class="c-slider a-settings--mainVolume">
                 <div class="c-slider--input">
@@ -206,8 +206,8 @@
                 </div>
                 <div class="c-slider--value"></div>
               </div>
-            </div>
-            <div class="c-screen--field">
+            </li>
+            <li class="c-screen--field">
               <label class="c-screen--label" for="a-settings--turningSpeedInput">Turning speed</label>
               <div class="c-slider a-settings--turningSpeed">
                 <div class="c-slider--input">
@@ -215,8 +215,8 @@
                 </div>
                 <div class="c-slider--value"></div>
               </div>
-            </div>
-            <div class="c-screen--field">
+            </li>
+            <li class="c-screen--field">
               <label class="c-screen--label" for="a-settings--mouseSensitivityInput">Mouse sensitivity</label>
               <div class="c-slider a-settings--mouseSensitivity">
                 <div class="c-slider--input">
@@ -224,8 +224,8 @@
                 </div>
                 <div class="c-slider--value"></div>
               </div>
-            </div>
-            <div class="c-screen--field">
+            </li>
+            <li class="c-screen--field">
               <label class="c-screen--label" for="a-settings--gamepadVibrationInput">Vibration strength</label>
               <div class="c-slider a-settings--gamepadVibration">
                 <div class="c-slider--input">
@@ -233,8 +233,8 @@
                 </div>
                 <div class="c-slider--value"></div>
               </div>
-            </div>
-            <div class="c-screen--field">
+            </li>
+            <li class="c-screen--field">
               <div class="c-screen--label" id="a-settings--graphicsOnLabel">Enable graphics</div>
               <div class="c-toggle a-settings--graphicsOn">
                 <button class="c-toggle--button" role="switch" aria-checked="false" aria-labeledby="a-settings--graphicsOnLabel">
@@ -242,12 +242,21 @@
                   <span class="c-toggle--on">On</span>
                 </button>
               </div>
-            </div>
-          </div>
-          <ul class="c-screen--actions">
-            <li class="c-screen--action">
+            </li>
+            <li class="c-screen--field">
+              <div class="c-screen--label" id="a-settings--darkModeOnLabel">Enable dark mode</div>
+              <div class="c-toggle a-settings--darkModeOn">
+                <button class="c-toggle--button" role="switch" aria-checked="false" aria-labeledby="a-settings--darkModeOnLabel">
+                  <span class="c-toggle--off">Off</span>
+                  <span class="c-toggle--on">On</span>
+                </button>
+              </div>
+            </li>
+            <li class="c-screen--field">
               <button class="c-menuButton a-settings--resetTutorial" type="button">Reset tutorials</button>
             </li>
+          </ul>
+          <ul class="c-screen--actions">
             <li class="c-screen--action">
               <button class="c-menuButton a-settings--back" type="button">Back</button>
             </li>
