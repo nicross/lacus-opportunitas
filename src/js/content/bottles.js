@@ -65,6 +65,19 @@ content.bottles = (() => {
   }
 
   return pubsub.decorate({
+    dot: function () {
+      if (!isSpawned) {
+        return 0
+      }
+
+      const value = engine.tool.vector3d.create(vector)
+        .subtract(engine.position.getVector())
+        .zeroZ()
+        .normalize()
+        .dotProduct(engine.position.getQuaternion().forward())
+
+      return engine.fn.scale(value, -1, 1, 0, 1)
+    },
     export: () => content.dock.is() ? undefined : count,
     import: function ({bottles, dock}) {
       if (dock) {
@@ -77,6 +90,7 @@ content.bottles = (() => {
       return this
     },
     isSpawned: () => isSpawned,
+    maxDistance: () => maxDistance,
     onDock: function () {
       resetExcursion()
 
@@ -87,7 +101,6 @@ content.bottles = (() => {
 
       return this
     },
-    maxDistance: () => maxDistance,
     relativeVector: () => vector.subtract(engine.position.getVector()).rotateQuaternion(engine.position.getQuaternion().conjugate()),
     reset: function () {
       resetExcursion()

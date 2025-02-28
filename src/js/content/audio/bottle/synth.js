@@ -33,14 +33,32 @@ content.audio.bottle.synth.prototype = {
 
     this.notes = content.audio.theme.randomSequenceSlice(20)
 
+    const subFrequency = engine.fn.transpose(
+      this.notes[0],
+      engine.fn.fromMidi(30),
+      engine.fn.fromMidi(36),
+    )
+
+    this.sub = engine.synth.pwm({
+      frequency: subFrequency,
+      gain: engine.fn.fromDb(0),
+      type: 'sawtooth',
+      width: 0.5,
+    }).filtered({
+      detune: 0,
+      frequency: subFrequency,
+    }).connect(this.fader)
+
     this.stab()
 
     return this
   },
   destroy: function () {
-    const release = 1/4
+    const now = engine.time(),
+      release = 1/4
 
-    engine.fn.rampLinear(this.fader.gain, 0, release)
+    engine.fn.rampLinear(this.fader.gain, 0, release - engine.const.zeroTime)
+    this.sub.stop(now + release)
     setTimeout(() => this.binaural.destroy(), release * 1000)
 
     return this
@@ -77,6 +95,8 @@ content.audio.bottle.synth.prototype = {
 
       this.stab()
     }
+
+    engine.fn.setParam(this.sub.filter.detune, engine.fn.lerpExp(0, 8, content.bottles.dot(), 4) * 1200)
 
     this.binaural.update(
       content.bottles.relativeVector()
