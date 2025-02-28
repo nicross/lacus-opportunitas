@@ -86,12 +86,14 @@
       text-align: left;
       width: 100%;
     }
-    .c-screen--table:focus-within tr:focus,
-    .c-screen--table:hover tr:hover {
-      color: rgba(255, 255, 255, 1.0);
-    }
     .c-screen--table tr[aria-disabled="true"] {
-      text-decoration: line-through rgba(255, 255, 255, 0.5) 0.0625em;
+      color: rgba(255, 255, 255, 0.75);
+      text-decoration: line-through rgba(255, 255, 255, 0.75) 0.0625em;
+    }
+    .c-screen--table tr[aria-disabled="true"]:active,
+    .c-screen--table tr[aria-disabled="true"]:focus,
+    .c-screen--table tr[aria-disabled="true"]:hover {
+      text-decoration-color: rgba(255, 255, 255, 0.333);
     }
   .c-screen--title {
     font-family: HybridBold;

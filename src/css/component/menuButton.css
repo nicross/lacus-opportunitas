@@ -13,9 +13,14 @@
 .c-menuButton:hover {
   border-color: rgba(255, 255, 255, 1);
 }
-.c-menuButton[aria-disabled="true"],
-.c-menuButton[disabled] {
+.c-menuButton[aria-disabled="true"] {
   border-color: rgba(255, 255, 255, 0.5) !important;
+  color: rgba(255, 255, 255, 0.75);
   cursor: not-allowed;
-  text-decoration: line-through rgba(255, 255, 255, 0.5) 0.0625em;
+  text-decoration: line-through rgba(255, 255, 255, 0.75) 0.0625em;
+}
+.c-menuButton[aria-disabled="true"]:active,
+.c-menuButton[aria-disabled="true"]:focus,
+.c-menuButton[aria-disabled="true"]:hover {
+  text-decoration-color: rgba(255, 255, 255, 0.333);
 }

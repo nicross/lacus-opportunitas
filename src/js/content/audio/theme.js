@@ -1,7 +1,6 @@
 content.audio.theme = (() => {
   const bus = content.audio.channel.bypass.createBus(),
     context = engine.context(),
-    inputBass = context.createGain(),
     inputReverb = context.createGain(),
     inputSequence = context.createGain()
 
@@ -143,12 +142,23 @@ content.audio.theme = (() => {
   ].map((note) => note ? engine.fn.fromMidi(note) : undefined)
 
   let index = 0,
+    inputBass,
     isDucked,
     isPlaying
 
-  inputBass.gain.value = 0
-  inputBass.connect(bus)
-  inputSequence.connect(bus)
+  swapInputBass()
+
+  function swapInputBass() {
+    if (inputBass) {
+      engine.fn.rampLinear(inputBass.gain, 0, 1/8)
+    }
+
+    inputBass = context.createGain()
+
+    inputBass.gain.value = 0
+    inputBass.connect(bus)
+    inputSequence.connect(bus)
+  }
 
   function trigger() {
     if (!isPlaying) {
@@ -284,6 +294,8 @@ content.audio.theme = (() => {
     slice: (start, end) => sequence.slice(start, end),
     stop: function () {
       isPlaying = false
+
+      swapInputBass()
 
       return this
     },
