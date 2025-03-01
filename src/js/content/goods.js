@@ -37,7 +37,7 @@ content.goods = (() => {
     priceMultiplier: () => {
       const plus = content.plus.count()
 
-      return priceMultiplier ** (1 + plus)
+      return priceMultiplier * (8 ** plus)
     },
     reset: function () {
       luxuries.clear()
