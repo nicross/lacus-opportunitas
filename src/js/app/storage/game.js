@@ -21,6 +21,7 @@ app.storage.game = {
       credits: 10,
       dock: start.index,
       inventory: {},
+      plus: 0,
       ports,
       position: {
         quaternion: startVector.normalize().inverse().quaternion(),
@@ -50,6 +51,7 @@ app.storage.game = {
       previous = this.get()
 
     next.credits = Math.max(previous.credits || 0, 10)
+    next.plus = (previous.plus || 0) + 1
 
     engine.state.import(next)
 

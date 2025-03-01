@@ -20,7 +20,6 @@ app.screen.newGame = app.screenManager.invent({
       app.screen.mainMenu.clearFocusMemory()
 
       app.storage.game.plus()
-      app.storage.tutorial.clear()
       app.gameState.setLoaded(true)
 
       this.change('dock')
@@ -28,6 +27,11 @@ app.screen.newGame = app.screenManager.invent({
   },
   // State
   state: {},
+  tutorials: [
+    {
+      text: `From this screen we can start over on a randomized lake. <em>Beware!</em> the overall price of goods will multiply <em>every time</em> a <strong>New game plus</strong> is started.`,
+    }
+  ],
   useBasicFocusMemory: false,
   // Hooks
   onReady: function () {

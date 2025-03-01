@@ -34,7 +34,11 @@ content.goods = (() => {
       registry.set(instance.id, instance)
       return instance
     },
-    priceMultiplier: () => priceMultiplier,
+    priceMultiplier: () => {
+      const plus = content.plus.count()
+
+      return priceMultiplier ** (1 + plus)
+    },
     reset: function () {
       luxuries.clear()
 

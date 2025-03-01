@@ -1,5 +1,6 @@
 # CHANGELOG
 ## v1.0.2
+- Increased the price multiplier whenever new game plus is started.
 - Added a toggle for a high-contrast dark mode.
 - Added mouse controls for trick note selection.
 - Added a directional sub bass sound to bottles.
@@ -11,7 +12,7 @@
 - Fixed a clicking sound when tricks end.
 - Fixed wrong focus order when returning to travel screen.
 - Reset vertical look when docking.
-- Removed reset tutorial button. Start a new game plus instead.
+- Removed reset tutorial button because it can cause soft progress locks.
 
 ## v1.0.1
 Fixed a divide by zero error with trick score calculations.

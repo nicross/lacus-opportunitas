@@ -3,6 +3,10 @@
   margin-left: 0.5rem;
 }
 
+:nth-child(2n+1) > .u-helper {
+  animation-name: u-helper-alternate;
+}
+
 .u-helper-material {
   animation: none;
 }
@@ -12,6 +16,15 @@
     opacity: 1;
   }
   100% {
-    opacity: 0.5;
+    opacity: 0.666;
+  }
+}
+
+@keyframes u-helper-alternate {
+  0% {
+    opacity: 0.666;
+  }
+  100% {
+    opacity: 1;
   }
 }
