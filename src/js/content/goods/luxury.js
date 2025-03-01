@@ -34,7 +34,7 @@ content.goods.luxury = engine.fn.extend(content.goods.base, {
     const origin = this.getPort()
 
     const base = this.getBaseCostRaw(),
-      bonus = engine.fn.scale(Math.log(base) / Math.log(8), 5, 3, 1.375, 1.125) ** origin.getTransactionLevel(true),
+      bonus = engine.fn.scale(Math.log(base) / Math.log(8), 6, 4, 1.375, 1.125) ** origin.getTransactionLevel(true),
       distance = engine.fn.distance(port, origin)
 
     // Up to 100% profit at optimal conditions
