@@ -111,7 +111,7 @@ content.tricks = (() => {
         ? engine.fn.scale(run[type].durationRatio, 0, idealWeight, idealWeight, 1)
         : engine.fn.scale(run[type].durationRatio, idealWeight, 1, 1, idealWeight)
 
-      run.score += (run.activeDuration * run[type].durationRatio * run[type].scoreWeight) || 0
+      run.score += ((run[type].longest + (run[type].durationRatio * run.activeDuration)) * run[type].scoreWeight) || 0
     }
 
     run.score *= content.ports.averageTransactionLevel() * 4
