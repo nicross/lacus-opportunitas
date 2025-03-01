@@ -29,7 +29,7 @@ app.screen.newGame = app.screenManager.invent({
   state: {},
   tutorials: [
     {
-      text: `From this screen we can start over on a randomized lake. <em>Beware!</em> the overall price of goods will multiply <em>every time</em> a <strong>New game plus</strong> is started.`,
+      text: `From this screen we can start over on a randomized lake. Sounds nice, <em>but think twice!</em> as the overall price of goods will multiply <em>every time</em> a <strong>New game plus</strong> is started.`,
     }
   ],
   useBasicFocusMemory: false,
