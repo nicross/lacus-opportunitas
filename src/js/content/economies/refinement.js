@@ -5,6 +5,7 @@ content.economies.refinement = content.economies.invent({
     'copper-ore',
     'essentials',
     'gold-ore',
+    'iridium-ore',
     'iron-ore',
     'platinum-ore',
     'refinement-equipment',
@@ -12,6 +13,7 @@ content.economies.refinement = content.economies.invent({
   sells: [
     'copper-bars',
     'gold-bars',
+    'iridium-bars',
     'iron-bars',
     'platinum-bars',
     'waste',

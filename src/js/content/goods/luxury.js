@@ -6,9 +6,9 @@ content.goods.luxury = engine.fn.extend(content.goods.base, {
     const origin = this.getPort()
 
     const power = {
-      0: 4,
-      1: 5,
-      2: 3,
+      0: 5,
+      1: 6,
+      2: 4,
     }[
       Math.floor(origin.index / 5) % 3
     ]

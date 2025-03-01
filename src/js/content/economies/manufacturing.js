@@ -5,6 +5,7 @@ content.economies.manufacturing = content.economies.invent({
     'copper-bars',
     'essentials',
     'gold-bars',
+    'iridium-bars',
     'iron-bars',
     'platinum-bars',
   ],

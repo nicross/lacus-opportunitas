@@ -8,6 +8,7 @@ content.economies.extraction = content.economies.invent({
   sells: [
     'copper-ore',
     'gold-ore',
+    'iridium-ore',
     'iron-ore',
     'platinum-ore',
     'waste',

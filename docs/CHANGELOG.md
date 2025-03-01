@@ -1,6 +1,8 @@
 # CHANGELOG
 ## v1.0.2
-- Increased the price multiplier whenever new game plus is started.
+- Added iridium-level goods.
+- Rebalanced prices of manufactured goods.
+- Added price multipliers for new game plus.
 - Added a toggle for a high-contrast dark mode.
 - Added mouse controls for trick note selection.
 - Added a directional sub bass sound to bottles.

@@ -38,6 +38,12 @@ content.goods.invent({
   baseCost: 8 ** 4,
 })
 
+content.goods.invent({
+  id: 'iridium-ore',
+  name: 'Iridium ore',
+  baseCost: 8 ** 5,
+})
+
 // Refinement
 content.goods.invent({
   id: 'copper-bars',
@@ -63,11 +69,17 @@ content.goods.invent({
   baseCost: 8 ** 5,
 })
 
+content.goods.invent({
+  id: 'iridium-bars',
+  name: 'Iridium bars',
+  baseCost: 8 ** 6,
+})
+
 // Manufacturing
 content.goods.invent({
   id: 'agricultural-equipment',
   name: 'Agricultural equipment',
-  baseCost: 8 ** 6,
+  baseCost: 8 ** 4,
 })
 
 content.goods.invent({
@@ -79,11 +91,11 @@ content.goods.invent({
 content.goods.invent({
   id: 'refinement-equipment',
   name: 'Refinement equipment',
-  baseCost: 8 ** 4,
+  baseCost: 8 ** 6,
 })
 
 content.goods.invent({
   id: 'consumer-goods',
   name: 'Consumer goods',
-  baseCost: 8 ** 3,
+  baseCost: 8 ** 7,
 })
