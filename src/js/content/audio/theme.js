@@ -213,11 +213,11 @@ content.audio.theme = (() => {
     }
 
     // Bass notes
-    if (index % 5 == 0) {
+    if (isDucked && index % 5 == 0) {
       const bassIndex = index / 5
 
       const bassFrequency = bass[bassIndex],
-        bassGain = engine.fn.fromDb(-19.5)
+        bassGain = engine.fn.fromDb(-18)
 
       if (bassFrequency) {
         const bassSynth = engine.synth.fm({
@@ -227,6 +227,7 @@ content.audio.theme = (() => {
           modDepth: bassFrequency / engine.fn.randomFloat(12, 24),
           modFrequency: engine.fn.randomFloat(4, 8),
         }).filtered({
+          detune: 2400,
           frequency: bassFrequency,
         }).connect(inputBass)
 
@@ -236,14 +237,15 @@ content.audio.theme = (() => {
                 bass[bassIndex + 2] ? 2 : (
                       bass[bassIndex + 3] ? 3: (
                             bass[bassIndex + 4] ? 4 : (
-                                  bass[bassIndex + 6] ? 6 : 8
+                                  bass[bassIndex + 6] ? 6 : (bassIndex < 128 ? 8 : 7.5)
                             )
                       )
                 )
           )
         )
 
-        bassSynth.filter.detune.linearRampToValueAtTime(1200, now + 1/32)
+        bassSynth.filter.detune.linearRampToValueAtTime(0, now + 1/8)
+        bassSynth.filter.detune.linearRampToValueAtTime(3000, now + bassRelease/2)
         bassSynth.filter.detune.linearRampToValueAtTime(0, now + bassRelease)
 
         bassSynth.param.gain.setValueAtTime(bassGain, now + bassRelease - 1/128 - engine.const.zeroTime)
