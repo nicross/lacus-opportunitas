@@ -1,4 +1,7 @@
 # CHANGELOG
+## v1.0.3
+- Added cues when hovering over clickable elements with the mouse.
+
 ## v1.0.2
 - **Gameplay**
   - Added iridium-level goods.

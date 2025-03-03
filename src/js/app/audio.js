@@ -77,22 +77,44 @@ app.audio = (() => {
     focus: function ({
       enabled,
     }) {
-      killClickSynth()
-
       const frequency = engine.fn.fromMidi(
         engine.fn.choose(enabled ? [36,38,40,43,45] : [24,26,28,31,33], Math.random())
       )
 
       const synth = engine.synth.pwm({
         frequency,
-        gain: 1,
+        gain: engine.fn.fromDb(0),
       }).filtered({
         frequency: frequency * (enabled ? 1 : 8),
       }).connect(bus)
 
       const attack = 1/64,
         now = engine.time(),
-        release = 1/24
+        release = 1/32
+
+      synth.param.gain.linearRampToValueAtTime(1, now + attack)
+      synth.param.gain.linearRampToValueAtTime(0, now + release)
+      synth.stop(now + release)
+
+      return this
+    },
+    hover: function ({
+      enabled,
+    }) {
+      const frequency = engine.fn.fromMidi(
+        engine.fn.choose(enabled ? [36,38,40,43,45] : [24,26,28,31,33], Math.random())
+      )
+
+      const synth = engine.synth.pwm({
+        frequency,
+        gain: engine.fn.fromDb(0),
+      }).filtered({
+        frequency: frequency * (enabled ? 0.5 : 4),
+      }).connect(bus)
+
+      const attack = 1/96,
+        now = engine.time(),
+        release = 1/48
 
       synth.param.gain.linearRampToValueAtTime(1, now + attack)
       synth.param.gain.linearRampToValueAtTime(0, now + release)
@@ -208,6 +230,21 @@ document.addEventListener('focusin', (e) => {
   }
 
   app.audio.focus({
+    enabled: e.target.getAttribute('aria-disabled') != 'true',
+  })
+})
+
+// Hovering
+document.addEventListener('mouseover', (e) => {
+  if (e.target.matches('.a-app--game *, .a-app--splash *')) {
+    return
+  }
+
+  if (!app.utility.focus.isFocusable(e.currentTarget)) {
+    return
+  }
+
+  app.audio.hover({
     enabled: e.target.getAttribute('aria-disabled') != 'true',
   })
 })
