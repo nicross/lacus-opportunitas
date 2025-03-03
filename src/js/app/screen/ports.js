@@ -49,6 +49,8 @@ app.screen.ports = app.screenManager.invent({
 
       return component
     })
+
+    this.rootElement.querySelector('.c-screen--scrollable').scrollTop = 0
   },
   onExit: function () {},
   onFrame: function () {

@@ -109,7 +109,7 @@ app.audio = (() => {
         frequency,
         gain: engine.fn.fromDb(0),
       }).filtered({
-        frequency: frequency * (enabled ? 0.5 : 4),
+        frequency: frequency * (enabled ? 1 : 4),
       }).connect(bus)
 
       const attack = 1/96,
@@ -240,12 +240,12 @@ document.addEventListener('mouseover', (e) => {
     return
   }
 
-  if (!app.utility.focus.isFocusable(e.currentTarget)) {
+  if (!app.utility.focus.isFocusable(e.target) && !app.utility.focus.isFocusableDescendent(e.target)) {
     return
   }
 
   app.audio.hover({
-    enabled: e.target.getAttribute('aria-disabled') != 'true',
+    enabled: e.target.closest('[aria-disabled]') ? e.target.closest('[aria-disabled]').getAttribute('aria-disabled') != 'true' : true,
   })
 })
 

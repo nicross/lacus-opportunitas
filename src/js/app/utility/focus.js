@@ -1,5 +1,6 @@
 app.utility.focus = (() => {
   const focusableSelector = 'button, input, [tabindex="0"]',
+    focusableSelectorDescendent = 'button *, input *, [tabindex="0"] *',
     identity = (x) => x,
     notFocusableSelector = '[aria-hidden="true"], [aria-hidden="true"] *, [hidden], [hidden] *'
 
@@ -14,6 +15,9 @@ app.utility.focus = (() => {
     },
     isFocusable: function (element) {
       return element instanceof HTMLElement && element.matches(focusableSelector) && !element.matches(notFocusableSelector)
+    },
+    isFocusableDescendent: function (element) {
+      return element instanceof HTMLElement && (element.matches(focusableSelector) || element.matches(focusableSelectorDescendent)) && !element.matches(notFocusableSelector)
     },
     isWithin: function (parentElement) {
       return Boolean(parentElement.querySelector(':focus'))

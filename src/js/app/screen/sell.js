@@ -65,6 +65,8 @@ app.screen.sell = app.screenManager.invent({
 
       return component
     })
+
+    this.rootElement.querySelector('.c-screen--scrollable').scrollTop = 0
   },
   onExit: function () {
     this.statusComponent.setLive(false)

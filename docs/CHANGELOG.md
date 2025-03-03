@@ -1,6 +1,7 @@
 # CHANGELOG
 ## v1.0.3
 - Added cues when hovering over clickable elements with the mouse.
+- Fixed scrollbar issues on scrollable screens.
 
 ## v1.0.2
 - **Gameplay**
