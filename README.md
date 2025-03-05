@@ -40,12 +40,12 @@ npx gulp electron
 npx gulp electron-rebuild
 ```
 
-### Start web server
+#### Start web server
 ```sh
 npx gulp serve
 ```
 
-### Start web server and build continuously
+#### Start web server and build continuously
 ```sh
 npx gulp dev
 ```
