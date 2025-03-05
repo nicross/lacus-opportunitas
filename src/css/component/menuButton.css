@@ -15,12 +15,13 @@
 }
 .c-menuButton[aria-disabled="true"] {
   border-color: rgba(255, 255, 255, 0.5) !important;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.666);
   cursor: not-allowed;
-  text-decoration: line-through rgba(255, 255, 255, 0.75) 0.0625em;
+  text-decoration: line-through rgba(255, 255, 255, 0.666) 0.0625em;
 }
 .c-menuButton[aria-disabled="true"]:active,
 .c-menuButton[aria-disabled="true"]:focus,
 .c-menuButton[aria-disabled="true"]:hover {
+  color: rgba(255, 255, 255, 1.0);
   text-decoration-color: rgba(255, 255, 255, 0.333);
 }

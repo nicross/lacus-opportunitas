@@ -87,12 +87,13 @@
       width: 100%;
     }
     .c-screen--table tr[aria-disabled="true"] {
-      color: rgba(255, 255, 255, 0.75);
-      text-decoration: line-through rgba(255, 255, 255, 0.75) 0.0625em;
+      color: rgba(255, 255, 255, 0.666);
+      text-decoration: line-through rgba(255, 255, 255, 0.666) 0.0625em;
     }
     .c-screen--table tr[aria-disabled="true"]:active,
     .c-screen--table tr[aria-disabled="true"]:focus,
     .c-screen--table tr[aria-disabled="true"]:hover {
+      color: rgba(255, 255, 255, 1.0);
       text-decoration-color: rgba(255, 255, 255, 0.333);
     }
   .c-screen--title {
