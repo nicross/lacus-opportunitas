@@ -5,6 +5,7 @@
 - Increased visual contrast of disallowed buttons further.
 - Increased base font size slightly.
 - Increased audibility of lower-pitched port blips and targeting sounds.
+- Increased price multiplier of New Game Plus.
 - Fixed scrollbar issues on scrollable screens.
 
 ## v1.0.2
