@@ -57,6 +57,12 @@ content.ports.model.prototype = {
     this.rootNote = rootNote + rootBase
     this.rootFrequency = engine.fn.fromMidi(this.rootNote)
 
+    this.rootRatio = engine.fn.clamp(engine.fn.scale(
+      this.rootNote,
+      52, 86,
+      0, 1,
+    ))
+
     // Build triad around root note
     const scale = [
       -24,-22,-20,-19,-17,-15,-13,

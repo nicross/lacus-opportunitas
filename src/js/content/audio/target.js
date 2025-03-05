@@ -32,7 +32,7 @@ content.audio.target = (() => {
         play({
           color: 4,
           duration: 1/16,
-          gain: engine.fn.fromDb(-12),
+          gain: engine.fn.fromDb(engine.fn.lerp(-7.5, -13.5, port.rootRatio)),
           frequency: frequencies[i],
           when: engine.time() + (i * 1/32),
           width: 0.5,
@@ -49,7 +49,7 @@ content.audio.target = (() => {
         play({
           color: 4,
           duration: 1/64,
-          gain: engine.fn.fromDb(-12),
+          gain: engine.fn.fromDb(engine.fn.lerp(-7.5, -13.5, port.rootRatio)),
           frequency: frequencies[i],
           when: engine.time() + (i * 1/64),
           width: 0.25,

@@ -4,18 +4,12 @@ content.audio.facing = (() => {
   let previous
 
   function play(port) {
-    const noteRatio = engine.fn.clamp(engine.fn.scale(
-      port.rootNote,
-      52, 86,
-      0, 1,
-    ))
-
     const synth = engine.synth.pwm({
-      gain: engine.fn.fromDb(engine.fn.lerp(-7.5, -13.5, noteRatio)),
+      gain: engine.fn.fromDb(engine.fn.lerp(-7.5, -13.5, port.rootRatio)),
       frequency: port.rootFrequency,
       width: 0.75,
     }).filtered({
-      frequency: port.rootFrequency * engine.fn.lerp(4, 2, noteRatio),
+      frequency: port.rootFrequency * engine.fn.lerp(4, 2, port.rootRatio),
     }).connect(bus)
 
     const now = engine.time(),
