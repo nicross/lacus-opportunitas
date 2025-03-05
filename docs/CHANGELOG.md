@@ -1,6 +1,7 @@
 # CHANGELOG
 ## v1.0.3
 - Added cues when hovering over clickable elements with the mouse.
+- Attenuated targeted port when heading in the correct direction.
 - Increased visual contrast of disallowed buttons further.
 - Increased base font size slightly.
 - Increased audibility of lower-pitched port blips when faced.

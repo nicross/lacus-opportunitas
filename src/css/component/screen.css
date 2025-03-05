@@ -94,7 +94,7 @@
     .c-screen--table tr[aria-disabled="true"]:focus,
     .c-screen--table tr[aria-disabled="true"]:hover {
       color: rgba(255, 255, 255, 1.0);
-      text-decoration-color: rgba(255, 255, 255, 0.333);
+      text-decoration-color: rgba(255, 255, 255, 0.5);
     }
   .c-screen--title {
     font-family: HybridBold;

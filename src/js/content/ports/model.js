@@ -142,6 +142,13 @@ content.ports.model.prototype = {
 
     return engine.fn.scale(value, -1, 1, 0, 1)
   },
+  getDotVelocity: function() {
+    const value = engine.tool.vector3d.create(this)
+      .normalize()
+      .dotProduct(content.movement.velocity().normalize())
+
+    return (engine.fn.scale(value, -1, 1, 0, 1) ** 2) * content.movement.velocityValue()
+  },
   getRelative: function () {
     return engine.tool.vector3d.create(this)
       .subtract(engine.position.getVector())

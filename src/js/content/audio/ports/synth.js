@@ -8,7 +8,8 @@ content.audio.ports.synth.prototype = {
   calculateParameters: function () {
     const distance = this.port.getDistance(),
       dot = this.port.getDot(),
-      isPaused = engine.loop.isPaused()
+      isPaused = engine.loop.isPaused(),
+      velocityDot = this.port.getDotVelocity()
 
     const carrierFrequency = this.port.rootFrequency,
       octave = engine.fn.clamp(engine.fn.scale(Math.log2(carrierFrequency), 5, 10, 0, 1))
@@ -33,6 +34,8 @@ content.audio.ports.synth.prototype = {
       engine.fn.lerp(-4.5, -6, this.isTargetAccelerated)
     )
 
+    const isTargetedNotPausedAccelerated = engine.fn.lerp(this.isTargetAccelerated, 0, this.isPausedAccelerated)
+
     const gain = Math.max(this.isTargetAccelerated, (this.fadeAccelerated ** 8))
       * engine.fn.fromDb(
           engine.fn.lerp(-9, 0, Math.max(this.isTargetAccelerated, 1 - distance))
@@ -46,14 +49,17 @@ content.audio.ports.synth.prototype = {
       * engine.fn.fromDb(
           engine.fn.lerp(0, -1.5, this.isPausedAccelerated)
         )
+      * engine.fn.fromDb(
+          engine.fn.lerp(0, engine.fn.lerp(0, -3, velocityDot), isTargetedNotPausedAccelerated)
+        )
 
     return {
       amodDepth,
-      amodFrequency: engine.fn.lerp(1 / this.port.primeNumber, engine.fn.lerpExp(16, 4, distance, 0.5) * engine.fn.lerpExp(0.25, 1, dot, 2), this.isTargetAccelerated),
+      amodFrequency: engine.fn.lerp(1 / this.port.primeNumber, engine.fn.lerpExp(16, 4, distance, 0.5) * engine.fn.lerpExp(0.25, 1, velocityDot, 2), isTargetedNotPausedAccelerated),
       carrierFrequency,
       carrierGain: 1 - amodDepth,
       color: engine.fn.lerp(
-        engine.fn.lerp(engine.fn.lerpExp(4, 2, octave, 0.5), engine.fn.lerpExp(12, 2, octave, 0.5), this.isTargetAccelerated),
+        engine.fn.lerp(engine.fn.lerpExp(4, 2, octave, 0.5), engine.fn.lerpExp(12, 4, octave, 0.5), this.isTargetAccelerated),
         1,
         this.isPausedAccelerated,
       ),
