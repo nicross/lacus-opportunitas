@@ -107,7 +107,7 @@ app.audio = (() => {
 
       const synth = engine.synth.pwm({
         frequency,
-        gain: engine.fn.fromDb(-9),
+        gain: engine.fn.fromDb(-12),
       }).filtered({
         frequency: frequency * (enabled ? 1 : 4),
       }).connect(bus)

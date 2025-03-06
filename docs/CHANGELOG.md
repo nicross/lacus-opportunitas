@@ -3,6 +3,7 @@
 - **Gameplay**
   - Increased price multiplier of New Game Plus.
 - **Interface**
+  - Remembered the last selection on the ports screen.
   - Fixed scrollbar issues on scrollable screens.
 - **Audio**
   - Added cues when hovering over clickable elements with the mouse.

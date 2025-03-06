@@ -5,6 +5,7 @@ app.screen.ports = app.screenManager.invent({
   rootSelector: '.a-ports',
   transitions: {
     back: function () {
+      app.screen.ports.clearFocusMemory()
       this.change('gameMenu')
     },
     travel: function () {
@@ -14,6 +15,7 @@ app.screen.ports = app.screenManager.invent({
   // State
   state: {
     components: [],
+    focusMemory: undefined,
   },
   useBasicFocusMemory: false,
   // Tutorials
@@ -43,6 +45,7 @@ app.screen.ports = app.screenManager.invent({
         .attach(this.tableElement)
 
       component.on('click', () => {
+        app.screen.ports.state.focusMemory = port
         app.screen.travel.setPort(port)
         app.screenManager.dispatch('travel')
       })
@@ -56,4 +59,16 @@ app.screen.ports = app.screenManager.invent({
   onFrame: function () {
     this.handleBasicInput()
   },
+  // Custom methods
+  getFocusWithinTarget: function () {
+    if (this.state.focusMemory) {
+      for (const component of this.state.components) {
+        if (component.port === this.state.focusMemory) {
+          return component.rootElement
+        }
+      }
+    }
+
+    return this.rootElement
+  }
 })
