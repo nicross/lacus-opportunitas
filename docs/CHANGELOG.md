@@ -1,12 +1,17 @@
 # CHANGELOG
 ## v1.0.3
-- Added cues when hovering over clickable elements with the mouse.
-- Attenuated targeted port when heading in the correct direction.
-- Increased visual contrast of disallowed buttons further.
-- Increased base font size slightly.
-- Increased audibility of lower-pitched port blips and targeting sounds.
-- Increased price multiplier of New Game Plus.
-- Fixed scrollbar issues on scrollable screens.
+- **Gameplay**
+  - Increased price multiplier of New Game Plus.
+- **Interface**
+  - Fixed scrollbar issues on scrollable screens.
+- **Audio**
+  - Added cues when hovering over clickable elements with the mouse.
+  - Attenuated targeted port when heading in the correct direction.
+  - Increased audibility of lower-pitched port blips and targeting sounds.
+  - Removed a sound to increase performance.
+- **Graphics**
+  - Increased visual contrast of disallowed buttons further.
+  - Increased base font size slightly.
 
 ## v1.0.2
 - **Gameplay**
